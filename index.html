@@ -14,13 +14,14 @@
 
   <div class="login-form" id="login-form">
     <h2>Login</h2>
-    <form>
-      <label for="email">Email:</label>
+    <form onsubmit="login(event)">
+      <label for="login-email">Email:</label>
       <input type="email" id="login-email" name="email" required>
-      <label for="password">Password:</label>
+      <label for="login-password">Password:</label>
       <input type="password" id="login-password" name="password" required>
       <button type="submit">Login</button>
     </form>
+    <button onclick="showRegistrationForm()">Register</button>
   </div>
 
   <div class="registration-form" id="registration-form">
@@ -48,19 +49,14 @@
   <div class="posts-page" id="posts-page">
     <h2>Posts</h2>
     <button onclick="createPost()">Create New Post</button>
-    <div class="post">
-      <h3>Post Title</h3>
-      <img src="image.jpg" alt="Post Image">
-      <video controls>
-        <source src="video.mp4" type="video/mp4">
-      </video>
-      <p>This is a sample post content.</p>
+    <div id="posts-list">
+      <!-- Posts will be dynamically added here -->
     </div>
   </div>
 
   <div class="create-post-form" id="create-post-form">
     <h2>Create New Post</h2>
-    <form>
+    <form onsubmit="submitPost(event)">
       <label for="post-title">Post Title:</label>
       <input type="text" id="post-title" name="post-title" required>
       <label for="post-content">Post Content:</label>
