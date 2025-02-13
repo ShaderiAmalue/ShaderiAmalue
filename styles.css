@@ -1,9 +1,10 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: #f0f0f0;
   color: #333;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 .welcome-window {
@@ -12,50 +13,66 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  transition: opacity 1s ease-out;
+  opacity: 1;
 }
 
 .welcome-window h1 {
   font-size: 3em;
   margin-bottom: 20px;
+  animation: fadeIn 2s;
 }
 
 .welcome-window button {
   padding: 10px 20px;
   font-size: 1.2em;
   cursor: pointer;
+  background-color: #ff8c00;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  animation: buttonFadeIn 2s;
 }
 
-.registration-form {
+.registration-form, .login-form, .verification-form {
+  display: none;
   margin: 50px auto;
   padding: 20px;
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   max-width: 400px;
+  transition: transform 1s ease-out, opacity 1s ease-out;
 }
 
-.registration-form h2 {
+.registration-form.active, .login-form.active, .verification-form.active {
+  display: block;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.registration-form h2, .login-form h2, .verification-form h2 {
   margin-top: 0;
 }
 
-.registration-form label {
+.registration-form label, .login-form label, .verification-form label {
   display: block;
   margin-top: 10px;
 }
 
-.registration-form input {
+.registration-form input, .login-form input, .verification-form input {
   width: 100%;
   padding: 8px;
   margin-top: 5px;
 }
 
-.registration-form button {
+.registration-form button, .login-form button, .verification-form button {
   width: 100%;
   padding: 10px;
   background-color: #007BFF;
@@ -67,8 +84,16 @@ body {
 }
 
 .posts {
+  display: none;
   margin: 50px auto;
   max-width: 800px;
+  opacity: 0;
+  transition: opacity 2s ease-out;
+}
+
+.posts.active {
+  display: block;
+  opacity: 1;
 }
 
 .posts h2 {
@@ -91,4 +116,24 @@ body {
 
 .post h3 {
   margin-top: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes buttonFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
