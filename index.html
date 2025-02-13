@@ -7,14 +7,25 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="welcome-window">
+  <div class="welcome-window" id="welcome-window">
     <h1>Welcome to Our Platform</h1>
     <button onclick="closeWelcome()">Enter</button>
   </div>
 
-  <div class="registration-form">
-    <h2>Account Registration</h2>
+  <div class="login-form" id="login-form">
+    <h2>Login</h2>
     <form>
+      <label for="email">Email:</label>
+      <input type="email" id="login-email" name="email" required>
+      <label for="password">Password:</label>
+      <input type="password" id="login-password" name="password" required>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <div class="registration-form" id="registration-form">
+    <h2>Account Registration</h2>
+    <form onsubmit="sendVerificationEmail(event)">
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" required>
       <label for="email">Email:</label>
@@ -25,7 +36,16 @@
     </form>
   </div>
 
-  <div class="posts">
+  <div class="verification-form" id="verification-form">
+    <h2>Verify Your Email</h2>
+    <form onsubmit="verifyCode(event)">
+      <label for="verification-code">Enter Verification Code:</label>
+      <input type="text" id="verification-code" name="verification-code" required>
+      <button type="submit">Verify</button>
+    </form>
+  </div>
+
+  <div class="posts" id="posts">
     <h2>Posts</h2>
     <div class="post">
       <h3>Post Title</h3>
