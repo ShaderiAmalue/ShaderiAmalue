@@ -40,7 +40,7 @@ body {
   animation: buttonFadeIn 2s;
 }
 
-.registration-form, .login-form, .verification-form, .create-post-form {
+.registration-form, .login-form, .verification-form, .create-post-form, .posts-page {
   display: none;
   margin: 50px auto;
   padding: 20px;
@@ -51,13 +51,13 @@ body {
   transition: transform 1s ease-out, opacity 1s ease-out;
 }
 
-.registration-form.active, .login-form.active, .verification-form.active, .create-post-form.active {
+.registration-form.active, .login-form.active, .verification-form.active, .create-post-form.active, .posts-page.active {
   display: block;
   transform: translateY(0);
   opacity: 1;
 }
 
-.registration-form h2, .login-form h2, .verification-form h2, .create-post-form h2 {
+.registration-form h2, .login-form h2, .verification-form h2, .create-post-form h2, .posts-page h2 {
   margin-top: 0;
 }
 
