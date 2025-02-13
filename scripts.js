@@ -1,7 +1,7 @@
 const clientId = '1339126931513413663';
 const redirectUri = 'https://endregion-dc.vercel.app';
-const scope = 'identify';
-const authUrl = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${scope}`;
+const scopes = ['identify', 'email', 'guilds', 'guilds.join', 'messages.read', 'bot'];
+const authUrl = `https://discord.com/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${scopes.join('%20')}`;
 
 document.querySelector('.enter-btn').addEventListener('click', function() {
     window.location.href = authUrl;
