@@ -7,6 +7,27 @@ body {
   overflow: hidden;
 }
 
+nav {
+  background-color: #007BFF;
+  padding: 10px;
+  text-align: center;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
 .welcome-window {
   position: fixed;
   top: 0;
@@ -16,6 +37,7 @@ body {
   background-color: rgba(0, 0, 0, 0.9);
   color: white;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   z-index: 1000;
@@ -26,7 +48,11 @@ body {
 .welcome-window h1 {
   font-size: 3em;
   margin-bottom: 20px;
-  animation: fadeIn 2s;
+}
+
+.welcome-window p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
 }
 
 .welcome-window button {
@@ -37,7 +63,6 @@ body {
   border: none;
   color: white;
   border-radius: 5px;
-  animation: buttonFadeIn 2s;
 }
 
 .registration-form, .login-form, .verification-form, .create-post-form, .posts-page {
@@ -116,6 +141,16 @@ body {
 
 .post h3 {
   margin-top: 0;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #007BFF;
+  color: white;
+  position: relative;
+  bottom: 0;
+  width: 100%;
 }
 
 @keyframes fadeIn {
