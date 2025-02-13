@@ -45,8 +45,9 @@
     </form>
   </div>
 
-  <div class="posts" id="posts">
+  <div class="posts-page" id="posts-page">
     <h2>Posts</h2>
+    <button onclick="createPost()">Create New Post</button>
     <div class="post">
       <h3>Post Title</h3>
       <img src="image.jpg" alt="Post Image">
@@ -55,6 +56,21 @@
       </video>
       <p>This is a sample post content.</p>
     </div>
+  </div>
+
+  <div class="create-post-form" id="create-post-form">
+    <h2>Create New Post</h2>
+    <form>
+      <label for="post-title">Post Title:</label>
+      <input type="text" id="post-title" name="post-title" required>
+      <label for="post-content">Post Content:</label>
+      <textarea id="post-content" name="post-content" required></textarea>
+      <label for="post-image">Post Image:</label>
+      <input type="file" id="post-image" name="post-image">
+      <label for="post-video">Post Video:</label>
+      <input type="file" id="post-video" name="post-video">
+      <button type="submit">Submit Post</button>
+    </form>
   </div>
 
   <script src="scripts.js"></script>
