@@ -1,10 +1,29 @@
+const clientId = '1339126931513413663';
+const redirectUri = 'https://endregion-dc.vercel.app';
+const scope = 'identify';
+const authUrl = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${scope}`;
+
 document.querySelector('.enter-btn').addEventListener('click', function() {
-    document.querySelector('.welcome-screen').classList.add('hidden');
-    document.querySelector('.container').classList.remove('hidden');
+    window.location.href = authUrl;
 });
 
-document.getElementById('save-settings').addEventListener('click', function() {
-    saveTokenAndFetchProfile(); // Save token and fetch user profile after clicking Save
+window.addEventListener('load', function() {
+    const urlParams = new URLSearchParams(window.location.hash.substring(1));
+    const accessToken = urlParams.get('access_token');
+
+    if (accessToken) {
+        localStorage.setItem('discordToken', accessToken);
+        document.querySelector('.welcome-screen').classList.add('hidden');
+        document.querySelector('.container').classList.remove('hidden');
+        getUserProfile(accessToken);
+    } else {
+        const savedToken = localStorage.getItem('discordToken');
+        if (savedToken) {
+            document.querySelector('.welcome-screen').classList.add('hidden');
+            document.querySelector('.container').classList.remove('hidden');
+            getUserProfile(savedToken);
+        }
+    }
 });
 
 document.getElementById('user-message-form').addEventListener('submit', function(event) {
@@ -17,22 +36,13 @@ document.getElementById('channel-message-form').addEventListener('submit', funct
     sendChannelMessage();
 });
 
-
-function saveTokenAndFetchProfile() {
-    const token = document.getElementById('token').value;
-    if (token) {
-        localStorage.setItem('discordToken', token);
-        getUserProfile(token);
-    }
-}
-
 function sendUserMessage() {
     const token = localStorage.getItem('discordToken');
     const userId = document.getElementById('send-user-id').value;
     const message = document.getElementById('send-user-message').value;
     if (token && userId && message) {
         const headers = {
-            'Authorization': token,
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         };
         fetch(`https://discord.com/api/v9/users/@me/messages`, {
@@ -58,7 +68,7 @@ function sendChannelMessage() {
     const message = document.getElementById('send-channel-message').value;
     if (token && channelId && message) {
         const headers = {
-            'Authorization': token,
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         };
         fetch(`https://discord.com/api/v9/channels/${channelId}/messages`, {
@@ -78,22 +88,6 @@ function sendChannelMessage() {
     }
 }
 
-function getUserId(token) {
-    return new Promise((resolve, reject) => {
-        const headers = {
-            'Authorization': token,
-            'Content-Type': 'application/json'
-        };
-        fetch('https://discord.com/api/v9/users/@me', {
-            method: 'GET',
-            headers: headers
-        })
-        .then(response => response.json())
-        .then(data => resolve(data.id))
-        .catch(error => reject(error));
-    });
-}
-
 function logAction(action) {
     const logs = document.getElementById('logs');
     logs.textContent += `${action}\n`;
@@ -109,7 +103,7 @@ function showPage(pageId) {
 function getUserProfile(token) {
     if (token) {
         const headers = {
-            'Authorization': token,
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         };
         fetch('https://discord.com/api/v9/users/@me', {
@@ -125,11 +119,3 @@ function getUserProfile(token) {
         .catch(error => console.error('Error fetching profile:', error));
     }
 }
-
-window.onload = function() {
-    const savedToken = localStorage.getItem('discordToken');
-    if (savedToken) {
-        document.getElementById('token').value = savedToken;
-        getUserProfile(savedToken);
-    }
-};
