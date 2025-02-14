@@ -104,7 +104,19 @@ h2 {
     position: relative;
 }
 
-.profile p {
+.profile-info {
+    display: flex;
+    align-items: center;
+}
+
+.profile img {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    margin-right: 1em;
+}
+
+.profile-info p {
     margin: 0;
     color: #5dade2;
     border: 1px solid #ecf0f1;
@@ -124,26 +136,28 @@ h2 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-.profile-info {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-grow: 1;
-}
-
-.line {
+.line-vertical {
     border-left: 2px solid #3498db;
     height: 60px;
-    margin: 0 10px;
+    margin-left: 10px;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
 }
 
+.line-horizontal {
+    border-top: 2px solid #3498db;
+    width: 100px;
+    margin-left: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 .channel {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: flex-start;
 }
 
@@ -153,12 +167,5 @@ h2 {
         align-items: center;
     }
 
-    .line {
+    .line-vertical, .line-horizontal {
         display: none;
-    }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
