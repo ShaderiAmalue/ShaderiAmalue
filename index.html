@@ -3,81 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #ece9e6, #ffffff);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-        }
-        nav {
-            background: #333;
-            padding: 1em;
-            display: flex;
-            justify-content: space-around;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        nav a {
-            color: white;
-            margin: 0 1em;
-            text-decoration: none;
-            transition: color 0.3s;
-            padding: 0.5em 1em;
-            border-radius: 5px;
-        }
-        nav a:hover {
-            color: #00b3b3;
-            background-color: #444;
-        }
-        .content {
-            flex: 1;
-            padding: 2em;
-            animation: fadeIn 2s;
-            overflow-y: auto;
-        }
-        .downloads a, .credits a {
-            color: #006666;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 1em;
-            padding: 1em;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            transition: box-shadow 0.3s, border-color 0.3s, background-color 0.3s;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            background-color: #f9f9f9;
-        }
-        .downloads a:hover, .credits a:hover {
-            color: #00b3b3;
-            border-color: #00b3b3;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            background-color: #e0f7fa;
-        }
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 2em;
-            font-size: 1.5em;
-        }
-        @media (max-width: 600px) {
-            nav {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-    </style>
+    <title>Stylish UI</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <nav>
         <a href="#downloads">Downloads</a>
+        <a href="#blockmanTool">Blockman Tool</a>
         <a href="#credits">Credits</a>
     </nav>
     <div class="loading">Loading...</div>
@@ -87,36 +19,23 @@
             <p><a href="https://www.mediafire.com/file/sf1m8u6rronb57w/T_I__3.3.6.apk/file" target="_blank">Blockman Go Modded</a></p>
         </div>
     </div>
+    <div id="blockmanTool" class="content" style="display: none;">
+        <div class="blockmanTool">
+            <h2>Blockman Tool</h2>
+            <p>Enter your access token and user ID:</p>
+            <form id="blockmanForm">
+                <input type="text" id="accessToken" name="accessToken" placeholder="Access Token" required>
+                <input type="text" id="userId" name="userId" placeholder="User ID" required>
+                <button type="button" onclick="submitBlockmanForm()">Submit</button>
+            </form>
+            <pre id="responseOutput"></pre>
+        </div>
+    </div>
     <div id="credits" class="content" style="display: none;">
         <div class="credits">
             <p>Credits: GreenBMgo for the Blockman</p>
         </div>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const links = document.querySelectorAll('nav a');
-            const contents = document.querySelectorAll('.content');
-            const loading = document.querySelector('.loading');
-            
-            links.forEach(link => {
-                link.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    const targetId = this.getAttribute('href').substring(1);
-                    contents.forEach(content => {
-                        content.style.display = 'none';
-                    });
-                    loading.style.display = 'block';
-                    setTimeout(() => {
-                        contents.forEach(content => {
-                            if (content.id === targetId) {
-                                content.style.display = 'block';
-                            }
-                        });
-                        loading.style.display = 'none';
-                    }, 500); // simulate loading delay
-                });
-            });
-        });
-    </script>
+    <script src="scripts.js"></script>
 </body>
 </html>
