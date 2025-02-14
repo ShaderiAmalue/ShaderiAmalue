@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UI with Pages</title>
+    <title>Responsive UI</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background: linear-gradient(to right, #f0f0f0, #c0c0c0);
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
         }
         nav {
             background: #004d4d;
@@ -27,11 +30,10 @@
             color: #00b3b3;
         }
         .content {
+            flex: 1;
             padding: 2em;
             animation: fadeIn 2s;
-        }
-        .downloads, .credits {
-            margin-bottom: 2em;
+            overflow-y: auto;
         }
         .downloads a, .credits a {
             color: #006666;
@@ -41,6 +43,15 @@
         }
         .downloads a:hover, .credits a:hover {
             color: #00b3b3;
+        }
+        .credits-page {
+            display: none;
+        }
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -53,25 +64,30 @@
         <a href="#downloads">Downloads</a>
         <a href="#credits">Credits</a>
     </nav>
-    <div class="content">
-        <div id="downloads" class="downloads">
+    <div id="downloads" class="content">
+        <div class="downloads">
             <p><a href="https://1drv.ms/u/s!Aggzh8g6tvvple8M8xVeFAa-ME0NQQ?e=Op7PdP" target="_blank">T_I (Hytp Canary)</a></p>
             <p><a href="https://www.mediafire.com/file/sf1m8u6rronb57w/T_I__3.3.6.apk/file" target="_blank">Blockman Go Modded</a></p>
         </div>
-        <div id="credits" class="credits">
-            <p>Credits: GreenBMgo for the Blockman</p>
-        </div>
+    </div>
+    <div id="credits" class="content credits-page">
+        <p>Credits: GreenBMgo for the Blockman</p>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const links = document.querySelectorAll('nav a');
+            const contents = document.querySelectorAll('.content');
+            
             links.forEach(link => {
                 link.addEventListener('click', function(event) {
                     event.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    document.querySelector('.content').scrollTo({
-                        top: target.offsetTop,
-                        behavior: 'smooth'
+                    const targetId = this.getAttribute('href').substring(1);
+                    contents.forEach(content => {
+                        if (content.id === targetId) {
+                            content.style.display = 'block';
+                        } else {
+                            content.style.display = 'none';
+                        }
                     });
                 });
             });
