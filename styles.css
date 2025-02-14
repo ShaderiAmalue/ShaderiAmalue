@@ -121,6 +121,17 @@ nav a:hover {
     color: #ff8a80;
 }
 
+.profile a {
+    color: #ff8a80;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.profile a:hover {
+    color: #ff5252;
+}
+
 @media (max-width: 600px) {
     nav {
         flex-direction: column;
