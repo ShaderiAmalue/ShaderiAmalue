@@ -35,6 +35,11 @@ nav a:hover {
     padding: 2em;
     animation: fadeIn 2s;
     overflow-y: auto;
+    display: none; /* Hide all content by default */
+}
+
+.content.active {
+    display: block; /* Show active content */
 }
 
 .downloads a, .credits a, .blockmanTool a {
