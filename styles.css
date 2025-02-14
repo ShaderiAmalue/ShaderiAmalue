@@ -90,7 +90,6 @@ h2 {
 
 .profiles {
     margin-top: 1em;
-    position: relative;
 }
 
 .profile {
@@ -101,19 +100,19 @@ h2 {
     border-radius: 5px;
     background-color: #2c3e50;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
-    position: relative;
-}
-
-.profile-info {
-    display: flex;
-    align-items: center;
 }
 
 .profile img {
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     margin-right: 1em;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .profile-info p {
@@ -136,36 +135,14 @@ h2 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-.line-vertical {
-    border-left: 2px solid #3498db;
-    height: 60px;
-    margin-left: 10px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.line-horizontal {
-    border-top: 2px solid #3498db;
-    width: 100px;
-    margin-left: 10px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.channel {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
 @media (max-width: 600px) {
     nav {
         flex-direction: column;
         align-items: center;
     }
+}
 
-    .line-vertical, .line-horizontal {
-        display: none;
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
