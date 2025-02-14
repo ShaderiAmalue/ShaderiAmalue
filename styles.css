@@ -90,30 +90,18 @@ h2 {
 
 .profiles {
     margin-top: 1em;
+    position: relative;
 }
 
 .profile {
     display: flex;
     align-items: center;
-    margin-bottom: 1em;
+    margin-bottom: 2em;
     padding: 1em;
     border-radius: 5px;
     background-color: #2c3e50;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
     position: relative;
-}
-
-.profile img {
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    margin-right: 1em;
-}
-
-.profile-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
 }
 
 .profile p {
@@ -136,34 +124,27 @@ h2 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
+.profile-info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-grow: 1;
+}
+
 .line {
+    border-left: 2px solid #3498db;
+    height: 60px;
+    margin: 0 10px;
     position: absolute;
-    height: 2px;
-    background-color: #3498db;
-    animation: lineMove 2s infinite;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-.profile:nth-child(1) .line {
-    top: 50%;
-    left: 20%;
-    width: 50%;
-}
-
-.profile:nth-child(2) .line {
-    top: 50%;
-    left: 30%;
-    width: 60%;
-}
-
-.profile:nth-child(3) .line {
-    top: 50%;
-    left: 10%;
-    width: 40%;
-}
-
-@keyframes lineMove {
-    0% { width: 0; }
-    100% { width: 100%; }
+.channel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 @media (max-width: 600px) {
