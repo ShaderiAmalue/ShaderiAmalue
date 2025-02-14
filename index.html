@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Sleek</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <nav>
         <a href="#" data-target="downloads">Downloads</a>
-        <a href="#" data-target="blockmanTool">Blockman Tool</a>
         <a href="#" data-target="credits">Credits</a>
     </nav>
     <div class="loading">Loading...</div>
@@ -17,20 +16,6 @@
         <div class="downloads">
             <p><a href="https://1drv.ms/u/s!Aggzh8g6tvvple8M8xVeFAa-ME0NQQ?e=Op7PdP" target="_blank">T_I (HTTP Canary)</a></p>
             <p><a href="https://www.mediafire.com/file/sf1m8u6rronb57w/T_I__3.3.6.apk/file" target="_blank">Blockman Go Modded</a></p>
-        </div>
-    </div>
-    <div id="blockmanTool" class="content">
-        <div class="blockmanTool">
-            <h2>Blockman Tool</h2>
-            <p>Enter your access token and user ID:</p>
-            <form id="blockmanForm">
-                <input type="text" id="accessToken" name="accessToken" placeholder="Access Token" required>
-                <input type="text" id="userId" name="userId" placeholder="User ID" required>
-                <input type="date" id="birthday" name="birthday" placeholder="Birthday" required>
-                <input type="text" id="nickname" name="nickname" placeholder="New Nickname" required>
-                <button type="button" onclick="submitBlockmanForm()">Submit</button>
-            </form>
-            <pre id="responseOutput"></pre>
         </div>
     </div>
     <div id="credits" class="content">
