@@ -67,6 +67,13 @@ nav a:hover {
     display: block; /* Show active content */
 }
 
+h2 {
+    text-align: center;
+    margin-bottom: 1em;
+    color: #ff5252;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
 .downloads a, .credits a, .profiles a {
     color: #ff5252;
     text-decoration: none;
