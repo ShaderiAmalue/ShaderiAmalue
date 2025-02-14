@@ -2,8 +2,8 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(120deg, #121212 68%, #b71c1c 32%);
-    color: #e0e0e0;
+    background: linear-gradient(120deg, #2c3e50 68%, #3498db 32%);
+    color: #ecf0f1;
     margin: 0;
     padding: 0;
     display: flex;
@@ -12,28 +12,8 @@ body {
     overflow: hidden;
 }
 
-.rainbow-cat-container {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    z-index: 1;
-    animation: slide 10s infinite linear;
-}
-
-.rainbow-cat {
-    width: 100px;
-    height: auto;
-}
-
-@keyframes slide {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
-
 nav {
-    background: #b71c1c;
+    background: #2980b9;
     padding: 1em;
     display: flex;
     justify-content: space-around;
@@ -42,7 +22,7 @@ nav {
 }
 
 nav a {
-    color: #fff;
+    color: #ecf0f1;
     margin: 0 1em;
     text-decoration: none;
     transition: color 0.3s, background-color 0.3s;
@@ -51,7 +31,7 @@ nav a {
 }
 
 nav a:hover {
-    background-color: #d32f2f;
+    background-color: #3498db;
 }
 
 .content {
@@ -69,12 +49,12 @@ nav a:hover {
 h2 {
     text-align: center;
     margin-bottom: 1em;
-    color: #ff5252;
+    color: #3498db;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .downloads a, .credits a, .profiles a {
-    color: #ff5252;
+    color: #3498db;
     text-decoration: none;
     display: block;
     margin-bottom: 1em;
@@ -82,15 +62,15 @@ h2 {
     border: 1px solid #333;
     border-radius: 5px;
     transition: box-shadow 0.3s, border-color 0.3s, background-color 0.3s;
-    box-shadow: 4px 4px 10px rgba(255, 82, 82, 0.6), 0 0 10px rgba(0, 0, 0, 0.5);
-    background-color: #1e1e1e;
+    box-shadow: 4px 4px 10px rgba(52, 152, 219, 0.6), 0 0 10px rgba(0, 0, 0, 0.5);
+    background-color: #34495e;
 }
 
 .downloads a:hover, .credits a:hover, .profiles a:hover {
-    color: #ff8a80;
-    border-color: #ff8a80;
-    box-shadow: 6px 6px 15px rgba(255, 82, 82, 0.8), 0 0 15px rgba(0, 0, 0, 0.7);
-    background-color: #333;
+    color: #5dade2;
+    border-color: #5dade2;
+    box-shadow: 6px 6px 15px rgba(52, 152, 219, 0.8), 0 0 15px rgba(0, 0, 0, 0.7);
+    background-color: #2c3e50;
     transition: box-shadow 0.3s ease-out;
 }
 
@@ -99,7 +79,7 @@ h2 {
     text-align: center;
     padding: 2em;
     font-size: 1.5em;
-    color: #ff5252;
+    color: #3498db;
 }
 
 .profiles {
@@ -112,7 +92,7 @@ h2 {
     margin-bottom: 1em;
     padding: 1em;
     border-radius: 5px;
-    background-color: #333;
+    background-color: #2c3e50;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -131,18 +111,18 @@ h2 {
 
 .profile p {
     margin: 0;
-    color: #ff8a80;
+    color: #5dade2;
 }
 
 .profile a {
-    color: #ff8a80;
+    color: #5dade2;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s;
 }
 
 .profile a:hover {
-    color: #ff5252;
+    color: #3498db;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
