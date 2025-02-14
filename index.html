@@ -8,7 +8,11 @@
 </head>
 <body>
     <div class="welcome-screen" id="welcome-screen">
-        <h1>Advanced Discord Control Panel</h1>
+        <h1>Welcome to Advanced Discord Control Panel</h1>
+        <button class="btn-primary" onclick="showLogin()">Get Started</button>
+    </div>
+    <div class="login-screen hidden" id="login-screen">
+        <h1>Log In</h1>
         <form id="token-form">
             <div class="form-group">
                 <label for="token">Enter Discord Token:</label>
@@ -17,13 +21,13 @@
             </div>
             <button type="submit" class="btn-primary">Log In</button>
         </form>
-        <div id="profile-confirmation" class="hidden">
-            <h2>Is this you?</h2>
-            <img id="profile-picture" alt="Profile Picture">
-            <p id="profile-username"></p>
-            <button class="btn-primary" onclick="confirmProfile()">Yes, it's me</button>
-            <button class="btn-secondary" onclick="retryLogin()">No, try again</button>
-        </div>
+    </div>
+    <div class="profile-confirmation hidden" id="profile-confirmation">
+        <h2>Is this you?</h2>
+        <img id="profile-picture" alt="Profile Picture">
+        <p id="profile-username"></p>
+        <button class="btn-primary" onclick="confirmProfile()">Yes, it's me</button>
+        <button class="btn-secondary" onclick="retryLogin()">No, try again</button>
     </div>
     <div class="container hidden">
         <aside class="sidebar">
