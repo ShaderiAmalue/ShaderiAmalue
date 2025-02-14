@@ -71,6 +71,18 @@ nav a:hover {
     color: #ff5252;
 }
 
+.profiles div {
+    background-color: #333;
+    padding: 1em;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1em;
+}
+
+.profiles p {
+    margin: 0.5em 0;
+}
+
 @media (max-width: 600px) {
     nav {
         flex-direction: column;
