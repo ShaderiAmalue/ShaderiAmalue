@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI with Pages</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #f0f0f0, #c0c0c0);
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background: #004d4d;
+            padding: 1em;
+            display: flex;
+            justify-content: space-around;
+        }
+        nav a {
+            color: white;
+            margin: 0 1em;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #00b3b3;
+        }
+        .content {
+            padding: 2em;
+            animation: fadeIn 2s;
+        }
+        .downloads, .credits {
+            margin-bottom: 2em;
+        }
+        .downloads a, .credits a {
+            color: #006666;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5em;
+        }
+        .downloads a:hover, .credits a:hover {
+            color: #00b3b3;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#downloads">Downloads</a>
+        <a href="#credits">Credits</a>
+    </nav>
+    <div class="content">
+        <div id="downloads" class="downloads">
+            <p><a href="https://1drv.ms/u/s!Aggzh8g6tvvple8M8xVeFAa-ME0NQQ?e=Op7PdP" target="_blank">T_I (Hytp Canary)</a></p>
+            <p><a href="https://www.mediafire.com/file/sf1m8u6rronb57w/T_I__3.3.6.apk/file" target="_blank">Blockman Go Modded</a></p>
+        </div>
+        <div id="credits" class="credits">
+            <p>Credits: GreenBMgo for the Blockman</p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('nav a');
+            links.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    document.querySelector('.content').scrollTo({
+                        top: target.offsetTop,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
