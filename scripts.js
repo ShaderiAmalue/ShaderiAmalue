@@ -1,3 +1,4 @@
+// Handle login form submission
 document.getElementById('token-form').addEventListener('submit', function(event) {
     event.preventDefault();
     const token = document.getElementById('token').value;
@@ -13,6 +14,7 @@ document.getElementById('token-form').addEventListener('submit', function(event)
     });
 });
 
+// Function to confirm user profile
 function confirmProfile() {
     document.getElementById('profile-confirmation').classList.add('hidden');
     document.getElementById('welcome-screen').classList.add('hidden');
@@ -20,17 +22,20 @@ function confirmProfile() {
     showPage('dashboard-page');
 }
 
+// Function to retry login
 function retryLogin() {
     document.getElementById('profile-confirmation').classList.add('hidden');
     document.getElementById('token-form').classList.remove('hidden');
 }
 
+// Function to toggle token visibility
 function toggleTokenVisibility() {
     const tokenInput = document.getElementById('token');
     const type = tokenInput.getAttribute('type') === 'password' ? 'text' : 'password';
     tokenInput.setAttribute('type', type);
 }
 
+// Function to show specified page
 function showPage(pageId) {
     document.querySelectorAll('.page').forEach(page => {
         page.classList.add('hidden');
@@ -38,21 +43,25 @@ function showPage(pageId) {
     document.getElementById(pageId).classList.remove('hidden');
 }
 
+// Handle user message form submission
 document.getElementById('user-message-form').addEventListener('submit', function(event) {
     event.preventDefault();
     sendUserMessage();
 });
 
+// Handle channel message form submission
 document.getElementById('channel-message-form').addEventListener('submit', function(event) {
     event.preventDefault();
     sendChannelMessage();
 });
 
+// Handle delete messages form submission
 document.getElementById('delete-messages-form').addEventListener('submit', function(event) {
     event.preventDefault();
     deleteMessages();
 });
 
+// Function to send a user message
 function sendUserMessage() {
     const token = localStorage.getItem('discordToken');
     const userId = document.getElementById('send-user-id').value;
@@ -79,6 +88,7 @@ function sendUserMessage() {
     }
 }
 
+// Function to send a channel message
 function sendChannelMessage() {
     const token = localStorage.getItem('discordToken');
     const channelId = document.getElementById('send-channel-id').value;
@@ -105,6 +115,7 @@ function sendChannelMessage() {
     }
 }
 
+// Function to delete messages
 function deleteMessages() {
     const token = localStorage.getItem('discordToken');
     const channelId = document.getElementById('delete-channel-id').value;
@@ -141,6 +152,7 @@ function deleteMessages() {
     }
 }
 
+// Function to get user ID from token
 function getUserId(token) {
     return new Promise((resolve, reject) => {
         const headers = {
@@ -157,11 +169,13 @@ function getUserId(token) {
     });
 }
 
+// Function to log actions
 function logAction(action) {
     const logs = document.getElementById('logs');
     logs.textContent += `${action}\n`;
 }
 
+// Function to get user profile from token
 function getUserProfile(token) {
     return new Promise((resolve, reject) => {
         const headers = {
@@ -178,6 +192,7 @@ function getUserProfile(token) {
     });
 }
 
+// Load saved token on page load
 window.onload = function() {
     const savedToken = localStorage.getItem('discordToken');
     if (savedToken) {
