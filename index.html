@@ -9,7 +9,13 @@
 <body>
     <div class="welcome-screen">
         <h1>Advanced Discord Control Panel</h1>
-        <button class="enter-btn">Login with Discord</button>
+        <form id="token-form">
+            <div class="form-group">
+                <label for="token">Enter Discord Token:</label>
+                <input type="text" id="token" name="token" required>
+            </div>
+            <button type="submit" class="btn-primary">Log In</button>
+        </form>
     </div>
     <div class="container hidden">
         <aside class="sidebar">
