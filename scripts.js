@@ -3,8 +3,6 @@ document.getElementById('token-form').addEventListener('submit', function(event)
     const token = document.getElementById('token').value;
     localStorage.setItem('discordToken', token);
     getUserProfile(token).then(user => {
-        document.querySelector('.welcome-screen').classList.add('hidden');
-        document.querySelector('.container').classList.remove('hidden');
         document.getElementById('profile-username').textContent = user.username;
         document.getElementById('profile-picture').src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
         document.getElementById('profile-confirmation').classList.remove('hidden');
@@ -16,7 +14,14 @@ document.getElementById('token-form').addEventListener('submit', function(event)
 
 function confirmProfile() {
     document.getElementById('profile-confirmation').classList.add('hidden');
+    document.querySelector('.welcome-screen').classList.add('hidden');
+    document.querySelector('.container').classList.remove('hidden');
     showPage('dashboard-page');
+}
+
+function retryLogin() {
+    document.getElementById('profile-confirmation').classList.add('hidden');
+    document.getElementById('token-form').classList.remove('hidden');
 }
 
 function showPage(pageId) {
@@ -113,7 +118,7 @@ function deleteMessages() {
             let count = 0;
 
             messages.forEach(message => {
-                if (count < deleteCount && message.author.id === getUserId(token)) {
+                if (count < deleteCount && message.author.id === user.id) {
                     deletePromises.push(fetch(`https://discord.com/api/v9/channels/${channelId}/messages/${message.id}`, {
                         method: 'DELETE',
                         headers: headers
@@ -127,22 +132,6 @@ function deleteMessages() {
         })
         .catch(error => console.error('Error fetching messages:', error));
     }
-}
-
-function getUserId(token) {
-    return new Promise((resolve, reject) => {
-        const headers = {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        };
-        fetch('https://discord.com/api/v9/users/@me', {
-            method: 'GET',
-            headers: headers
-        })
-        .then(response => response.json())
-        .then(data => resolve(data.id))
-        .catch(error => reject(error));
-    });
 }
 
 function logAction(action) {
@@ -170,8 +159,6 @@ window.onload = function() {
     const savedToken = localStorage.getItem('discordToken');
     if (savedToken) {
         getUserProfile(savedToken).then(user => {
-            document.querySelector('.welcome-screen').classList.add('hidden');
-            document.querySelector('.container').classList.remove('hidden');
             document.getElementById('profile-username').textContent = user.username;
             document.getElementById('profile-picture').src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
             document.getElementById('profile-confirmation').classList.remove('hidden');
