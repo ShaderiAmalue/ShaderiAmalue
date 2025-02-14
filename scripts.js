@@ -25,7 +25,9 @@ document.addEventListener('DOMContentLoaded', function() {
 function submitBlockmanForm() {
     const accessToken = document.getElementById('accessToken').value;
     const userId = document.getElementById('userId').value;
-    
+    const birthday = document.getElementById('birthday').value;
+    const nickname = document.getElementById('nickname').value;
+
     const headers = {
         'userId': userId,
         'Access-Token': accessToken,
@@ -33,10 +35,11 @@ function submitBlockmanForm() {
     };
 
     const data = {
-        'birthday': '9999-12-31',
+        'birthday': birthday,
         'details': ''
     };
 
+    // Update birthday
     fetch('https://gw.sandboxol.com/user/api/v1/user/info', {
         method: 'PUT',
         headers: headers,
@@ -44,7 +47,16 @@ function submitBlockmanForm() {
     })
     .then(response => response.text())
     .then(text => {
-        document.getElementById('responseOutput').textContent = text;
+        console.log('Birthday Update:', text);
+        // Update nickname
+        fetch(`https://gw.sandboxol.com/user/api/v3/user/nickName?newName=${nickname}&oldName=Shadie`, {
+            method: 'PUT',
+            headers: headers
+        })
+        .then(response => response.json())
+        .then(json => {
+            document.getElementById('responseOutput').textContent = JSON.stringify(json, null, 2);
+        });
     })
     .catch(error => {
         console.error('Error:', error);
