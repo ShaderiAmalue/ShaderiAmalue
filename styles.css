@@ -24,6 +24,7 @@ body {
     position: absolute;
     width: 100%;
     max-width: 600px;
+    z-index: 2;
 }
 
 .welcome-screen h1 {
@@ -70,7 +71,7 @@ body {
     width: 90%;
     overflow: hidden;
     position: relative;
-    z-index: 0;
+    z-index: 1;
 }
 
 .sidebar {
