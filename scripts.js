@@ -31,10 +31,10 @@ function submitBlockmanForm() {
     const headers = {
         'userId': userId,
         'Access-Token': accessToken,
-        'User-Agent': ''
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
     };
 
-    const data = {
+    const birthdayData = {
         'birthday': birthday,
         'details': ''
     };
@@ -42,20 +42,36 @@ function submitBlockmanForm() {
     // Update birthday
     fetch('https://gw.sandboxol.com/user/api/v1/user/info', {
         method: 'PUT',
-        headers: headers,
-        body: JSON.stringify(data)
+        headers: {
+            'Content-Type': 'application/json',
+            ...headers
+        },
+        body: JSON.stringify(birthdayData)
     })
-    .then(response => response.text())
-    .then(text => {
-        console.log('Birthday Update:', text);
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to update birthday');
+        }
+        return response.json();
+    })
+    .then(birthdayResponse => {
+        console.log('Birthday Update:', birthdayResponse);
+
+        const nicknameUrl = `https://gw.sandboxol.com/user/api/v3/user/nickName?newName=${encodeURIComponent(nickname)}&oldName=Shadie`;
+
         // Update nickname
-        fetch(`https://gw.sandboxol.com/user/api/v3/user/nickName?newName=${nickname}&oldName=Shadie`, {
+        fetch(nicknameUrl, {
             method: 'PUT',
             headers: headers
         })
-        .then(response => response.json())
-        .then(json => {
-            document.getElementById('responseOutput').textContent = JSON.stringify(json, null, 2);
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to update nickname');
+            }
+            return response.json();
+        })
+        .then(nicknameResponse => {
+            document.getElementById('responseOutput').textContent = JSON.stringify(nicknameResponse, null, 2);
         });
     })
     .catch(error => {
