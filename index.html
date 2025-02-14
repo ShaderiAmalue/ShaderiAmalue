@@ -16,6 +16,12 @@
             </div>
             <button type="submit" class="btn-primary">Log In</button>
         </form>
+        <div id="profile-confirmation" class="hidden">
+            <h2>Is this you?</h2>
+            <img id="profile-picture" alt="Profile Picture">
+            <p id="profile-username"></p>
+            <button class="btn-primary" onclick="confirmProfile()">Yes, it's me</button>
+        </div>
     </div>
     <div class="container hidden">
         <aside class="sidebar">
@@ -30,13 +36,6 @@
         </aside>
 
         <main>
-            <div id="profile-confirmation" class="hidden">
-                <h2>Is this you?</h2>
-                <img id="profile-picture" alt="Profile Picture">
-                <p id="profile-username"></p>
-                <button class="btn-primary" onclick="confirmProfile()">Yes, it's me</button>
-            </div>
-
             <div id="dashboard-page" class="page hidden">
                 <h2>Dashboard</h2>
                 <p>Welcome to the Advanced Discord Control Panel! Here you can manage your activities.</p>
