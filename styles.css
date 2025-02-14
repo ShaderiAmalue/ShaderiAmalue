@@ -57,7 +57,7 @@ h2 {
     border-radius: 5px;
 }
 
-.downloads a, .credits a, .videos a {
+.downloads a, .credits a {
     color: #3498db;
     text-decoration: none;
     display: block;
@@ -70,7 +70,7 @@ h2 {
     background-color: #34495e;
 }
 
-.downloads a:hover, .credits a:hover, .videos a:hover {
+.downloads a:hover, .credits a:hover {
     color: #5dade2;
     border-color: #5dade2;
     box-shadow: 6px 6px 15px rgba(52, 152, 219, 0.8), 0 0 15px rgba(0, 0, 0, 0.7);
@@ -100,7 +100,6 @@ h2 {
     border-radius: 5px;
     background-color: #2c3e50;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
-    position: relative;
 }
 
 .profile img {
@@ -135,23 +134,6 @@ h2 {
     color: #3498db;
     border-color: #5dade2;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-.videos {
-    margin-top: 1em;
-}
-
-.video {
-    margin-bottom: 1em;
-    padding: 1em;
-    border-radius: 5px;
-    background-color: #2c3e50;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-.video p {
-    margin: 0;
-    color: #5dade2;
 }
 
 @media (max-width: 600px) {
