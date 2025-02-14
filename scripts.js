@@ -6,6 +6,7 @@ document.getElementById('token-form').addEventListener('submit', function(event)
         document.getElementById('profile-username').textContent = user.username;
         document.getElementById('profile-picture').src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
         document.getElementById('profile-confirmation').classList.remove('hidden');
+        document.getElementById('token-form').classList.add('hidden');
     }).catch(error => {
         console.error('Error fetching profile:', error);
         alert('Invalid token. Please try again.');
@@ -14,7 +15,7 @@ document.getElementById('token-form').addEventListener('submit', function(event)
 
 function confirmProfile() {
     document.getElementById('profile-confirmation').classList.add('hidden');
-    document.querySelector('.welcome-screen').classList.add('hidden');
+    document.getElementById('welcome-screen').classList.add('hidden');
     document.querySelector('.container').classList.remove('hidden');
     showPage('dashboard-page');
 }
@@ -22,6 +23,12 @@ function confirmProfile() {
 function retryLogin() {
     document.getElementById('profile-confirmation').classList.add('hidden');
     document.getElementById('token-form').classList.remove('hidden');
+}
+
+function toggleTokenVisibility() {
+    const tokenInput = document.getElementById('token');
+    const type = tokenInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    tokenInput.setAttribute('type', type);
 }
 
 function showPage(pageId) {
@@ -118,7 +125,7 @@ function deleteMessages() {
             let count = 0;
 
             messages.forEach(message => {
-                if (count < deleteCount && message.author.id === user.id) {
+                if (count < deleteCount && message.author.id === getUserId(token)) {
                     deletePromises.push(fetch(`https://discord.com/api/v9/channels/${channelId}/messages/${message.id}`, {
                         method: 'DELETE',
                         headers: headers
@@ -132,6 +139,22 @@ function deleteMessages() {
         })
         .catch(error => console.error('Error fetching messages:', error));
     }
+}
+
+function getUserId(token) {
+    return new Promise((resolve, reject) => {
+        const headers = {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        };
+        fetch('https://discord.com/api/v9/users/@me', {
+            method: 'GET',
+            headers: headers
+        })
+        .then(response => response.json())
+        .then(data => resolve(data.id))
+        .catch(error => reject(error));
+    });
 }
 
 function logAction(action) {
@@ -162,6 +185,7 @@ window.onload = function() {
             document.getElementById('profile-username').textContent = user.username;
             document.getElementById('profile-picture').src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
             document.getElementById('profile-confirmation').classList.remove('hidden');
+            document.getElementById('token-form').classList.add('hidden');
         }).catch(error => {
             console.error('Error fetching profile:', error);
             alert('Invalid token. Please log in again.');
