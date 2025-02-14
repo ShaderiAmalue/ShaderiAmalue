@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function fetchProfiles(userIds) {
     const profilesContainer = document.querySelector('.profiles');
+    profilesContainer.innerHTML = ''; // Clear loading message
     const promises = userIds.map(id => fetch(`https://discordlookup.mesalytic.moe/v1/user/${id}`));
     Promise.all(promises).then(responses => {
         responses.forEach(response => {
@@ -39,7 +40,7 @@ function fetchProfiles(userIds) {
                 });
             } else {
                 const profile = document.createElement('div');
-                profile.innerHTML = `<p>Error fetching profile for ID: ${id}</p>`;
+                profile.innerHTML = `<p>Error fetching profile for ID: ${response.url.split('/').pop()}</p>`;
                 profilesContainer.appendChild(profile);
             }
         });
