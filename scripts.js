@@ -1,3 +1,9 @@
+// Function to show the login screen
+function showLogin() {
+    document.getElementById('welcome-screen').classList.add('hidden');
+    document.getElementById('login-screen').classList.remove('hidden');
+}
+
 // Handle login form submission
 document.getElementById('token-form').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -7,7 +13,7 @@ document.getElementById('token-form').addEventListener('submit', function(event)
         document.getElementById('profile-username').textContent = user.username;
         document.getElementById('profile-picture').src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
         document.getElementById('profile-confirmation').classList.remove('hidden');
-        document.getElementById('token-form').classList.add('hidden');
+        document.getElementById('login-screen').classList.add('hidden');
     }).catch(error => {
         console.error('Error fetching profile:', error);
         alert('Invalid token. Please try again.');
@@ -17,7 +23,6 @@ document.getElementById('token-form').addEventListener('submit', function(event)
 // Function to confirm user profile
 function confirmProfile() {
     document.getElementById('profile-confirmation').classList.add('hidden');
-    document.getElementById('welcome-screen').classList.add('hidden');
     document.querySelector('.container').classList.remove('hidden');
     showPage('dashboard-page');
 }
@@ -25,7 +30,7 @@ function confirmProfile() {
 // Function to retry login
 function retryLogin() {
     document.getElementById('profile-confirmation').classList.add('hidden');
-    document.getElementById('token-form').classList.remove('hidden');
+    document.getElementById('login-screen').classList.remove('hidden');
 }
 
 // Function to toggle token visibility
@@ -200,7 +205,7 @@ window.onload = function() {
             document.getElementById('profile-username').textContent = user.username;
             document.getElementById('profile-picture').src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
             document.getElementById('profile-confirmation').classList.remove('hidden');
-            document.getElementById('token-form').classList.add('hidden');
+            document.getElementById('login-screen').classList.add('hidden');
         }).catch(error => {
             console.error('Error fetching profile:', error);
             alert('Invalid token. Please log in again.');
