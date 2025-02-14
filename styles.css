@@ -62,7 +62,7 @@ nav a:hover {
     background-color: #e0f7fa;
 }
 
-input[type="text"], button {
+input[type="text"], input[type="date"], button {
     padding: 0.5em;
     margin: 0.5em 0;
     width: calc(100% - 1em);
@@ -72,7 +72,7 @@ input[type="text"], button {
     transition: box-shadow 0.3s, border-color 0.3s;
 }
 
-input[type="text"]:hover, button:hover {
+input[type="text"]:hover, input[type="date"]:hover, button:hover {
     border-color: #00b3b3;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
