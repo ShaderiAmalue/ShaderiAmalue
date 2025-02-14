@@ -71,16 +71,30 @@ nav a:hover {
     color: #ff5252;
 }
 
-.profiles div {
-    background-color: #333;
-    padding: 1em;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    margin-bottom: 1em;
+.profiles {
+    margin-top: 1em;
 }
 
-.profiles p {
-    margin: 0.5em 0;
+.profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+    padding: 1em;
+    border-radius: 5px;
+    background-color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.profile img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin-right: 1em;
+}
+
+.profile p {
+    margin: 0;
+    color: #ff8a80;
 }
 
 @media (max-width: 600px) {
