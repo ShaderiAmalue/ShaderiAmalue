@@ -2,7 +2,8 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(120deg, #b71c1c, #1e1e1e);
+    background-color: #121212;
+    background: linear-gradient(120deg, #121212 68%, #b71c1c 32%);
     color: #e0e0e0;
     margin: 0;
     padding: 0;
@@ -12,12 +13,33 @@ body {
     overflow: hidden;
 }
 
+.rainbow-cat-container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+    animation: slide 10s infinite linear;
+}
+
+.rainbow-cat {
+    width: 100px;
+    height: auto;
+}
+
+@keyframes slide {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
 nav {
     background: #b71c1c;
     padding: 1em;
     display: flex;
     justify-content: space-around;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 2;
 }
 
 nav a {
