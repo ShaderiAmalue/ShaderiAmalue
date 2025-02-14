@@ -27,11 +27,13 @@ function submitBlockmanForm() {
     const userId = document.getElementById('userId').value;
     const birthday = document.getElementById('birthday').value;
     const nickname = document.getElementById('nickname').value;
+    const xSign = '9f7058899e9f2ad4f1861f010b24e684'; // Provided X-Sign
 
     const headers = {
         'userId': userId,
         'Access-Token': accessToken,
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
+        'X-Sign': xSign
     };
 
     const birthdayData = {
