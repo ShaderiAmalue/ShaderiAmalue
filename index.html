@@ -7,12 +7,13 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="welcome-screen">
+    <div class="welcome-screen" id="welcome-screen">
         <h1>Advanced Discord Control Panel</h1>
         <form id="token-form">
             <div class="form-group">
                 <label for="token">Enter Discord Token:</label>
-                <input type="text" id="token" name="token" required>
+                <input type="password" id="token" name="token" required>
+                <span class="toggle-password" onclick="toggleTokenVisibility()">👁️</span>
             </div>
             <button type="submit" class="btn-primary">Log In</button>
         </form>
