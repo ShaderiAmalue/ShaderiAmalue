@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 document.getElementById(targetId).classList.add('active');
                 loading.style.display = 'none';
-            }, 500); // simulate loading delay
+            }, 50); // simulate loading delay
         });
     });
 
