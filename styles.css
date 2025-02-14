@@ -83,15 +83,16 @@ h2 {
     border: 1px solid #333;
     border-radius: 5px;
     transition: box-shadow 0.3s, border-color 0.3s, background-color 0.3s;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 4px 4px 10px rgba(255, 82, 82, 0.6), 0 0 10px rgba(0, 0, 0, 0.5);
     background-color: #1e1e1e;
 }
 
 .downloads a:hover, .credits a:hover, .profiles a:hover {
     color: #ff8a80;
     border-color: #ff8a80;
-    box-shadow: 0 4px 8px rgba(255, 82, 82, 0.4);
+    box-shadow: 6px 6px 15px rgba(255, 82, 82, 0.8), 0 0 15px rgba(0, 0, 0, 0.7);
     background-color: #333;
+    transition: box-shadow 0.3s ease-out;
 }
 
 .loading {
@@ -113,7 +114,7 @@ h2 {
     padding: 1em;
     border-radius: 5px;
     background-color: #333;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .profile img {
@@ -143,6 +144,7 @@ h2 {
 
 .profile a:hover {
     color: #ff5252;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 @media (max-width: 600px) {
