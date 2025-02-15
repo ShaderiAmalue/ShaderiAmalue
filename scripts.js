@@ -85,14 +85,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     <h2>eternal_hacker</h2>
                     <img src="https://cdn.discordapp.com/avatars/971473213144072203/0ec9e7cccbc709e8013001d38dc2f297.webp?size=2048" alt="eternal_hacker" class="avatar-large">
                     <p><a href="https://youtube.com/@eternalhackerbg?si=AU5DFntWLEtTrUTo" target="_blank" class="channel-link">YouTube Channel</a></p>
-                    <p>pro.</p>
+                    <p>Here you can add more detailed information about eternal_hacker.</p>
                 `;
             case 'greenbmgo':
                 return `
                     <h2>greenbmgo</h2>
                     <img src="https://cdn.discordapp.com/avatars/1094920973611958343/044a19ba4826f743a496c8894b14eaf8.webp?size=2048" alt="greenbmgo" class="avatar-large">
                     <p><a href="https://youtube.com/@rundexmods?si=xfVKY42L38g-OGcd" target="_blank" class="channel-link">YouTube Channel</a></p>
-                    <p>pro.</p>
+                    <p>Here you can add more detailed information about greenbmgo.</p>
                 `;
             default:
                 return `<p>No additional information available.</p>`;
