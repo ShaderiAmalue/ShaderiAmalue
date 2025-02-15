@@ -1,17 +1,28 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const links = document.querySelectorAll('nav a');
+    const links = document.querySelectorAll('nav a, .link, .button-link');
     const contents = document.querySelectorAll('.content');
+    const toast = document.getElementById('toast');
 
     links.forEach(link => {
         link.addEventListener('click', function(event) {
             event.preventDefault();
             const targetId = this.dataset.target;
-            contents.forEach(content => {
-                content.classList.remove('active');
-            });
-            document.getElementById(targetId).classList.add('active');
+            if (targetId) {
+                contents.forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.getElementById(targetId).classList.add('active');
+            }
+            showToast();
         });
     });
+
+    function showToast() {
+        toast.className = 'toast show';
+        setTimeout(function() {
+            toast.className = toast.className.replace('show', '');
+        }, 3000);
+    }
 
     document.getElementById('downloads').classList.add('active');
 });
