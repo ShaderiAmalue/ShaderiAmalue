@@ -18,6 +18,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const audioPlayer = document.getElementById('audioPlayer');
     const seekBar = document.getElementById('seekBar');
     const volumeControl = document.getElementById('volumeControl');
+    const playlist = document.getElementById('playlist');
+
+    function fetchMusic() {
+        fetch('https://api.example.com/music')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(track => {
+                    const trackElement = document.createElement('p');
+                    trackElement.innerHTML = `<a href="#" onclick="loadTrack('${track.url}')">${track.title}</a>`;
+                    playlist.appendChild(trackElement);
+                });
+            })
+            .catch(error => console.error('Error fetching music:', error));
+    }
 
     audioPlayer.addEventListener('timeupdate', function() {
         const value = (audioPlayer.currentTime / audioPlayer.duration) * 100;
@@ -65,4 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('active');
         });
     });
+
+    fetchMusic();
 });
