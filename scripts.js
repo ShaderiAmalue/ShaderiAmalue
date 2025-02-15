@@ -4,13 +4,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const galleryForm = document.getElementById('gallery-form');
     const postsContainer = document.getElementById('posts');
     const nicknameInput = document.getElementById('nickname');
+    const setNicknameButton = document.getElementById('set-nickname');
+    const nicknameContainer = document.getElementById('nickname-container');
 
     // Check if a nickname is already saved
     const savedNickname = localStorage.getItem('nickname');
     if (savedNickname) {
         nicknameInput.value = savedNickname;
         nicknameInput.disabled = true; // Prevent changing the nickname
-        nicknameInput.classList.add('hidden'); // Hide the nickname input
+        nicknameContainer.classList.add('hidden'); // Hide the nickname input
     }
 
     links.forEach(link => {
@@ -24,16 +26,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    setNicknameButton.addEventListener('click', function() {
+        const nickname = nicknameInput.value;
+        if (nickname.trim() !== "") {
+            // Save the nickname to localStorage
+            localStorage.setItem('nickname', nickname);
+            nicknameInput.disabled = true;
+            nicknameContainer.classList.add('hidden');
+        }
+    });
+
     galleryForm.addEventListener('submit', function(event) {
         event.preventDefault();
-        const nickname = nicknameInput.value;
+        const nickname = localStorage.getItem('nickname');
         const postText = document.getElementById('post-text').value;
         const postImage = document.getElementById('post-image').files[0];
-
-        // Save the nickname to localStorage
-        localStorage.setItem('nickname', nickname);
-        nicknameInput.disabled = true;
-        nicknameInput.classList.add('hidden');
 
         const postElement = document.createElement('div');
         postElement.classList.add('post');
@@ -56,14 +63,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Save the post to localStorage
                 savePost(nickname, postText, event.target.result);
+                postsContainer.appendChild(postElement);
             }
             reader.readAsDataURL(postImage);
         } else {
             // Save the post to localStorage without an image
             savePost(nickname, postText, null);
+            postsContainer.appendChild(postElement);
         }
 
-        postsContainer.appendChild(postElement);
         galleryForm.reset();
     });
 
@@ -76,6 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function loadPosts() {
         const posts = JSON.parse(localStorage.getItem('posts')) || [];
+        postsContainer.innerHTML = ''; // Clear existing posts
         posts.forEach(post => {
             const postElement = document.createElement('div');
             postElement.classList.add('post');
