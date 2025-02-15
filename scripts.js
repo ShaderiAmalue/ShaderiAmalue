@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const links = document.querySelectorAll('.url-link');
+    const channelLinks = document.querySelectorAll('.channel-link');
     const contents = document.querySelectorAll('.content');
     const toast = document.getElementById('toast');
     const navLinks = document.querySelectorAll('nav a');
@@ -15,17 +16,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    links.forEach(link => {
-        link.addEventListener('click', function(event) {
-            showToast();
-            setTimeout(() => {
-                window.open(this.href, '_blank');
-            }, 1000);
-        });
+    function handleLinkClick(event) {
+        showToast();
+        setTimeout(() => {
+            window.open(this.href, '_blank');
+        }, 1000);
+    }
 
-        link.addEventListener('contextmenu', function(event) {
-            event.preventDefault();
-        });
+    function preventContextMenu(event) {
+        event.preventDefault();
+    }
+
+    links.forEach(link => {
+        link.addEventListener('click', handleLinkClick);
+        link.addEventListener('contextmenu', preventContextMenu);
+    });
+
+    channelLinks.forEach(channelLink => {
+        channelLink.addEventListener('click', handleLinkClick);
+        channelLink.addEventListener('contextmenu', preventContextMenu);
     });
 
     function showToast() {
