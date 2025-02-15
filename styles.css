@@ -10,6 +10,7 @@ body {
     flex-direction: column;
     height: 100vh;
     overflow: hidden;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 nav {
@@ -35,6 +36,29 @@ nav a:hover {
     background-color: #3498db;
 }
 
+.toggle-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.toggle-switch {
+    display: none;
+}
+
+.toggle-label {
+    cursor: pointer;
+    background-color: #3498db;
+    color: #ecf0f1;
+    padding: 0.5em 1em;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+}
+
+.toggle-switch:checked + .toggle-label {
+    background-color: #34495e;
+}
+
 .content {
     flex: 1;
     padding: 2em;
@@ -57,7 +81,7 @@ h2 {
     border-radius: 5px;
 }
 
-.downloads a, .credits a, .scripts a {
+.downloads a, .credits a, .scripts a, .button-link {
     color: #ecf0f1;
     text-decoration: none;
     display: block;
@@ -71,7 +95,7 @@ h2 {
     text-align: center;
 }
 
-.downloads a:hover, .credits a:hover, .scripts a:hover {
+.downloads a:hover, .credits a:hover, .scripts a:hover, .button-link:hover {
     color: #5dade2;
     border-color: #5dade2;
     box-shadow: 4px 4px 10px rgba(52, 152, 219, 0.8);
@@ -145,6 +169,27 @@ h2 {
 
 .button-link:hover {
     background-color: #3498db;
+}
+
+.dark-mode {
+    background: linear-gradient(120deg, #1c2833 68%, #2c3e50 32%);
+    color: #ecf0f1;
+}
+
+.dark-mode nav {
+    background: #34495e;
+}
+
+.dark-mode nav a {
+    border: 1px solid #5dade2;
+}
+
+.dark-mode nav a:hover {
+    background-color: #5dade2;
+}
+
+.dark-mode .profile-info p {
+    background-color: #1c2833;
 }
 
 @media (max-width: 600px) {
