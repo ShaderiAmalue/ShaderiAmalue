@@ -57,7 +57,7 @@ h2 {
     border-radius: 5px;
 }
 
-.downloads a, .credits a {
+.downloads a, .credits a, .scripts a {
     color: #3498db;
     text-decoration: none;
     display: block;
@@ -70,7 +70,7 @@ h2 {
     background-color: #34495e;
 }
 
-.downloads a:hover, .credits a:hover {
+.downloads a:hover, .credits a:hover, .scripts a:hover {
     color: #5dade2;
     border-color: #5dade2;
     box-shadow: 6px 6px 15px rgba(52, 152, 219, 0.8), 0 0 15px rgba(0, 0, 0, 0.7);
@@ -134,6 +134,20 @@ h2 {
     color: #3498db;
     border-color: #5dade2;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.button-link {
+    color: #ecf0f1;
+    background-color: #2980b9;
+    text-decoration: none;
+    padding: 1em;
+    border-radius: 5px;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.button-link:hover {
+    background-color: #3498db;
 }
 
 @media (max-width: 600px) {
