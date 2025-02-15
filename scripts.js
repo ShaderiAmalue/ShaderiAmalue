@@ -42,17 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const postText = document.getElementById('post-text').value;
         const postImage = document.getElementById('post-image').files[0];
 
-        const postElement = document.createElement('div');
-        postElement.classList.add('post');
-
-        const nicknameElement = document.createElement('p');
-        nicknameElement.classList.add('nickname');
-        nicknameElement.textContent = nickname;
-        postElement.appendChild(nicknameElement);
-
-        const textElement = document.createElement('p');
-        textElement.textContent = postText;
-        postElement.appendChild(textElement);
+        const postElement = createPostElement(nickname, postText, postImage);
 
         if (postImage) {
             const reader = new FileReader();
@@ -75,6 +65,28 @@ document.addEventListener('DOMContentLoaded', function() {
         galleryForm.reset();
     });
 
+    function createPostElement(nickname, text, image) {
+        const postElement = document.createElement('div');
+        postElement.classList.add('post');
+
+        const nicknameElement = document.createElement('p');
+        nicknameElement.classList.add('nickname');
+        nicknameElement.textContent = nickname;
+        postElement.appendChild(nicknameElement);
+
+        const textElement = document.createElement('p');
+        textElement.textContent = text;
+        postElement.appendChild(textElement);
+
+        if (image) {
+            const imgElement = document.createElement('img');
+            imgElement.src = image;
+            postElement.appendChild(imgElement);
+        }
+
+        return postElement;
+    }
+
     function savePost(nickname, text, image) {
         const posts = JSON.parse(localStorage.getItem('posts')) || [];
         const newPost = { nickname, text, image };
@@ -86,24 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const posts = JSON.parse(localStorage.getItem('posts')) || [];
         postsContainer.innerHTML = ''; // Clear existing posts
         posts.forEach(post => {
-            const postElement = document.createElement('div');
-            postElement.classList.add('post');
-
-            const nicknameElement = document.createElement('p');
-            nicknameElement.classList.add('nickname');
-            nicknameElement.textContent = post.nickname;
-            postElement.appendChild(nicknameElement);
-
-            const textElement = document.createElement('p');
-            textElement.textContent = post.text;
-            postElement.appendChild(textElement);
-
-            if (post.image) {
-                const imgElement = document.createElement('img');
-                imgElement.src = post.image;
-                postElement.appendChild(imgElement);
-            }
-
+            const postElement = createPostElement(post.nickname, post.text, post.image);
             postsContainer.appendChild(postElement);
         });
     }
