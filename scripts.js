@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     const links = document.querySelectorAll('nav a');
     const contents = document.querySelectorAll('.content');
-    const toggleSwitch = document.querySelector('.toggle-switch');
-    const body = document.body;
+    const galleryForm = document.getElementById('gallery-form');
+    const postsContainer = document.getElementById('posts');
 
     links.forEach(link => {
         link.addEventListener('click', function(event) {
@@ -15,8 +15,36 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    toggleSwitch.addEventListener('change', function() {
-        body.classList.toggle('dark-mode');
+    galleryForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const nickname = document.getElementById('nickname').value;
+        const postText = document.getElementById('post-text').value;
+        const postImage = document.getElementById('post-image').files[0];
+
+        const postElement = document.createElement('div');
+        postElement.classList.add('post');
+
+        const nicknameElement = document.createElement('p');
+        nicknameElement.classList.add('nickname');
+        nicknameElement.textContent = nickname;
+        postElement.appendChild(nicknameElement);
+
+        const textElement = document.createElement('p');
+        textElement.textContent = postText;
+        postElement.appendChild(textElement);
+
+        if (postImage) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const imgElement = document.createElement('img');
+                imgElement.src = event.target.result;
+                postElement.appendChild(imgElement);
+            }
+            reader.readAsDataURL(postImage);
+        }
+
+        postsContainer.appendChild(postElement);
+        galleryForm.reset();
     });
 
     // Show the first tab by default
