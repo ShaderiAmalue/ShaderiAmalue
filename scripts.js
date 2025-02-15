@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
         profile.addEventListener('mousedown', function(event) {
             holdTimer = setTimeout(() => {
                 showModal(this.dataset.info);
+                console.log('Hold event triggered'); // Debug log
             }, 500);
         });
         profile.addEventListener('mouseup', function(event) {
