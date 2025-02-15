@@ -206,6 +206,28 @@ h2 {
     display: none;
 }
 
+.edit-button, .delete-button, .delete-image-button, .remove-image-button {
+    background-color: #2980b9;
+    color: #ecf0f1;
+    border: 1px solid #3498db;
+    border-radius: 5px;
+    padding: 0.3em 0.5em;
+    margin-right: 0.5em;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.edit-button:hover, .delete-button:hover, .delete-image-button:hover, .remove-image-button:hover {
+    background-color: #3498db;
+    border-color: #5dade2;
+}
+
+.img-preview {
+    max-width: 80%;
+    border-radius: 5px;
+    margin-top: 1em;
+}
+
 @media (max-width: 600px) {
     nav {
         flex-direction: column;
