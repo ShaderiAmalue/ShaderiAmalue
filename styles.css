@@ -2,8 +2,8 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(120deg, #F5F5F5 68%, #E57373 32%);
-    color: #333333;
+    background: linear-gradient(120deg, #D32F2F 68%, #B71C1C 32%);
+    color: #FFFFFF;
     margin: 0;
     padding: 0;
     display: flex;
@@ -13,11 +13,11 @@ body {
 }
 
 nav {
-    background: #D32F2F;
+    background: #B71C1C;
     padding: 1em;
     display: flex;
     justify-content: space-around;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 2;
 }
 
@@ -32,7 +32,7 @@ nav a {
 }
 
 nav a:hover {
-    background-color: #C62828;
+    background-color: #D32F2F;
 }
 
 .content {
@@ -50,24 +50,24 @@ nav a:hover {
 h2 {
     text-align: center;
     margin-bottom: 1em;
-    color: #D32F2F;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    border: 2px solid #000000;
     padding: 0.5em;
     border-radius: 5px;
 }
 
 .downloads a, .credits a, .scripts a {
-    color: #D32F2F;
+    color: #FFFFFF;
     text-decoration: none;
     display: block;
     margin-bottom: 1em;
     padding: 1em;
-    border: 1px solid #FFFFFF;
+    border: 2px solid #000000;
     border-radius: 5px;
     transition: box-shadow 0.3s, border-color 0.3s, background-color 0.3s;
-    box-shadow: 2px 2px 5px rgba(211, 47, 47, 0.5);
-    background-color: #E57373;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    background-color: #B71C1C;
     text-align: center;
 }
 
@@ -89,8 +89,8 @@ h2 {
     margin-bottom: 2em;
     padding: 1em;
     border-radius: 5px;
-    background-color: #E57373;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #D32F2F;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .profile img {
@@ -108,23 +108,29 @@ h2 {
 
 .profile-info p {
     margin: 0;
-    color: #C62828;
+    color: #FFFFFF;
+    border: 1px solid #000000;
+    padding: 0.3em;
+    border-radius: 5px;
+    background-color: #B71C1C;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .channel-link {
-    color: #C62828;
+    color: #FFFFFF;
     text-decoration: none;
     padding: 0.3em 0.5em;
-    border: 1px solid #D32F2F;
+    border: 2px solid #000000;
     border-radius: 5px;
     margin-top: 0.3em;
+    background-color: #D32F2F;
     transition: color 0.3s, border-color 0.3s;
 }
 
 .channel-link:hover {
-    color: #FFFFFF;
-    border-color: #FFCDD2;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    color: #FFCDD2;
+    border-color: #FFFFFF;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .button-link {
@@ -138,7 +144,7 @@ h2 {
 }
 
 .button-link:hover {
-    background-color: #C62828;
+    background-color: #B71C1C;
 }
 
 @media (max-width: 600px) {
