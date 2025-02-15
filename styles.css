@@ -148,26 +148,6 @@ h2 {
     background-color: #3498db;
 }
 
-.customization {
-    text-align: center;
-    margin-top: 2em;
-}
-
-.customization label, .customization button {
-    display: block;
-    margin: 0.5em auto;
-    padding: 1em;
-    border: 1px solid #3498db;
-    border-radius: 5px;
-    background-color: #2980b9;
-    color: #ecf0f1;
-    transition: background-color 0.3s;
-}
-
-.customization label:hover, .customization button:hover {
-    background-color: #3498db;
-}
-
 @media (max-width: 600px) {
     nav {
         flex-direction: column;
