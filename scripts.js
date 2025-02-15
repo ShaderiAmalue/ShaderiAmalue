@@ -84,12 +84,19 @@ document.addEventListener('DOMContentLoaded', function() {
             const imgElement = document.createElement('img');
             imgElement.src = image;
             postElement.appendChild(imgElement);
+
+            // Add image delete button
+            const deleteImageButton = document.createElement('button');
+            deleteImageButton.textContent = 'X';
+            deleteImageButton.classList.add('delete-image-button');
+            deleteImageButton.addEventListener('click', () => deleteImage(postId));
+            postElement.appendChild(deleteImageButton);
         }
 
         const editButton = document.createElement('button');
         editButton.textContent = 'Edit';
         editButton.classList.add('edit-button');
-        editButton.addEventListener('click', () => editPost(postId));
+        editButton.addEventListener('click', () => startEditPost(postId));
         postElement.appendChild(editButton);
 
         const deleteButton = document.createElement('button');
@@ -124,7 +131,19 @@ document.addEventListener('DOMContentLoaded', function() {
         loadPosts(); // Reload posts to reflect the changes
     }
 
-    function editPost(postId) {
+    function deleteImage(postId) {
+        if (confirm("Are you sure you want to remove the image?")) {
+            const posts = JSON.parse(localStorage.getItem('posts')) || [];
+            const post = posts.find(post => post.postId === postId);
+            if (post) {
+                post.image = null; // Remove the image
+                localStorage.setItem('posts', JSON.stringify(posts));
+                loadPosts(); // Reload posts to reflect the changes
+            }
+        }
+    }
+
+    function startEditPost(postId) {
         const posts = JSON.parse(localStorage.getItem('posts')) || [];
         const post = posts.find(post => post.postId === postId);
         if (post) {
@@ -135,6 +154,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 imgPreview.src = post.image;
                 imgPreview.classList.add('img-preview');
                 document.querySelector('.gallery').appendChild(imgPreview);
+
+                // Add a button to remove the image
+                const removeImageButton = document.createElement('button');
+                removeImageButton.textContent = 'Remove Image';
+                removeImageButton.classList.add('remove-image-button');
+                removeImageButton.addEventListener('click', () => deleteImage(postId));
+                document.querySelector('.gallery').appendChild(removeImageButton);
             }
             deletePost(postId); // Remove the existing post
         }
