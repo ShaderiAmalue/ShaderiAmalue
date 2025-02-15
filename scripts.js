@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const links = document.querySelectorAll('nav a, .link, .button-link');
+    const links = document.querySelectorAll('nav a, .url-link');
     const contents = document.querySelectorAll('.content');
     const toast = document.getElementById('toast');
 
@@ -13,7 +13,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 document.getElementById(targetId).classList.add('active');
             }
-            showToast();
+            if (this.classList.contains('url-link')) {
+                showToast();
+            }
         });
     });
 
