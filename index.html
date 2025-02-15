@@ -56,7 +56,10 @@
         <h2>Gallery</h2>
         <div class="gallery">
             <form id="gallery-form">
-                <input type="text" id="nickname" placeholder="Enter your nickname" required>
+                <div id="nickname-container">
+                    <input type="text" id="nickname" placeholder="Enter your nickname" required>
+                    <button type="button" id="set-nickname">Set Nickname</button>
+                </div>
                 <textarea id="post-text" placeholder="Share something..." required></textarea>
                 <input type="file" id="post-image" accept="image/*">
                 <button type="submit">Post</button>
