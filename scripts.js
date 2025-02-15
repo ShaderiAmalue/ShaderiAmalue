@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Save the post to localStorage
                 savePost(nickname, postText, event.target.result);
                 postsContainer.appendChild(postElement);
-            }
+            };
             reader.readAsDataURL(postImage);
         } else {
             // Save the post to localStorage without an image
