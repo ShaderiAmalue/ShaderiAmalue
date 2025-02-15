@@ -56,6 +56,7 @@ h2 {
     border: 1px solid #3498db;
     padding: 0.5em;
     border-radius: 5px;
+    background-color: rgba(44, 62, 80, 0.8); /* Background improvement */
 }
 
 .downloads a, .scripts a, .button-link {
@@ -90,8 +91,8 @@ h2 {
     margin-bottom: 2em;
     padding: 1em;
     border-radius: 5px;
-    background-color: #34495e;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    background-color: rgba(52, 73, 94, 0.8); /* Background improvement */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Box shadow improvement */
 }
 
 .profile img {
@@ -111,10 +112,11 @@ h2 {
     margin: 0;
     color: #ecf0f1;
     border: 1px solid #3498db;
-    padding: 0.3em;
+    padding: 0.5em; /* Padding improvement */
     border-radius: 5px;
-    background-color: #2980b9;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    background-color: rgba(41, 128, 185, 0.8); /* Background improvement */
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Box shadow improvement */
+    transition: background-color 0.3s; /* Transition improvement */
 }
 
 .channel-link {
@@ -124,14 +126,15 @@ h2 {
     border: 1px solid #3498db;
     border-radius: 5px;
     margin-top: 0.3em;
-    background-color: #2980b9;
-    transition: color 0.3s, border-color 0.3s;
+    background-color: rgba(41, 128, 185, 0.8); /* Background improvement */
+    transition: color 0.3s, border-color 0.3s, background-color 0.3s; /* Transition improvement */
 }
 
 .channel-link:hover {
     color: #5dade2;
     border-color: #ecf0f1;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background-color: rgba(52, 152, 219, 0.8); /* Hover improvement */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .button-link {
