@@ -36,29 +36,6 @@ nav a:hover {
     background-color: #3498db;
 }
 
-.toggle-container {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-
-.toggle-switch {
-    display: none;
-}
-
-.toggle-label {
-    cursor: pointer;
-    background-color: #3498db;
-    color: #ecf0f1;
-    padding: 0.5em 1em;
-    border-radius: 20px;
-    transition: background-color 0.3s;
-}
-
-.toggle-switch:checked + .toggle-label {
-    background-color: #34495e;
-}
-
 .content {
     flex: 1;
     padding: 2em;
@@ -157,39 +134,68 @@ h2 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.button-link {
-    color: #ecf0f1;
-    background-color: #2980b9;
-    text-decoration: none;
-    padding: 1em;
+.gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#gallery-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2em;
+}
+
+#gallery-form input[type="text"], #gallery-form textarea {
+    width: 80%;
+    max-width: 500px;
+    margin-bottom: 1em;
+    padding: 0.5em;
+    border: 1px solid #3498db;
     border-radius: 5px;
-    display: inline-block;
-    transition: background-color 0.3s;
-}
-
-.button-link:hover {
-    background-color: #3498db;
-}
-
-.dark-mode {
-    background: linear-gradient(120deg, #1c2833 68%, #2c3e50 32%);
+    background-color: #34495e;
     color: #ecf0f1;
 }
 
-.dark-mode nav {
-    background: #34495e;
+#gallery-form button {
+    padding: 0.5em 1em;
+    border: 1px solid #3498db;
+    border-radius: 5px;
+    background-color: #2980b9;
+    color: #ecf0f1;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
-.dark-mode nav a {
-    border: 1px solid #5dade2;
+#gallery-form button:hover {
+    background-color: #3498db;
+    border-color: #5dade2;
 }
 
-.dark-mode nav a:hover {
-    background-color: #5dade2;
+#posts {
+    width: 80%;
+    max-width: 500px;
 }
 
-.dark-mode .profile-info p {
-    background-color: #1c2833;
+.post {
+    margin-bottom: 2em;
+    padding: 1em;
+    border: 1px solid #3498db;
+    border-radius: 5px;
+    background-color: #34495e;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.post img {
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+.post .nickname {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    color: #5dade2;
 }
 
 @media (max-width: 600px) {
