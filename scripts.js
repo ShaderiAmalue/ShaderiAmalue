@@ -7,12 +7,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const setNicknameButton = document.getElementById('set-nickname');
     const nicknameContainer = document.getElementById('nickname-container');
 
-    // Check if a nickname is already saved
     const savedNickname = localStorage.getItem('nickname');
     if (savedNickname) {
         nicknameInput.value = savedNickname;
-        nicknameInput.disabled = true; // Prevent changing the nickname
-        nicknameContainer.classList.add('hidden'); // Hide the nickname input
+        nicknameInput.disabled = true;
+        nicknameContainer.classList.add('hidden');
     }
 
     links.forEach(link => {
@@ -29,7 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
     setNicknameButton.addEventListener('click', function() {
         const nickname = nicknameInput.value;
         if (nickname.trim() !== "") {
-            // Save the nickname to localStorage
             localStorage.setItem('nickname', nickname);
             nicknameInput.disabled = true;
             nicknameContainer.classList.add('hidden');
@@ -43,7 +41,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const postImage = document.getElementById('post-image').files[0];
 
         const postId = new Date().getTime().toString(); // Unique post ID
-        const postElement = createPostElement(postId, nickname, postText, postImage);
+        const postURL = `${window.location.origin}?postId=${postId}`; // Simulated unique URL
+        const postElement = createPostElement(postId, nickname, postText, postImage, postURL);
 
         if (postImage) {
             const reader = new FileReader();
@@ -51,22 +50,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 const imgElement = document.createElement('img');
                 imgElement.src = event.target.result;
                 postElement.appendChild(imgElement);
-
-                // Save the post to localStorage
-                savePost(postId, nickname, postText, event.target.result);
+                savePost(postId, nickname, postText, event.target.result, postURL);
                 postsContainer.appendChild(postElement);
             }
             reader.readAsDataURL(postImage);
         } else {
-            // Save the post to localStorage without an image
-            savePost(postId, nickname, postText, null);
+            savePost(postId, nickname, postText, null, postURL);
             postsContainer.appendChild(postElement);
         }
 
         galleryForm.reset();
     });
 
-    function createPostElement(postId, nickname, text, image) {
+    function createPostElement(postId, nickname, text, image, postURL) {
         const postElement = document.createElement('div');
         postElement.classList.add('post');
         postElement.dataset.postId = postId;
@@ -75,6 +71,11 @@ document.addEventListener('DOMContentLoaded', function() {
         nicknameElement.classList.add('nickname');
         nicknameElement.textContent = nickname;
         postElement.appendChild(nicknameElement);
+
+        const urlElement = document.createElement('a');
+        urlElement.href = postURL;
+        urlElement.textContent = `Post URL: ${postURL}`;
+        postElement.appendChild(urlElement);
 
         const textElement = document.createElement('p');
         textElement.textContent = text;
@@ -85,7 +86,6 @@ document.addEventListener('DOMContentLoaded', function() {
             imgElement.src = image;
             postElement.appendChild(imgElement);
 
-            // Add image delete button
             const deleteImageButton = document.createElement('button');
             deleteImageButton.textContent = 'X';
             deleteImageButton.classList.add('delete-image-button');
@@ -108,18 +108,18 @@ document.addEventListener('DOMContentLoaded', function() {
         return postElement;
     }
 
-    function savePost(postId, nickname, text, image) {
+    function savePost(postId, nickname, text, image, postURL) {
         const posts = JSON.parse(localStorage.getItem('posts')) || [];
-        const newPost = { postId, nickname, text, image };
+        const newPost = { postId, nickname, text, image, postURL };
         posts.push(newPost);
         localStorage.setItem('posts', JSON.stringify(posts));
     }
 
     function loadPosts() {
         const posts = JSON.parse(localStorage.getItem('posts')) || [];
-        postsContainer.innerHTML = ''; // Clear existing posts
+        postsContainer.innerHTML = ''; 
         posts.forEach(post => {
-            const postElement = createPostElement(post.postId, post.nickname, post.text, post.image);
+            const postElement = createPostElement(post.postId, post.nickname, post.text, post.image, post.postURL);
             postsContainer.appendChild(postElement);
         });
     }
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let posts = JSON.parse(localStorage.getItem('posts')) || [];
         posts = posts.filter(post => post.postId !== postId);
         localStorage.setItem('posts', JSON.stringify(posts));
-        loadPosts(); // Reload posts to reflect the changes
+        loadPosts();
     }
 
     function deleteImage(postId) {
@@ -136,9 +136,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const posts = JSON.parse(localStorage.getItem('posts')) || [];
             const post = posts.find(post => post.postId === postId);
             if (post) {
-                post.image = null; // Remove the image
+                post.image = null;
                 localStorage.setItem('posts', JSON.stringify(posts));
-                loadPosts(); // Reload posts to reflect the changes
+                loadPosts();
             }
         }
     }
@@ -149,26 +149,21 @@ document.addEventListener('DOMContentLoaded', function() {
         if (post) {
             document.getElementById('post-text').value = post.text;
             if (post.image) {
-                // Display image preview if exists
                 const imgPreview = document.createElement('img');
                 imgPreview.src = post.image;
                 imgPreview.classList.add('img-preview');
                 document.querySelector('.gallery').appendChild(imgPreview);
 
-                // Add a button to remove the image
                 const removeImageButton = document.createElement('button');
                 removeImageButton.textContent = 'Remove Image';
                 removeImageButton.classList.add('remove-image-button');
                 removeImageButton.addEventListener('click', () => deleteImage(postId));
                 document.querySelector('.gallery').appendChild(removeImageButton);
             }
-            deletePost(postId); // Remove the existing post
+            deletePost(postId);
         }
     }
 
-    // Load saved posts on page load
     loadPosts();
-
-    // Show the first tab by default
     document.getElementById('downloads').classList.add('active');
 });
