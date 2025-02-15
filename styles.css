@@ -58,7 +58,7 @@ h2 {
     border-radius: 5px;
 }
 
-.downloads a, .credits a, .scripts a, .button-link {
+.downloads a, .scripts a, .button-link {
     color: #ecf0f1;
     text-decoration: none;
     display: block;
@@ -72,7 +72,7 @@ h2 {
     text-align: center;
 }
 
-.downloads a:hover, .credits a:hover, .scripts a:hover, .button-link:hover {
+.downloads a:hover, .scripts a:hover, .button-link:hover {
     color: #5dade2;
     border-color: #5dade2;
     box-shadow: 4px 4px 10px rgba(52, 152, 219, 0.8);
@@ -148,25 +148,15 @@ h2 {
     background-color: #3498db;
 }
 
-.music-player {
+.customization {
     text-align: center;
+    margin-top: 2em;
+}
+
+.customization label, .customization button {
+    display: block;
+    margin: 0.5em auto;
     padding: 1em;
-    background-color: #34495e;
-    border-radius: 5px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    margin-top: 1em;
-}
-
-.controls {
-    margin-top: 1em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.controls button {
-    margin: 0 0.5em;
-    padding: 0.5em 1em;
     border: 1px solid #3498db;
     border-radius: 5px;
     background-color: #2980b9;
@@ -174,30 +164,8 @@ h2 {
     transition: background-color 0.3s;
 }
 
-.controls button:hover {
+.customization label:hover, .customization button:hover {
     background-color: #3498db;
-}
-
-#seekBar, #volumeControl {
-    width: 80%;
-    margin-top: 1em;
-    background-color: #2980b9;
-    border: 1px solid #3498db;
-    border-radius: 5px;
-}
-
-#playlist p {
-    margin: 0.5em 0;
-}
-
-#playlist a {
-    color: #ecf0f1;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-#playlist a:hover {
-    color: #5dade2;
 }
 
 @media (max-width: 600px) {
