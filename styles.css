@@ -41,11 +41,11 @@ nav a:hover {
     padding: 2em;
     animation: fadeIn 1s ease-in-out;
     overflow-y: auto;
-    display: none; /* Hide all content by default */
+    display: none;
 }
 
 .content.active {
-    display: block; /* Show active content */
+    display: block;
 }
 
 h2 {
@@ -146,6 +146,63 @@ h2 {
 
 .button-link:hover {
     background-color: #3498db;
+}
+
+.music-player {
+    text-align: center;
+    padding: 1em;
+    background-color: #34495e;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    margin-top: 1em;
+}
+
+.controls {
+    margin-top: 1em;
+}
+
+.controls button {
+    margin: 0 0.5em;
+    padding: 0.5em 1em;
+    border: 1px solid #3498db;
+    border-radius: 5px;
+    background-color: #2980b9;
+    color: #ecf0f1;
+    transition: background-color 0.3s;
+}
+
+.controls button:hover {
+    background-color: #3498db;
+}
+
+#seekBar {
+    width: 80%;
+    margin-top: 1em;
+    background-color: #2980b9;
+    border: 1px solid #3498db;
+    border-radius: 5px;
+}
+
+#volumeControl {
+    width: 80%;
+    margin-top: 1em;
+    background-color: #2980b9;
+    border: 1px solid #3498db;
+    border-radius: 5px;
+}
+
+#playlist p {
+    margin: 0.5em 0;
+}
+
+#playlist a {
+    color: #ecf0f1;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+#playlist a:hover {
+    color: #5dade2;
 }
 
 @media (max-width: 600px) {
