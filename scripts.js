@@ -20,7 +20,11 @@ document.addEventListener('DOMContentLoaded', function() {
             showToast();
             setTimeout(() => {
                 window.open(this.href, '_blank');
-            }, 1000); // Adjust the timeout if needed
+            }, 1000);
+        });
+
+        link.addEventListener('contextmenu', function(event) {
+            event.preventDefault();
         });
     });
 
