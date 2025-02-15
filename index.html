@@ -13,10 +13,6 @@
         <a href="#" data-target="scripts">Game Guardian Scripts</a>
         <a href="#" data-target="gallery">Gallery</a>
     </nav>
-    <div class="toggle-container">
-        <input type="checkbox" id="dark-mode-toggle" class="toggle-switch">
-        <label for="dark-mode-toggle" class="toggle-label">Dark Mode</label>
-    </div>
     <div id="downloads" class="content active">
         <h2>Working Blockman APK with HTTP</h2>
         <div class="downloads">
@@ -59,7 +55,13 @@
     <div id="gallery" class="content">
         <h2>Gallery</h2>
         <div class="gallery">
-            <!-- Add gallery items here -->
+            <form id="gallery-form">
+                <input type="text" id="nickname" placeholder="Enter your nickname" required>
+                <textarea id="post-text" placeholder="Share something..." required></textarea>
+                <input type="file" id="post-image" accept="image/*">
+                <button type="submit">Post</button>
+            </form>
+            <div id="posts"></div>
         </div>
     </div>
     <script src="scripts.js"></script>
