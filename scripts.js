@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const links = document.querySelectorAll('nav a');
     const contents = document.querySelectorAll('.content');
-    const loading = document.querySelector('.loading');
 
     links.forEach(link => {
         link.addEventListener('click', function(event) {
@@ -10,11 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
             contents.forEach(content => {
                 content.classList.remove('active');
             });
-            loading.style.display = 'block';
-            setTimeout(() => {
-                document.getElementById(targetId).classList.add('active');
-                loading.style.display = 'none';
-            }, 10);
+            document.getElementById(targetId).classList.add('active');
         });
     });
 
