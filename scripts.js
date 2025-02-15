@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     const links = document.querySelectorAll('nav a');
     const contents = document.querySelectorAll('.content');
+    const toggleSwitch = document.querySelector('.toggle-switch');
+    const body = document.body;
 
     links.forEach(link => {
         link.addEventListener('click', function(event) {
@@ -11,6 +13,10 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             document.getElementById(targetId).classList.add('active');
         });
+    });
+
+    toggleSwitch.addEventListener('change', function() {
+        body.classList.toggle('dark-mode');
     });
 
     // Show the first tab by default
