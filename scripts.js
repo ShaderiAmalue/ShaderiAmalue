@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const reader = new FileReader();
             reader.onload = function(event) {
                 newPost.image = event.target.result;
-                fetch('/api/posts', {
+                fetch('https://YOUR_VERCEL_DEPLOYMENT_URL/api/posts', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(newPost)
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             reader.readAsDataURL(postImage);
         } else {
-            fetch('/api/posts', {
+            fetch('https://YOUR_VERCEL_DEPLOYMENT_URL/api/posts', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newPost)
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function loadPosts() {
-        fetch('/api/posts')
+        fetch('https://YOUR_VERCEL_DEPLOYMENT_URL/api/posts')
             .then(response => response.json())
             .then(posts => {
                 postsContainer.innerHTML = '';
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function deletePost(postId) {
-        fetch(`/api/posts/${postId}`, { method: 'DELETE' })
+        fetch(`https://YOUR_VERCEL_DEPLOYMENT_URL/api/posts/${postId}`, { method: 'DELETE' })
             .then(response => {
                 if (response.ok) {
                     loadPosts();
