@@ -15,70 +15,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('downloads').classList.add('active');
 
-    const audioPlayer = document.getElementById('audioPlayer');
-    const seekBar = document.getElementById('seekBar');
-    const volumeControl = document.getElementById('volumeControl');
-    const playlist = document.getElementById('playlist');
+    // UI Customization
+    const bgImageInput = document.getElementById('bgImage');
+    
+    bgImageInput.addEventListener('change', changeBackground);
 
-    function fetchMusic() {
-        fetch('https://api.example.com/music')
-            .then(response => response.json())
-            .then(data => {
-                data.forEach(track => {
-                    const trackElement = document.createElement('p');
-                    trackElement.innerHTML = `<a href="#" onclick="loadTrack('${track.url}')">${track.title}</a>`;
-                    playlist.appendChild(trackElement);
-                });
-            })
-            .catch(error => console.error('Error fetching music:', error));
-    }
-
-    audioPlayer.addEventListener('timeupdate', function() {
-        const value = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-        seekBar.value = value;
-    });
-
-    audioPlayer.addEventListener('ended', function() {
-        const nextTrack = document.querySelector('#playlist a.active').nextElementSibling;
-        if (nextTrack) {
-            nextTrack.click();
+    function changeBackground() {
+        const file = bgImageInput.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.body.style.backgroundImage = `url(${e.target.result})`;
+            localStorage.setItem('bgImage', e.target.result);
         }
-    });
-
-    window.playAudio = function() {
-        audioPlayer.play();
+        if (file) {
+            reader.readAsDataURL(file);
+        }
     }
 
-    window.pauseAudio = function() {
-        audioPlayer.pause();
+    function loadCustomization() {
+        const bgImage = localStorage.getItem('bgImage');
+        if (bgImage) {
+            document.body.style.backgroundImage = `url(${bgImage})`;
+        }
     }
 
-    window.stopAudio = function() {
-        audioPlayer.pause();
-        audioPlayer.currentTime = 0;
+    function resetCustomization() {
+        localStorage.removeItem('bgImage');
+        document.body.style.backgroundImage = '';
+        location.reload(); // Reload page to remove custom styles
     }
 
-    window.seekAudio = function() {
-        const seekTo = audioPlayer.duration * (seekBar.value / 100);
-        audioPlayer.currentTime = seekTo;
-    }
-
-    window.setVolume = function() {
-        audioPlayer.volume = volumeControl.value / 100;
-    }
-
-    window.loadTrack = function(track) {
-        audioPlayer.src = track;
-        audioPlayer.play();
-    }
-
-    const playlistLinks = document.querySelectorAll('#playlist a');
-    playlistLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            playlistLinks.forEach(link => link.classList.remove('active'));
-            this.classList.add('active');
-        });
-    });
-
-    fetchMusic();
+    loadCustomization();
+    window.resetCustomization = resetCustomization;
 });
