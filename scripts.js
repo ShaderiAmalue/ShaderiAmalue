@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     links.forEach(link => {
         link.addEventListener('click', function(event) {
-            event.preventDefault();
             const targetId = this.dataset.target;
             if (targetId) {
+                event.preventDefault();
                 contents.forEach(content => {
                     content.classList.remove('active');
                 });
