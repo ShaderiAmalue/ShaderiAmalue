@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const postElement = createPostElement(post.postId, post.nickname, post.text, post.image, post.postURL);
                     postsContainer.appendChild(postElement);
                 });
-            }
+            };
             reader.readAsDataURL(postImage);
         } else {
             fetch('https://endregion-dc.vercel.app/api/posts', {
