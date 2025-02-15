@@ -40,23 +40,35 @@ document.addEventListener('DOMContentLoaded', function() {
         const postText = document.getElementById('post-text').value;
         const postImage = document.getElementById('post-image').files[0];
 
-        const postId = new Date().getTime().toString(); // Unique post ID
-        const postURL = `${window.location.origin}?postId=${postId}`; // Simulated unique URL
-        const postElement = createPostElement(postId, nickname, postText, postImage, postURL);
+        const newPost = { nickname, text: postText, image: null };
 
         if (postImage) {
             const reader = new FileReader();
             reader.onload = function(event) {
-                const imgElement = document.createElement('img');
-                imgElement.src = event.target.result;
-                postElement.appendChild(imgElement);
-                savePost(postId, nickname, postText, event.target.result, postURL);
-                postsContainer.appendChild(postElement);
+                newPost.image = event.target.result;
+                fetch('https://endregion-dc.vercel.app/api/posts', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newPost)
+                })
+                .then(response => response.json())
+                .then(post => {
+                    const postElement = createPostElement(post.postId, post.nickname, post.text, post.image, post.postURL);
+                    postsContainer.appendChild(postElement);
+                });
             }
             reader.readAsDataURL(postImage);
         } else {
-            savePost(postId, nickname, postText, null, postURL);
-            postsContainer.appendChild(postElement);
+            fetch('https://endregion-dc.vercel.app/api/posts', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newPost)
+            })
+            .then(response => response.json())
+            .then(post => {
+                const postElement = createPostElement(post.postId, post.nickname, post.text, post.image, post.postURL);
+                postsContainer.appendChild(postElement);
+            });
         }
 
         galleryForm.reset();
@@ -116,19 +128,24 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function loadPosts() {
-        const posts = JSON.parse(localStorage.getItem('posts')) || [];
-        postsContainer.innerHTML = ''; 
-        posts.forEach(post => {
-            const postElement = createPostElement(post.postId, post.nickname, post.text, post.image, post.postURL);
-            postsContainer.appendChild(postElement);
-        });
+        fetch('https://endregion-dc.vercel.app/api/posts')
+            .then(response => response.json())
+            .then(posts => {
+                postsContainer.innerHTML = '';
+                posts.forEach(post => {
+                    const postElement = createPostElement(post.postId, post.nickname, post.text, post.image, post.postURL);
+                    postsContainer.appendChild(postElement);
+                });
+            });
     }
 
     function deletePost(postId) {
-        let posts = JSON.parse(localStorage.getItem('posts')) || [];
-        posts = posts.filter(post => post.postId !== postId);
-        localStorage.setItem('posts', JSON.stringify(posts));
-        loadPosts();
+        fetch(`https://endregion-dc.vercel.app/api/posts/${postId}`, { method: 'DELETE' })
+            .then(response => {
+                if (response.ok) {
+                    loadPosts();
+                }
+            });
     }
 
     function deleteImage(postId) {
