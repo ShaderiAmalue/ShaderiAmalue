@@ -14,6 +14,29 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.getElementById('downloads').classList.add('active');
+
+    // Add event listeners for tooltips
+    const tooltips = document.querySelectorAll('.tooltip');
+
+    tooltips.forEach(tooltip => {
+        tooltip.addEventListener('mousedown', function() {
+            const tooltipText = this.querySelector('.tooltiptext');
+            tooltipText.style.visibility = 'visible';
+            tooltipText.style.opacity = '1';
+        });
+
+        tooltip.addEventListener('mouseup', function() {
+            const tooltipText = this.querySelector('.tooltiptext');
+            tooltipText.style.visibility = 'hidden';
+            tooltipText.style.opacity = '0';
+        });
+
+        tooltip.addEventListener('mouseleave', function() {
+            const tooltipText = this.querySelector('.tooltiptext');
+            tooltipText.style.visibility = 'hidden';
+            tooltipText.style.opacity = '0';
+        });
+    });
 });
 
 function sendApiRequest() {
