@@ -47,7 +47,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('downloads').classList.add('active');
 });
 
-// Advanced Hybrid Encryption and Decryption Functions
 async function encrypt() {
     const plaintext = document.getElementById('plaintext').value;
     const password = document.getElementById('encryptPassword').value;
@@ -77,7 +76,6 @@ function downloadFile(filename, content) {
     element.click();
 }
 
-// Advanced Encryption Logic
 const AdvancedEncryption = {
     async encrypt(plaintext, password, contentType) {
         const encoder = new TextEncoder();
@@ -101,11 +99,11 @@ const AdvancedEncryption = {
         ciphertext.set(salt, iv.length);
         ciphertext.set(encryptedBytes, iv.length + salt.length);
 
-        return btoa(String.fromCharCode.apply(null, ciphertext));
+        return this.customEncode(ciphertext);
     },
 
     async decrypt(ciphertext, password, contentType) {
-        const data = new Uint8Array(atob(ciphertext).split("").map(c => c.charCodeAt(0)));
+        const data = this.customDecode(ciphertext);
         const iv = data.slice(0, 12);
         const salt = data.slice(12, 28);
         const encryptedBytes = data.slice(28);
@@ -161,20 +159,11 @@ const AdvancedEncryption = {
     },
 
     customObfuscate(data) {
-        let obfuscated = '';
-        for (let i = 0; i < data.length; i++) {
-            obfuscated += String.fromCharCode(data.charCodeAt(i) ^ (i % 256));
-        }
-        return btoa(obfuscated);
+        return data.split('').map((char, i) => String.fromCharCode(char.charCodeAt(0) + 5 - i % 10)).join('');
     },
 
     customDeobfuscate(data) {
-        data = atob(data);
-        let deobfuscated = '';
-        for (let i = 0; i < data.length; i++) {
-            deobfuscated += String.fromCharCode(data.charCodeAt(i) ^ (i % 256));
-        }
-        return deobfuscated;
+        return data.split('').map((char, i) => String.fromCharCode(char.charCodeAt(0) - 5 + i % 10)).join('');
     },
 
     createLuaScript(data, password) {
@@ -188,5 +177,13 @@ const AdvancedEncryption = {
             return match[1];
         }
         return data;
+    },
+
+    customEncode(data) {
+        return Array.from(data).map(byte => String.fromCharCode(byte + 65)).join('');
+    },
+
+    customDecode(data) {
+        return new Uint8Array(Array.from(data).map(char => char.charCodeAt(0) - 65));
     }
 };
