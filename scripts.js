@@ -89,7 +89,7 @@ const AdvancedEncryption = {
         let formattedContent = this.customObfuscate(uniqueString + plaintext);
 
         if (contentType === 'Lua') {
-            formattedContent = this.createLuaScript(formattedContent, password);
+            formattedContent = this.createLuaScript(formattedContent);
         }
 
         const encryptedContent = await crypto.subtle.encrypt(alg, key, encoder.encode(formattedContent));
@@ -167,12 +167,19 @@ const AdvancedEncryption = {
         return data.split('').map((char, i) => String.fromCharCode(char.charCodeAt(0) - 5 + i % 10)).join('');
     },
 
-    createLuaScript(data, password) {
-        return `local enc = "${data}"; local key = "${password}"; function dec(enc, key) local decode = function(s) local b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" s = string.gsub(s, '[^'..b64..'=]', '') return (s:gsub('.', function(x) if x == '=' then return '' end local r,f='',(b64:find(x)-1) for i=6,1,-1 do r=r..(f%2^i-f%2^(i-1)>0 and'1' or'0') end return r end):gsub('%d%d%d?%d?%d?%d?%d?%d?', function(x) if #x ~= 8 then return '' end local c=0 for i=1,8 do c=c+(x:sub(i,i)=='1' and 2^(8-i) or 0) end return string.char(c) end)) end; local data = decode(enc); local result = ''; for i = 1, #data do local c = string.byte(data, i); local k = string.byte(key, (i - 1) % #key + 1); result = result .. string.char(bit.bxor(c, k)); end; return result; end; return dec(enc, key);`;
+    createLuaScript(data) {
+        const encoded = [];
+        for (let i = 0; i < data.length; i++) {
+            const char = data.charAt(i);
+            const asciiValue = char.charCodeAt(0);
+            encoded.push(asciiValue.toString(16).padStart(2, '0'));
+        }
+        const encodedStr = encoded.join('');
+        return `return(function(...) local E="${encodedStr}"; local function decode(s) local b = {}; for i = 1, #s, 2 do b[#b + 1] = tonumber(s:sub(i, i + 1), 16) end return b end local function loadString(b) local s = ''; for i = 1, #b do s = s .. string.char(b[i]) end return s end load(loadString(decode(E)))() end)()`;
     },
 
     extractLuaScript(data) {
-        const regex = /local enc = "(.*)"; local key = "(.*)"; function dec\(.*\) return (.*) end; return dec\(.*\);/;
+        const regex = /return\(function\(\.\.\.\) local E="(.*)"; local function decode\(.*\)return b end local function loadString\(.*\)return s end load\(loadString\(decode\(E\)\)\)\(\) end\)\(\)/;
         const match = data.match(regex);
         if (match) {
             return match[1];
