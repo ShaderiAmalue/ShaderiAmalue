@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('downloads').classList.add('active');
 });
 
-// Hybrid Encryption and Decryption Functions
+// Advanced Hybrid Encryption and Decryption Functions
 async function encrypt() {
     const plaintext = document.getElementById('plaintext').value;
     const password = document.getElementById('encryptPassword').value;
@@ -66,7 +66,7 @@ async function decrypt() {
     document.getElementById('result').innerText = `Decrypted ${contentType}: ${plaintext}`;
 }
 
-// Advanced Encryption Logic (Transpile to JavaScript)
+// Advanced Encryption Logic
 const AdvancedEncryption = {
     async encrypt(plaintext, password, contentType) {
         const encoder = new TextEncoder();
@@ -76,7 +76,7 @@ const AdvancedEncryption = {
         const alg = { name: 'AES-GCM', iv: iv };
 
         const uniqueString = this.generateUniqueString(contentType);
-        const encryptedContent = await crypto.subtle.encrypt(alg, key, encoder.encode(uniqueString + plaintext));
+        const encryptedContent = await crypto.subtle.encrypt(alg, key, encoder.encode(this.customObfuscate(uniqueString + plaintext)));
 
         const encryptedBytes = new Uint8Array(encryptedContent);
         const ciphertext = new Uint8Array(iv.length + salt.length + encryptedBytes.length);
@@ -97,7 +97,7 @@ const AdvancedEncryption = {
 
         const decryptedContent = await crypto.subtle.decrypt(alg, key, encryptedBytes);
         const decoder = new TextDecoder();
-        const decryptedText = decoder.decode(decryptedContent);
+        const decryptedText = this.customDeobfuscate(decoder.decode(decryptedContent));
 
         const uniqueString = this.generateUniqueString(contentType);
         return decryptedText.replace(uniqueString, '');
@@ -116,7 +116,7 @@ const AdvancedEncryption = {
             {
                 name: 'PBKDF2',
                 salt: salt,
-                iterations: 100000,
+                iterations: 200000,
                 hash: 'SHA-256'
             },
             keyMaterial,
@@ -135,5 +135,22 @@ const AdvancedEncryption = {
             default:
                 return 'Text_Encryption_Key_';
         }
+    },
+
+    customObfuscate(data) {
+        let obfuscated = '';
+        for (let i = 0; i < data.length; i++) {
+            obfuscated += String.fromCharCode(data.charCodeAt(i) ^ (i % 256));
+        }
+        return btoa(obfuscated);
+    },
+
+    customDeobfuscate(data) {
+        data = atob(data);
+        let deobfuscated = '';
+        for (let i = 0; i < data.length; i++) {
+            deobfuscated += String.fromCharCode(data.charCodeAt(i) ^ (i % 256));
+        }
+        return deobfuscated;
     }
 };
