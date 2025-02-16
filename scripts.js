@@ -47,13 +47,12 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('downloads').classList.add('active');
 });
 
-// Advanced Hybrid Encryption and Decryption Functions
 async function encrypt() {
     const plaintext = document.getElementById('plaintext').value;
     const password = document.getElementById('encryptPassword').value;
     const contentType = document.getElementById('contentType').value;
     
-    const ciphertext = await AdvancedEncryption.encrypt(plaintext, password, contentType);
+    const ciphertext = await AdvancedEncryption.encrypt(plaintext, password);
     document.getElementById('result').innerText = `Encrypted ${contentType}: ${ciphertext}`;
     downloadFile('encrypted.txt', ciphertext);
 }
@@ -63,7 +62,7 @@ async function decrypt() {
     const password = document.getElementById('decryptPassword').value;
     const contentType = document.getElementById('contentType').value;
 
-    const plaintext = await AdvancedEncryption.decrypt(ciphertext, password, contentType);
+    const plaintext = await AdvancedEncryption.decrypt(ciphertext, password);
     document.getElementById('result').innerText = `Decrypted ${contentType}: ${plaintext}`;
     downloadFile('decrypted.txt', plaintext);
 }
@@ -78,21 +77,14 @@ function downloadFile(filename, content) {
 }
 
 const AdvancedEncryption = {
-    async encrypt(plaintext, password, contentType) {
+    async encrypt(plaintext, password) {
         const encoder = new TextEncoder();
         const salt = crypto.getRandomValues(new Uint8Array(16));
         const iv = crypto.getRandomValues(new Uint8Array(12));
         const key = await this.deriveKey(password, salt);
         const alg = { name: 'AES-GCM', iv: iv };
 
-        const uniqueString = this.generateUniqueString(contentType);
-        let formattedContent = this.customObfuscate(uniqueString + plaintext);
-
-        if (contentType === 'Lua') {
-            formattedContent = this.createLuaScript(formattedContent);
-        }
-
-        const encryptedContent = await crypto.subtle.encrypt(alg, key, encoder.encode(formattedContent));
+        const encryptedContent = await crypto.subtle.encrypt(alg, key, encoder.encode(plaintext));
 
         const encryptedBytes = new Uint8Array(encryptedContent);
         const ciphertext = new Uint8Array(iv.length + salt.length + encryptedBytes.length);
@@ -103,7 +95,7 @@ const AdvancedEncryption = {
         return this.customEncode(ciphertext);
     },
 
-    async decrypt(ciphertext, password, contentType) {
+    async decrypt(ciphertext, password) {
         const data = this.customDecode(ciphertext);
         const iv = data.slice(0, 12);
         const salt = data.slice(12, 28);
@@ -113,16 +105,8 @@ const AdvancedEncryption = {
 
         const decryptedContent = await crypto.subtle.decrypt(alg, key, encryptedBytes);
         const decoder = new TextDecoder();
-        const decryptedText = this.customDeobfuscate(decoder.decode(decryptedContent));
 
-        const uniqueString = this.generateUniqueString(contentType);
-        let formattedContent = decryptedText.replace(uniqueString, '');
-
-        if (contentType === 'Lua') {
-            formattedContent = this.extractLuaScript(formattedContent);
-        }
-
-        return formattedContent;
+        return decoder.decode(decryptedContent);
     },
 
     async deriveKey(password, salt) {
@@ -148,50 +132,11 @@ const AdvancedEncryption = {
         );
     },
 
-    generateUniqueString(contentType) {
-        switch (contentType) {
-            case 'Lua':
-                return 'Lua_Encryption_Key_';
-            case 'Python':
-                return 'Python_Encryption_Key_';
-            default:
-                return 'Text_Encryption_Key_';
-        }
-    },
-
-    customObfuscate(data) {
-        return data.split('').map((char, i) => String.fromCharCode(char.charCodeAt(0) + 5 - i % 10)).join('');
-    },
-
-    customDeobfuscate(data) {
-        return data.split('').map((char, i) => String.fromCharCode(char.charCodeAt(0) - 5 + i % 10)).join('');
-    },
-
-    createLuaScript(data) {
-        const encoded = [];
-        for (let i = 0; i < data.length; i++) {
-            const char = data.charAt(i);
-            const asciiValue = char.charCodeAt(0);
-            encoded.push(asciiValue.toString(16).padStart(2, '0'));
-        }
-        const encodedStr = encoded.join('');
-        return `return(function(...) local E="${encodedStr}"; local function decode(s) local b = {}; for i = 1, #s, 2 do b[#b + 1] = tonumber(s:sub(i, i + 1), 16) end return b end local function loadString(b) local s = ''; for i = 1, #b do s = s .. string.char(b[i]) end return s end load(loadString(decode(E)))() end)()`;
-    },
-
-    extractLuaScript(data) {
-        const regex = /return\(function\(\.\.\.\) local E="(.*)"; local function decode\(.*\)return b end local function loadString\(.*\)return s end load\(loadString\(decode\(E\)\)\)\(\) end\)\(\)/;
-        const match = data.match(regex);
-        if (match) {
-            return match[1];
-        }
-        return data;
-    },
-
     customEncode(data) {
-        return Array.from(data).map(byte => String.fromCharCode(byte + 65)).join('');
+        return btoa(String.fromCharCode.apply(null, data));
     },
 
     customDecode(data) {
-        return new Uint8Array(Array.from(data).map(char => char.charCodeAt(0) - 65));
+        return new Uint8Array(atob(data).split('').map(c => c.charCodeAt(0)));
     }
 };
