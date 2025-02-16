@@ -262,17 +262,4 @@ h2 {
     font-size: 16px;
     border: 1px solid #3498db;
     border-radius: 5px;
-    background: rgba(44, 62, 80, 0.8);
-    color: #ecf0f1;
-    transition: all 0.3s ease;
-}
-
-.encryption-form button {
-    background: #2980b9;
-    cursor: pointer;
-}
-
-.encryption-form button:hover {
-    background: #3498db;
-    transform: scale(1.05);
-}
+    background: rgba(44, 62, 80, 0
