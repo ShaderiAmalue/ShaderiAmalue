@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>redG</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -44,7 +44,7 @@
     </div>
     <div id="encryption" class="content">
         <h2>Encryption Tool</h2>
-        <form id="encryptForm">
+        <form id="encryptForm" class="encryption-form">
             <label for="plaintext">Text to Encrypt:</label>
             <textarea id="plaintext" name="plaintext" rows="4" cols="50"></textarea>
             <label for="password">Password:</label>
@@ -57,7 +57,7 @@
             </select>
             <button type="button" onclick="encrypt()">Encrypt</button>
         </form>
-        <form id="decryptForm">
+        <form id="decryptForm" class="encryption-form">
             <label for="ciphertext">Text to Decrypt:</label>
             <textarea id="ciphertext" name="ciphertext" rows="4" cols="50"></textarea>
             <label for="password">Password:</label>
