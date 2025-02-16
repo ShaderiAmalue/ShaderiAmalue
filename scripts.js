@@ -47,12 +47,12 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('downloads').classList.add('active');
 });
 
-// Advanced Hybrid Encryption and Decryption Functions
+// endregion
 async function encrypt() {
     const plaintext = document.getElementById('plaintext').value;
     const password = document.getElementById('encryptPassword').value;
 
-    const ciphertext = await AdvancedEncryption.encrypt(plaintext, password);
+    const ciphertext = await AdvancedAES.encode(plaintext, password);
     displayResult('Encrypted Text', ciphertext);
 }
 
@@ -60,33 +60,24 @@ async function decrypt() {
     const ciphertext = document.getElementById('ciphertext').value;
     const password = document.getElementById('decryptPassword').value;
 
-    const plaintext = await AdvancedEncryption.decrypt(ciphertext, password);
+    const plaintext = await AdvancedAES.decode(ciphertext, password);
     displayResult('Decrypted Text', plaintext);
 }
 
 function displayResult(label, text) {
     const resultContainer = document.getElementById('result-container');
-    const resultBox = document.getElementById('result-box');
     const resultLabel = document.getElementById('result-label');
     const resultText = document.getElementById('result-text');
-    const eyeIcon = document.getElementById('eye-icon');
+    const resultBox = document.getElementById('result-box');
 
     resultLabel.textContent = label;
     resultText.textContent = text;
-    resultBox.classList.add('hidden');
-    resultContainer.classList.remove('hidden');
 
-    eyeIcon.addEventListener('click', function() {
-        if (resultBox.classList.contains('hidden')) {
-            resultBox.classList.remove('hidden');
-            resultBox.classList.add('visible');
-            eyeIcon.src = 'eye-closed.png'; // Change to closed eye icon
-        } else {
-            resultBox.classList.remove('visible');
-            resultBox.classList.add('hidden');
-            eyeIcon.src = 'eye-open.png'; // Change to open eye icon
-        }
-    });
+    resultBox.style.height = 'auto';  // Reset height
+    const height = resultBox.scrollHeight + 'px';  // Calculate new height
+    resultBox.style.height = height;  // Set new height
+
+    resultContainer.classList.remove('hidden');
 }
 
 function downloadFile(filename, content) {
@@ -98,8 +89,8 @@ function downloadFile(filename, content) {
     element.click();
 }
 
-const AdvancedEncryption = {
-    async encrypt(plaintext, password) {
+const AdvancedAES = {
+    async encode(plaintext, password) {
         const encoder = new TextEncoder();
         const salt = crypto.getRandomValues(new Uint8Array(16));
         const iv = crypto.getRandomValues(new Uint8Array(12));
@@ -117,7 +108,7 @@ const AdvancedEncryption = {
         return this.customEncode(ciphertext);
     },
 
-    async decrypt(ciphertext, password) {
+    async decode(ciphertext, password) {
         const data = this.customDecode(ciphertext);
         const iv = data.slice(0, 12);
         const salt = data.slice(12, 28);
