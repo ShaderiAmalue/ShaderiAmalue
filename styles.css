@@ -81,7 +81,7 @@ h2 {
     font-weight: bold;
 }
 
-.downloads a:hover, .scripts a:hover, .button-link:hover {
+.downloads a:hover, .scripts a:hover, .button-link:hover, .downloads a.hovered, .scripts a.hovered, .button-link.hovered {
     color: #5dade2;
     border-color: #5dade2;
     box-shadow: 4px 4px 15px rgba(52, 152, 219, 0.8);
@@ -156,11 +156,19 @@ h2 {
     transition: all 0.3s ease;
 }
 
-.channel-link:hover {
+.channel-link:hover, .channel-link.hovered {
     color: #5dade2;
     border-color: #ecf0f1;
     background-color: rgba(52, 152, 219, 0.8);
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    transform: scale(1.05);
+}
+
+.button-link:hover, .button-link.hovered {
+    color: #5dade2;
+    border-color: #5dade2;
+    background-color: #2980b9;
+    box-shadow: 4px 4px 15px rgba(52, 152, 219, 0.8);
     transform: scale(1.05);
 }
 
@@ -305,11 +313,17 @@ h2 {
     pointer-events: none;
     mix-blend-mode: difference;
     transform: translate(-50%, -50%);
-    transition: transform 0.15s, width 0.2s, height 0.2s;
+    transition: transform 0.15s, width 0.2s, height 0.2s, opacity 0.3s;
+    z-index: 9999; /* Ensure cursor is above all other elements */
+    opacity: 0; /* Initially hidden */
 }
 
 .cursor.big {
     width: 60px;
     height: 60px;
     background: rgba(255, 255, 255, 0.5);
+}
+
+.cursor.holding {
+    background: rgba(0, 123, 255, 0.7);
 }
