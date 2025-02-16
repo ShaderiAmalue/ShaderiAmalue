@@ -87,7 +87,13 @@ const AdvancedEncryption = {
         const alg = { name: 'AES-GCM', iv: iv };
 
         const uniqueString = this.generateUniqueString(contentType);
-        const encryptedContent = await crypto.subtle.encrypt(alg, key, encoder.encode(this.customObfuscate(uniqueString + plaintext)));
+        let formattedContent = this.customObfuscate(uniqueString + plaintext);
+        
+        if (contentType === 'Lua') {
+            formattedContent = `local enc = "${formattedContent}"; function dec() return (function(...)${formattedContent})() end; dec();`;
+        }
+        
+        const encryptedContent = await crypto.subtle.encrypt(alg, key, encoder.encode(formattedContent));
 
         const encryptedBytes = new Uint8Array(encryptedContent);
         const ciphertext = new Uint8Array(iv.length + salt.length + encryptedBytes.length);
@@ -111,7 +117,13 @@ const AdvancedEncryption = {
         const decryptedText = this.customDeobfuscate(decoder.decode(decryptedContent));
 
         const uniqueString = this.generateUniqueString(contentType);
-        return decryptedText.replace(uniqueString, '');
+        let formattedContent = decryptedText.replace(uniqueString, '');
+        
+        if (contentType === 'Lua') {
+            formattedContent = formattedContent.match(/function\(.*\)return \(\(.*\)\)\(\)\) end; dec\(\);/)[1];
+        }
+
+        return formattedContent;
     },
 
     async deriveKey(password, salt) {
