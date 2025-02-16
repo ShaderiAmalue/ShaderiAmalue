@@ -68,9 +68,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const target = document.elementFromPoint(x, y);
         if (target && (target.classList.contains('url-link') || target.classList.contains('button-link') || target.classList.contains('channel-link') || target.tagName === 'BUTTON' || target.tagName === 'A')) {
-            target.classList.add('hovered');
             setCursorState('holding');
             cursor.style.opacity = 0;
+            target.classList.add('hovered');
         } else {
             setCursorState('');
             cursor.style.opacity = 1;
