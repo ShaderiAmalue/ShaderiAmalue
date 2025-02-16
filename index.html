@@ -48,7 +48,12 @@
             <label for="plaintext">Text to Encrypt:</label>
             <textarea id="plaintext" name="plaintext" rows="4" cols="50"></textarea>
             <label for="password">Password:</label>
-            <input type="password" id="encryptPassword" name="password">
+            <div class="password-container">
+                <input type="password" id="encryptPassword" name="password">
+                <div class="eye" id="eye">
+                    <div class="eyeball" id="eyeball"></div>
+                </div>
+            </div>
             <button type="button" onclick="encrypt()">Encrypt</button>
         </form>
         <form id="decryptForm" class="encryption-form">
