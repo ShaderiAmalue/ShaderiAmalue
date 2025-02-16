@@ -48,24 +48,14 @@
             <label for="plaintext">Text to Encrypt:</label>
             <textarea id="plaintext" name="plaintext" rows="4" cols="50"></textarea>
             <label for="password">Password:</label>
-            <div class="password-container">
-                <input type="password" id="encryptPassword" name="password">
-                <div class="eye" id="eye1">
-                    <div class="eyeball" id="eyeball1"></div>
-                </div>
-            </div>
+            <input type="password" id="encryptPassword" name="password">
             <button type="button" onclick="encrypt()">Encrypt</button>
         </form>
         <form id="decryptForm" class="encryption-form">
             <label for="ciphertext">Text to Decrypt:</label>
             <textarea id="ciphertext" name="ciphertext" rows="4" cols="50"></textarea>
             <label for="password">Password:</label>
-            <div class="password-container">
-                <input type="password" id="decryptPassword" name="password">
-                <div class="eye" id="eye2">
-                    <div class="eyeball" id="eyeball2"></div>
-                </div>
-            </div>
+            <input type="password" id="decryptPassword" name="password">
             <button type="button" onclick="decrypt()">Decrypt</button>
         </form>
         <div id="result-container" class="hidden">
