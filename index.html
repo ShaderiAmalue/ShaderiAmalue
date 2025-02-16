@@ -83,10 +83,15 @@
             <label for="payload">Payload:</label>
             <textarea id="payload" name="payload" placeholder='{"key":"value"}' rows="4" cols="50"></textarea>
             <button type="button" onclick="sendApiRequest()">Send Request</button>
+            <button type="button" onclick="clearApiForm()">Clear</button>
         </form>
+        <div id="loading" class="hidden">Loading...</div>
         <div id="apiResult" class="api-result hidden">
             <h3>Response</h3>
             <pre id="apiResponse"></pre>
+            <h4>Status Code: <span id="statusCode"></span></h4>
+            <h4>Response Headers:</h4>
+            <pre id="responseHeaders"></pre>
         </div>
     </div>
     <script src="scripts.js"></script>
