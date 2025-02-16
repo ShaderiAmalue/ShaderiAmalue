@@ -53,8 +53,7 @@ async function encrypt() {
     const password = document.getElementById('encryptPassword').value;
 
     const ciphertext = await AdvancedEncryption.encrypt(plaintext, password);
-    document.getElementById('result').innerText = `Encrypted Text: ${ciphertext}`;
-    downloadFile('encrypted.txt', ciphertext);
+    displayResult('Encrypted Text', ciphertext);
 }
 
 async function decrypt() {
@@ -62,8 +61,32 @@ async function decrypt() {
     const password = document.getElementById('decryptPassword').value;
 
     const plaintext = await AdvancedEncryption.decrypt(ciphertext, password);
-    document.getElementById('result').innerText = `Decrypted Text: ${plaintext}`;
-    downloadFile('decrypted.txt', plaintext);
+    displayResult('Decrypted Text', plaintext);
+}
+
+function displayResult(label, text) {
+    const resultContainer = document.getElementById('result-container');
+    const resultBox = document.getElementById('result-box');
+    const resultLabel = document.getElementById('result-label');
+    const resultText = document.getElementById('result-text');
+    const eyeIcon = document.getElementById('eye-icon');
+
+    resultLabel.textContent = label;
+    resultText.textContent = text;
+    resultBox.classList.add('hidden');
+    resultContainer.classList.remove('hidden');
+
+    eyeIcon.addEventListener('click', function() {
+        if (resultBox.classList.contains('hidden')) {
+            resultBox.classList.remove('hidden');
+            resultBox.classList.add('visible');
+            eyeIcon.src = 'eye-closed.png'; // Change to closed eye icon
+        } else {
+            resultBox.classList.remove('visible');
+            resultBox.classList.add('hidden');
+            eyeIcon.src = 'eye-open.png'; // Change to open eye icon
+        }
+    });
 }
 
 function downloadFile(filename, content) {
