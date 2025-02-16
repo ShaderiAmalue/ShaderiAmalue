@@ -55,6 +55,7 @@ async function encrypt() {
     
     const ciphertext = await AdvancedEncryption.encrypt(plaintext, password, contentType);
     document.getElementById('result').innerText = `Encrypted ${contentType}: ${ciphertext}`;
+    downloadFile('encrypted.txt', ciphertext);
 }
 
 async function decrypt() {
@@ -64,6 +65,16 @@ async function decrypt() {
 
     const plaintext = await AdvancedEncryption.decrypt(ciphertext, password, contentType);
     document.getElementById('result').innerText = `Decrypted ${contentType}: ${plaintext}`;
+    downloadFile('decrypted.txt', plaintext);
+}
+
+function downloadFile(filename, content) {
+    const element = document.createElement('a');
+    const file = new Blob([content], { type: 'text/plain' });
+    element.href = URL.createObjectURL(file);
+    element.download = filename;
+    document.body.appendChild(element);
+    element.click();
 }
 
 // Advanced Encryption Logic
