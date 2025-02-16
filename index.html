@@ -50,8 +50,8 @@
             <label for="password">Password:</label>
             <div class="password-container">
                 <input type="password" id="encryptPassword" name="password">
-                <div class="eye" id="eye">
-                    <div class="eyeball" id="eyeball"></div>
+                <div class="eye" id="eye1">
+                    <div class="eyeball" id="eyeball1"></div>
                 </div>
             </div>
             <button type="button" onclick="encrypt()">Encrypt</button>
@@ -60,7 +60,12 @@
             <label for="ciphertext">Text to Decrypt:</label>
             <textarea id="ciphertext" name="ciphertext" rows="4" cols="50"></textarea>
             <label for="password">Password:</label>
-            <input type="password" id="decryptPassword" name="password">
+            <div class="password-container">
+                <input type="password" id="decryptPassword" name="password">
+                <div class="eye" id="eye2">
+                    <div class="eyeball" id="eyeball2"></div>
+                </div>
+            </div>
             <button type="button" onclick="decrypt()">Decrypt</button>
         </form>
         <div id="result-container" class="hidden">
