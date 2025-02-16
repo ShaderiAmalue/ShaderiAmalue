@@ -11,6 +11,7 @@ body {
     height: 100vh;
     overflow: hidden;
     transition: background-color 0.3s, color 0.3s;
+    cursor: none; /* Hide default cursor */
 }
 
 nav {
@@ -178,69 +179,6 @@ h2 {
     transform: scale(1.05);
 }
 
-.toast {
-    visibility: hidden;
-    max-width: 50%;
-    margin: 0 auto;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    border-radius: 5px;
-    padding: 16px;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    right: 0;
-    bottom: 30px;
-    font-size: 17px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-    transition: all 0.3s ease;
-}
-
-.toast.show {
-    visibility: visible;
-    animation: fadeInOut 0.5s, fadeOut 0.5s 2.5s;
-}
-
-@keyframes fadeInOut {
-    from { bottom: 0; opacity: 0; }
-    to { bottom: 30px; opacity: 1; }
-}
-
-@keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
-}
-
-@media (max-width: 600px) {
-    nav {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .downloads a, .scripts a, .button-link, .profile-info p, .channel-link {
-        padding: 0.75em 1em;
-        margin-bottom: 0.75em;
-        font-size: 14px;
-    }
-
-    h2 {
-        font-size: 1.5em;
-    }
-
-    .profile {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .profile img {
-        width: 80px;
-        height: 80px;
-        margin-bottom: 0.5em;
-    }
-}
-
 .encryption-form {
     display: flex;
     flex-direction: column;
@@ -294,3 +232,26 @@ h2 {
     white-space: pre-wrap; /* Preserve white space and line breaks */
     word-wrap: break-word; /* Break long words if necessary */
 }
+
+.toast {
+    visibility: hidden;
+    max-width: 50%;
+    margin: 0 auto;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    bottom: 30px;
+    font-size: 17px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.toast.show {
+    visibility: visible;
+    animation: fadeInOut 0.5s, fadeOut 0.5s 2.5s
