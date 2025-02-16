@@ -1,290 +1,145 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+document.addEventListener('DOMContentLoaded', function() {
+    const links = document.querySelectorAll('nav a');
+    const contents = document.querySelectorAll('.content');
 
-body {
-    font-family: 'Roboto', sans-serif;
-    background: linear-gradient(120deg, #2c3e50 68%, #3498db 32%);
-    color: #ecf0f1;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow: hidden;
-    transition: background-color 0.3s, color 0.3s;
-    cursor: none;
+    links.forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            const targetId = this.dataset.target;
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(targetId).classList.add('active');
+        });
+    });
+
+    document.getElementById('sendPacketButton').addEventListener('click', function() {
+        sendApiRequest();
+    });
+
+    document.getElementById('downloads').classList.add('active');
+});
+
+function sendApiRequest() {
+    const host = document.getElementById('host').value;
+    const endpoint = document.getElementById('endpoint').value;
+    const method = document.getElementById('method').value;
+    const payload = document.getElementById('payload').value;
+
+    const url = `${host}${endpoint}`;
+
+    fetch(url, {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: method !== 'GET' ? payload : null
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('apiResponse').textContent = JSON.stringify(data, null, 2);
+        document.getElementById('apiResult').classList.remove('hidden');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('apiResponse').textContent = 'Error: ' + error;
+        document.getElementById('apiResult').classList.remove('hidden');
+    });
 }
 
-nav {
-    background: rgba(41, 128, 185, 0.8);
-    padding: 1em;
-    display: flex;
-    justify-content: space-around;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    z-index: 2;
-    border-radius: 10px;
-    margin: 1em;
-    transition: all 0.3s ease;
+async function encrypt() {
+    const plaintext = document.getElementById('plaintext').value;
+    const password = document.getElementById('encryptPassword').value;
+
+    const ciphertext = await AdvancedAES.encode(plaintext, password);
+    displayResult('Encrypted Text', ciphertext);
 }
 
-nav a {
-    color: #ecf0f1;
-    margin: 0 1em;
-    text-decoration: none;
-    transition: color 0.3s, background-color 0.3s;
-    padding: 0.5em 1em;
-    border-radius: 5px;
-    border: 1px solid #3498db;
-    background-color: rgba(52, 152, 219, 0.5);
+async function decrypt() {
+    const ciphertext = document.getElementById('ciphertext').value;
+    const password = document.getElementById('decryptPassword').value;
+
+    const plaintext = await AdvancedAES.decode(ciphertext, password);
+    displayResult('Decrypted Text', plaintext);
 }
 
-nav a:hover {
-    background-color: rgba(52, 152, 219, 0.8);
-    transform: scale(1.05);
+function displayResult(label, text) {
+    const resultContainer = document.getElementById('result-container');
+    const resultLabel = document.getElementById('result-label');
+    const resultText = document.getElementById('result-text');
+    const resultBox = document.getElementById('result-box');
+
+    resultLabel.textContent = label;
+    resultText.textContent = text;
+
+    resultBox.style.height = 'auto';
+    const height = resultBox.scrollHeight + 'px';
+    resultBox.style.height = height;
+
+    resultContainer.classList.remove('hidden');
 }
 
-.content {
-    flex: 1;
-    padding: 2em;
-    animation: fadeIn 1s ease-in-out;
-    overflow-y: auto;
-    display: none;
-}
+const AdvancedAES = {
+    async encode(plaintext, password) {
+        const encoder = new TextEncoder();
+        const salt = crypto.getRandomValues(new Uint8Array(16));
+        const iv = crypto.getRandomValues(new Uint8Array(12));
+        const key = await this.deriveKey(password, salt);
+        const alg = { name: 'AES-GCM', iv: iv };
 
-.content.active {
-    display: block;
-}
+        const encryptedContent = await crypto.subtle.encrypt(alg, key, encoder.encode(plaintext));
 
-h2 {
-    text-align: center;
-    margin-bottom: 1em;
-    color: #ecf0f1;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    border: 1px solid #3498db;
-    padding: 0.5em;
-    border-radius: 10px;
-    background-color: rgba(44, 62, 80, 0.8);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
+        const encryptedBytes = new Uint8Array(encryptedContent);
+        const ciphertext = new Uint8Array(iv.length + salt.length + encryptedBytes.length);
+        ciphertext.set(iv, 0);
+        ciphertext.set(salt, iv.length);
+        ciphertext.set(encryptedBytes, iv.length + salt.length);
 
-.downloads a, .scripts a, .button-link {
-    color: #ecf0f1;
-    text-decoration: none;
-    display: block;
-    margin-bottom: 1em;
-    padding: 1em 1.5em;
-    border: 1px solid #3498db;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    box-shadow: 2px 2px 5px rgba(52, 152, 219, 0.5);
-    background-color: #34495e;
-    text-align: center;
-    font-weight: bold;
-}
+        return this.customEncode(ciphertext);
+    },
 
-.downloads a:hover, .scripts a:hover, .button-link:hover, .downloads a.hovered, .scripts a.hovered, .button-link.hovered {
-    color: #5dade2;
-    border-color: #5dade2;
-    box-shadow: 4px 4px 15px rgba(52, 152, 219, 0.8);
-    background-color: #2980b9;
-    transform: scale(1.05);
-}
+    async decode(ciphertext, password) {
+        const data = this.customDecode(ciphertext);
+        const iv = data.slice(0, 12);
+        const salt = data.slice(12, 28);
+        const encryptedBytes = data.slice(28);
+        const key = await this.deriveKey(password, salt);
+        const alg = { name: 'AES-GCM', iv: iv };
 
-.profiles {
-    margin-top: 1em;
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    padding: 1em;
-    border: 1px solid #3498db;
-    border-radius: 10px;
-    background: rgba(44, 62, 80, 0.8);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
+        const decryptedContent = await crypto.subtle.decrypt(alg, key, encryptedBytes);
+        const decoder = new TextDecoder();
 
-.profile {
-    display: flex;
-    align-items: center;
-    padding: 1em;
-    border-radius: 10px;
-    background: linear-gradient(120deg, rgba(52, 73, 94, 0.8), rgba(44, 62, 80, 0.8));
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-    transition: all 0.3s ease;
-}
+        return decoder.decode(decryptedContent);
+    },
 
-.profile:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-}
+    async deriveKey(password, salt) {
+        const encoder = new TextEncoder();
+        const keyMaterial = await crypto.subtle.importKey(
+            'raw',
+            encoder.encode(password),
+            'PBKDF2',
+            false,
+            ['deriveKey']
+        );
+        return crypto.subtle.deriveKey(
+            {
+                name: 'PBKDF2',
+                salt: salt,
+                iterations: 200000,
+                hash: 'SHA-256'
+            },
+            keyMaterial,
+            { name: 'AES-GCM', length: 256 },
+            false,
+            ['encrypt', 'decrypt']
+        );
+    },
 
-.profile img {
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    margin-right: 1em;
-    transition: transform 0.3s;
-}
+    customEncode(data) {
+        return btoa(String.fromCharCode.apply(null, data));
+    },
 
-.profile img:hover {
-    transform: scale(1.1);
-}
-
-.profile-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.profile-info p {
-    margin: 0;
-    color: #ecf0f1;
-    border: 1px solid #3498db;
-    padding: 0.5em 1em;
-    border-radius: 5px;
-    background-color: rgba(52, 73, 94, 0.8);
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-    transition: background-color 0.3s, box-shadow 0.3s;
-}
-
-.channel-link {
-    color: #ecf0f1;
-    text-decoration: none;
-    padding: 0.3em 0.5em;
-    border: 1px solid #3498db;
-    border-radius: 5px;
-    margin-top: 0.5em;
-    background-color: rgba(52, 73, 94, 0.8);
-    transition: all 0.3s ease;
-}
-
-.channel-link:hover, .channel-link.hovered {
-    color: #5dade2;
-    border-color: #ecf0f1;
-    background-color: rgba(52, 152, 219, 0.8);
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    transform: scale(1.05);
-}
-
-.button-link:hover, .button-link.hovered {
-    color: #5dade2;
-    border-color: #5dade2;
-    background-color: #2980b9;
-    box-shadow: 4px 4px 15px rgba(52, 152, 219, 0.8);
-    transform: scale(1.05);
-}
-
-.button-link {
-    color: #ecf0f1;
-    background-color: #2980b9;
-    text-decoration: none;
-    padding: 1em;
-    border-radius: 10px;
-    display: inline-block;
-    transition: all 0.3s ease;
-}
-
-.encryption-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    margin-top: 1em;
-    padding: 1em;
-    border: 1px solid #3498db;
-    border-radius: 10px;
-    background: rgba(44, 62, 80, 0.8);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-.encryption-form label, .encryption-form textarea, .encryption-form input, .encryption-form button {
-    margin-bottom: 1em;
-    padding: 0.75em;
-    font-size: 16px;
-    border: 1px solid #3498db;
-    border-radius: 5px;
-    background: rgba(44, 62, 80, 0.8);
-    color: #ecf0f1;
-    transition: all 0.3s ease;
-}
-
-.encryption-form button {
-    background: #2980b9;
-    cursor: pointer;
-}
-
-.encryption-form button:hover {
-    background: #3498db;
-    transform: scale(1.05);
-}
-
-.hidden {
-    display: none;
-}
-
-.result-box {
-    border: 1px solid #3498db;
-    border-radius: 5px;
-    background: rgba(44, 62, 80, 0.8);
-    padding: 1em;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-}
-
-#result-text {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-}
-
-@media (max-width: 600px) {
-    nav {
-        flex-direction: column;
-        align-items: center;
+    customDecode(data) {
+        return new Uint8Array(atob(data).split('').map(c => c.charCodeAt(0)));
     }
-
-    .downloads a, .scripts a, .button-link, .profile-info p, .channel-link {
-        padding: 0.75em 1em;
-        margin-bottom: 0.75em;
-        font-size: 14px;
-    }
-
-    h2 {
-        font-size: 1.5em;
-    }
-
-    .profile {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .profile img {
-        width: 80px;
-        height: 80px;
-        margin-bottom: 0.5em;
-    }
-}
-
-.cursor {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.8);
-    position: absolute;
-    pointer-events: none;
-    mix-blend-mode: difference;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s ease-out, opacity 0.3s;
-    z-index: 9999;
-    opacity: 0;
-}
-
-.cursor.big {
-    width: 60px;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.5);
-}
-
-.cursor.holding {
-    background: rgba(0, 123, 255, 0.7);
-}
+};
