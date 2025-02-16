@@ -155,18 +155,19 @@ const AdvancedAES = {
 };
 
 // Custom Cursor
-document.addEventListener('mousemove', function(e) {
+document.addEventListener('touchmove', function(e) {
     const cursor = document.getElementById('cursor');
-    cursor.style.left = `${e.pageX}px`;
-    cursor.style.top = `${e.pageY}px`;
+    const touch = e.touches[0];
+    cursor.style.left = `${touch.pageX}px`;
+    cursor.style.top = `${touch.pageY}px`;
 });
 
-document.addEventListener('mousedown', function() {
+document.addEventListener('touchstart', function() {
     const cursor = document.getElementById('cursor');
     cursor.classList.add('big');
 });
 
-document.addEventListener('mouseup', function() {
+document.addEventListener('touchend', function() {
     const cursor = document.getElementById('cursor');
     cursor.classList.remove('big');
 });
