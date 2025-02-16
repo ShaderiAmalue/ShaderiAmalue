@@ -46,3 +46,76 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('downloads').classList.add('active');
 });
+
+// Encryption and Decryption Functions
+async function encrypt() {
+    const plaintext = document.getElementById('plaintext').value;
+    const password = document.getElementById('encryptPassword').value;
+    const ciphertext = await AES256Encryption.encrypt(plaintext, password);
+    document.getElementById('result').innerText = `Encrypted Text: ${ciphertext}`;
+}
+
+async function decrypt() {
+    const ciphertext = document.getElementById('ciphertext').value;
+    const password = document.getElementById('decryptPassword').value;
+    const plaintext = await AES256Encryption.decrypt(ciphertext, password);
+    document.getElementById('result').innerText = `Decrypted Text: ${plaintext}`;
+}
+
+// AES-256 Encryption Logic (Transpile to JavaScript)
+const AES256Encryption = {
+    async encrypt(plaintext, password) {
+        const encoder = new TextEncoder();
+        const salt = crypto.getRandomValues(new Uint8Array(16));
+        const iv = crypto.getRandomValues(new Uint8Array(12));
+        const key = await this.deriveKey(password, salt);
+        const alg = { name: 'AES-GCM', iv: iv };
+
+        const encryptedContent = await crypto.subtle.encrypt(alg, key, encoder.encode(plaintext));
+
+        const encryptedBytes = new Uint8Array(encryptedContent);
+        const ciphertext = new Uint8Array(iv.length + salt.length + encryptedBytes.length);
+        ciphertext.set(iv, 0);
+        ciphertext.set(salt, iv.length);
+        ciphertext.set(encryptedBytes, iv.length + salt.length);
+
+        return btoa(String.fromCharCode.apply(null, ciphertext));
+    },
+
+    async decrypt(ciphertext, password) {
+        const data = new Uint8Array(atob(ciphertext).split("").map(c => c.charCodeAt(0)));
+        const iv = data.slice(0, 12);
+        const salt = data.slice(12, 28);
+        const encryptedBytes = data.slice(28);
+        const key = await this.deriveKey(password, salt);
+        const alg = { name: 'AES-GCM', iv: iv };
+
+        const decryptedContent = await crypto.subtle.decrypt(alg, key, encryptedBytes);
+        const decoder = new TextDecoder();
+
+        return decoder.decode(decryptedContent);
+    },
+
+    async deriveKey(password, salt) {
+        const encoder = new TextEncoder();
+        const keyMaterial = await crypto.subtle.importKey(
+            'raw',
+            encoder.encode(password),
+            'PBKDF2',
+            false,
+            ['deriveKey']
+        );
+        return crypto.subtle.deriveKey(
+            {
+                name: 'PBKDF2',
+                salt: salt,
+                iterations: 100000,
+                hash: 'SHA-256'
+            },
+            keyMaterial,
+            { name: 'AES-GCM', length: 256 },
+            false,
+            ['encrypt', 'decrypt']
+        );
+    }
+};
