@@ -49,12 +49,6 @@
             <textarea id="plaintext" name="plaintext" rows="4" cols="50"></textarea>
             <label for="password">Password:</label>
             <input type="password" id="encryptPassword" name="password">
-            <label for="contentType">Content Type:</label>
-            <select id="contentType" name="contentType">
-                <option value="Lua">Lua</option>
-                <option value="Python">Python</option>
-                <option value="Text">Text</option>
-            </select>
             <button type="button" onclick="encrypt()">Encrypt</button>
         </form>
         <form id="decryptForm" class="encryption-form">
@@ -62,12 +56,6 @@
             <textarea id="ciphertext" name="ciphertext" rows="4" cols="50"></textarea>
             <label for="password">Password:</label>
             <input type="password" id="decryptPassword" name="password">
-            <label for="contentType">Content Type:</label>
-            <select id="contentType" name="contentType">
-                <option value="Lua">Lua</option>
-                <option value="Python">Python</option>
-                <option value="Text">Text</option>
-            </select>
             <button type="button" onclick="decrypt()">Decrypt</button>
         </form>
         <div id="result"></div>
