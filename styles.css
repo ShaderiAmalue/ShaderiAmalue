@@ -65,27 +65,78 @@ h2 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.downloads a, .scripts a, .button-link {
-    color: #ecf0f1;
-    text-decoration: none;
-    display: block;
-    margin-bottom: 1em;
-    padding: 1em 1.5em;
-    border: 1px solid #3498db;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    box-shadow: 2px 2px 5px rgba(52, 152, 219, 0.5);
-    background-color: #34495e;
-    text-align: center;
-    font-weight: bold;
+.downloads {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    margin-top: 1em;
 }
 
-.downloads a:hover, .scripts a:hover, .button-link:hover {
-    color: #5dade2;
-    border-color: #5dade2;
-    box-shadow: 4px 4px 15px rgba(52, 152, 219, 0.8);
+.download-item {
+    background: rgba(52, 73, 94, 0.8);
+    border: 1px solid #3498db;
+    border-radius: 10px;
+    padding: 1.5em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.download-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.download-item h3 {
+    margin: 0 0 0.5em;
+    color: #ecf0f1;
+}
+
+.download-item p {
+    margin: 0 0 1em;
+    color: #bdc3c7;
+}
+
+.button-link {
     background-color: #2980b9;
+    color: #ecf0f1;
+    padding: 0.75em 1.5em;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-block;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.button-link:hover {
+    background-color: #3498db;
     transform: scale(1.05);
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 250px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Position above the text */
+    left: 50%;
+    margin-left: -125px; /* Center the tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
 }
 
 .profiles {
@@ -160,24 +211,6 @@ h2 {
     border-color: #ecf0f1;
     background-color: rgba(52, 152, 219, 0.8);
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    transform: scale(1.05);
-}
-
-.button-link {
-    color: #ecf0f1;
-    background-color: #2980b9;
-    text-decoration: none;
-    padding: 1em;
-    border-radius: 10px;
-    display: inline-block;
-    transition: all 0.3s ease;
-}
-
-.button-link:hover {
-    color: #5dade2;
-    border-color: #5dade2;
-    background-color: #2980b9;
-    box-shadow: 4px 4px 15px rgba(52, 152, 219, 0.8);
     transform: scale(1.05);
 }
 
