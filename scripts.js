@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const links = document.querySelectorAll('.url-link');
-    const channelLinks = document.querySelectorAll('.channel-link');
+    const links = document.querySelectorAll('.url-link, .button-link, .channel-link');
     const contents = document.querySelectorAll('.content');
     const toast = document.getElementById('toast');
     const navLinks = document.querySelectorAll('nav a');
@@ -30,11 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
     links.forEach(link => {
         link.addEventListener('click', handleLinkClick);
         link.addEventListener('contextmenu', preventContextMenu);
-    });
-
-    channelLinks.forEach(channelLink => {
-        channelLink.addEventListener('click', handleLinkClick);
-        channelLink.addEventListener('contextmenu', preventContextMenu);
     });
 
     function showToast() {
@@ -186,7 +180,7 @@ function moveCursor(x, y) {
     cursor.style.top = `${y}px`;
 
     const target = document.elementFromPoint(x, y);
-    if (target && (target.tagName === 'BUTTON' || target.tagName === 'A')) {
+    if (target && (target.classList.contains('url-link') || target.classList.contains('button-link') || target.classList.contains('channel-link'))) {
         setCursorState('holding');
     } else {
         setCursorState('');
