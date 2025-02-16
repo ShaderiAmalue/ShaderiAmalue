@@ -47,31 +47,36 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('downloads').classList.add('active');
 });
 
-// Encryption and Decryption Functions
+// Hybrid Encryption and Decryption Functions
 async function encrypt() {
     const plaintext = document.getElementById('plaintext').value;
     const password = document.getElementById('encryptPassword').value;
-    const ciphertext = await AES256Encryption.encrypt(plaintext, password);
-    document.getElementById('result').innerText = `Encrypted Text: ${ciphertext}`;
+    const contentType = document.getElementById('contentType').value;
+    
+    const ciphertext = await AdvancedEncryption.encrypt(plaintext, password, contentType);
+    document.getElementById('result').innerText = `Encrypted ${contentType}: ${ciphertext}`;
 }
 
 async function decrypt() {
     const ciphertext = document.getElementById('ciphertext').value;
     const password = document.getElementById('decryptPassword').value;
-    const plaintext = await AES256Encryption.decrypt(ciphertext, password);
-    document.getElementById('result').innerText = `Decrypted Text: ${plaintext}`;
+    const contentType = document.getElementById('contentType').value;
+
+    const plaintext = await AdvancedEncryption.decrypt(ciphertext, password, contentType);
+    document.getElementById('result').innerText = `Decrypted ${contentType}: ${plaintext}`;
 }
 
-// AES-256 Encryption Logic (Transpile to JavaScript)
-const AES256Encryption = {
-    async encrypt(plaintext, password) {
+// Advanced Encryption Logic (Transpile to JavaScript)
+const AdvancedEncryption = {
+    async encrypt(plaintext, password, contentType) {
         const encoder = new TextEncoder();
         const salt = crypto.getRandomValues(new Uint8Array(16));
         const iv = crypto.getRandomValues(new Uint8Array(12));
         const key = await this.deriveKey(password, salt);
         const alg = { name: 'AES-GCM', iv: iv };
 
-        const encryptedContent = await crypto.subtle.encrypt(alg, key, encoder.encode(plaintext));
+        const uniqueString = this.generateUniqueString(contentType);
+        const encryptedContent = await crypto.subtle.encrypt(alg, key, encoder.encode(uniqueString + plaintext));
 
         const encryptedBytes = new Uint8Array(encryptedContent);
         const ciphertext = new Uint8Array(iv.length + salt.length + encryptedBytes.length);
@@ -82,7 +87,7 @@ const AES256Encryption = {
         return btoa(String.fromCharCode.apply(null, ciphertext));
     },
 
-    async decrypt(ciphertext, password) {
+    async decrypt(ciphertext, password, contentType) {
         const data = new Uint8Array(atob(ciphertext).split("").map(c => c.charCodeAt(0)));
         const iv = data.slice(0, 12);
         const salt = data.slice(12, 28);
@@ -92,8 +97,10 @@ const AES256Encryption = {
 
         const decryptedContent = await crypto.subtle.decrypt(alg, key, encryptedBytes);
         const decoder = new TextDecoder();
+        const decryptedText = decoder.decode(decryptedContent);
 
-        return decoder.decode(decryptedContent);
+        const uniqueString = this.generateUniqueString(contentType);
+        return decryptedText.replace(uniqueString, '');
     },
 
     async deriveKey(password, salt) {
@@ -117,5 +124,16 @@ const AES256Encryption = {
             false,
             ['encrypt', 'decrypt']
         );
+    },
+
+    generateUniqueString(contentType) {
+        switch (contentType) {
+            case 'Lua':
+                return 'Lua_Encryption_Key_';
+            case 'Python':
+                return 'Python_Encryption_Key_';
+            default:
+                return 'Text_Encryption_Key_';
+        }
     }
 };
