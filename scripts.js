@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const links = document.querySelectorAll('.url-link, .button-link, .channel-link, nav a[data-target]');
     const contents = document.querySelectorAll('.content');
-    const toast = document.getElementById('toast');
     const cursor = document.getElementById('cursor');
     let cursorTimeout;
 
@@ -14,24 +13,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     content.classList.remove('active');
                 });
                 document.getElementById(targetId).classList.add('active');
-            } else {
-                showToast();
-                setTimeout(() => {
-                    window.open(this.href, '_blank');
-                }, 1000);
+            } else if (this.href) {
+                window.open(this.href, '_blank');
             }
         });
         link.addEventListener('contextmenu', function(event) {
             event.preventDefault();
         });
     });
-
-    function showToast() {
-        toast.className = 'toast show';
-        setTimeout(function() {
-            toast.className = toast.className.replace('show', '');
-        }, 3000);
-    }
 
     document.getElementById('downloads').classList.add('active');
 
@@ -74,17 +63,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function moveCursor(x, y) {
-        cursor.style.transition = 'transform 0.1s ease-out'; // Smoother transition
+        cursor.style.transition = 'transform 0.1s ease-out';
         cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`;
 
         const target = document.elementFromPoint(x, y);
         if (target && (target.classList.contains('url-link') || target.classList.contains('button-link') || target.classList.contains('channel-link') || target.tagName === 'BUTTON' || target.tagName === 'A')) {
             target.classList.add('hovered');
             setCursorState('holding');
-            cursor.style.opacity = 0; // Make cursor invisible when holding button
+            cursor.style.opacity = 0;
         } else {
             setCursorState('');
-            cursor.style.opacity = 1; // Ensure cursor is visible if not holding button
+            cursor.style.opacity = 1;
             links.forEach(link => link.classList.remove('hovered'));
         }
     }
@@ -109,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
     resetCursorTimeout();
 });
 
-// Advanced AES Encode and Decode Functions
 async function encrypt() {
     const plaintext = document.getElementById('plaintext').value;
     const password = document.getElementById('encryptPassword').value;
@@ -134,3 +122,84 @@ function displayResult(label, text) {
 
     resultLabel.textContent = label;
     resultText.textContent = text;
+
+    resultBox.style.height = 'auto';
+    const height = resultBox.scrollHeight + 'px';
+    resultBox.style.height = height;
+
+    resultContainer.classList.remove('hidden');
+}
+
+function downloadFile(filename, content) {
+    const element = document.createElement('a');
+    const file = new Blob([content], { type: 'text/plain' });
+    element.href = URL.createObjectURL(file);
+    element.download = filename;
+    document.body.appendChild(element);
+    element.click();
+}
+
+const AdvancedAES = {
+    async encode(plaintext, password) {
+        const encoder = new TextEncoder();
+        const salt = crypto.getRandomValues(new Uint8Array(16));
+        const iv = crypto.getRandomValues(new Uint8Array(12));
+        const key = await this.deriveKey(password, salt);
+        const alg = { name: 'AES-GCM', iv: iv };
+
+        const encryptedContent = await crypto.subtle.encrypt(alg, key, encoder.encode(plaintext));
+
+        const encryptedBytes = new Uint8Array(encryptedContent);
+        const ciphertext = new Uint8Array(iv.length + salt.length + encryptedBytes.length);
+        ciphertext.set(iv, 0);
+        ciphertext.set(salt, iv.length);
+        ciphertext.set(encryptedBytes, iv.length + salt.length);
+
+        return this.customEncode(ciphertext);
+    },
+
+    async decode(ciphertext, password) {
+        const data = this.customDecode(ciphertext);
+        const iv = data.slice(0, 12);
+        const salt = data.slice(12, 28);
+        const encryptedBytes = data.slice(28);
+        const key = await this.deriveKey(password, salt);
+        const alg = { name: 'AES-GCM', iv: iv };
+
+        const decryptedContent = await crypto.subtle.decrypt(alg, key, encryptedBytes);
+        const decoder = new TextDecoder();
+
+        return decoder.decode(decryptedContent);
+    },
+
+    async deriveKey(password, salt) {
+        const encoder = new TextEncoder();
+        const keyMaterial = await crypto.subtle.importKey(
+            'raw',
+            encoder.encode(password),
+            'PBKDF2',
+            false,
+            ['deriveKey']
+        );
+        return crypto.subtle.deriveKey(
+            {
+                name: 'PBKDF2',
+                salt: salt,
+                iterations: 200000,
+                hash: 'SHA-256'
+            },
+            keyMaterial,
+            { name: 'AES-GCM', length: 256 },
+            false,
+            ['encrypt', 'decrypt']
+        );
+    },
+
+    customEncode(data) {
+        return btoa(String.fromCharCode.apply(null, data));
+    },
+
+    customDecode(data) {
+        return new Uint8Array(atob(data).split('').map(c => c.charCodeAt(0)));
+    }
+};
