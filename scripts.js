@@ -47,23 +47,22 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('downloads').classList.add('active');
 });
 
+// Advanced Hybrid Encryption and Decryption Functions
 async function encrypt() {
     const plaintext = document.getElementById('plaintext').value;
     const password = document.getElementById('encryptPassword').value;
-    const contentType = document.getElementById('contentType').value;
-    
+
     const ciphertext = await AdvancedEncryption.encrypt(plaintext, password);
-    document.getElementById('result').innerText = `Encrypted ${contentType}: ${ciphertext}`;
+    document.getElementById('result').innerText = `Encrypted Text: ${ciphertext}`;
     downloadFile('encrypted.txt', ciphertext);
 }
 
 async function decrypt() {
     const ciphertext = document.getElementById('ciphertext').value;
     const password = document.getElementById('decryptPassword').value;
-    const contentType = document.getElementById('contentType').value;
 
     const plaintext = await AdvancedEncryption.decrypt(ciphertext, password);
-    document.getElementById('result').innerText = `Decrypted ${contentType}: ${plaintext}`;
+    document.getElementById('result').innerText = `Decrypted Text: ${plaintext}`;
     downloadFile('decrypted.txt', plaintext);
 }
 
