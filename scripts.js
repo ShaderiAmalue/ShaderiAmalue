@@ -7,18 +7,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     links.forEach(link => {
         link.addEventListener('click', function(event) {
-            event.preventDefault();
-            const targetId = this.dataset.target;
-            if (targetId) {
-                contents.forEach(content => {
-                    content.classList.remove('active');
-                });
-                document.getElementById(targetId).classList.add('active');
+            if (!this.href) {
+                event.preventDefault();
+                const targetId = this.dataset.target;
+                if (targetId) {
+                    contents.forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.getElementById(targetId).classList.add('active');
+                }
+            } else {
+                showToast();
+                setTimeout(() => {
+                    window.open(this.href, '_blank');
+                }, 1000);
             }
-            showToast();
-            setTimeout(() => {
-                window.open(this.href, '_blank');
-            }, 1000);
         });
         link.addEventListener('contextmenu', function(event) {
             event.preventDefault();
@@ -34,15 +37,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('downloads').classList.add('active');
 
+    let lastX = 0, lastY = 0;
     document.addEventListener('mousemove', function(e) {
-        moveCursor(e.pageX, e.pageY);
+        if (Math.abs(lastX - e.pageX) > 1 || Math.abs(lastY - e.pageY) > 1) {
+            moveCursor(e.pageX, e.pageY);
+            lastX = e.pageX;
+            lastY = e.pageY;
+        }
         showCursor();
         resetCursorTimeout();
     });
 
     document.addEventListener('touchmove', function(e) {
         const touch = e.touches[0];
-        moveCursor(touch.pageX, touch.pageY);
+        if (Math.abs(lastX - touch.pageX) > 1 || Math.abs(lastY - touch.pageY) > 1) {
+            moveCursor(touch.pageX, touch.pageY);
+            lastX = touch.pageX;
+            lastY = touch.pageY;
+        }
         showCursor();
         resetCursorTimeout();
     });
@@ -64,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function moveCursor(x, y) {
-        cursor.style.transition = 'transform 0.15s ease-out'; // Smooth transition
+        cursor.style.transition = 'transform 0.1s ease-out'; // Smoother transition
         cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`;
 
         const target = document.elementFromPoint(x, y);
@@ -99,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
     resetCursorTimeout();
 });
 
-// AES ENCODE -- DECODE BORDOM IDEA
+// Advanced AES Encode and Decode Functions
 async function encrypt() {
     const plaintext = document.getElementById('plaintext').value;
     const password = document.getElementById('encryptPassword').value;
