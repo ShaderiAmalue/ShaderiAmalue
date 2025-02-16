@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('downloads').classList.add('active');
 });
 
-// endregion
+// Advanced AES Encode and Decode Functions
 async function encrypt() {
     const plaintext = document.getElementById('plaintext').value;
     const password = document.getElementById('encryptPassword').value;
@@ -153,3 +153,20 @@ const AdvancedAES = {
         return new Uint8Array(atob(data).split('').map(c => c.charCodeAt(0)));
     }
 };
+
+// Custom Cursor
+document.addEventListener('mousemove', function(e) {
+    const cursor = document.getElementById('cursor');
+    cursor.style.left = `${e.pageX}px`;
+    cursor.style.top = `${e.pageY}px`;
+});
+
+document.addEventListener('mousedown', function() {
+    const cursor = document.getElementById('cursor');
+    cursor.classList.add('big');
+});
+
+document.addEventListener('mouseup', function() {
+    const cursor = document.getElementById('cursor');
+    cursor.classList.remove('big');
+});
