@@ -155,19 +155,45 @@ const AdvancedAES = {
 };
 
 // Custom Cursor
+document.addEventListener('mousemove', function(e) {
+    moveCursor(e.pageX, e.pageY);
+});
+
 document.addEventListener('touchmove', function(e) {
-    const cursor = document.getElementById('cursor');
     const touch = e.touches[0];
-    cursor.style.left = `${touch.pageX}px`;
-    cursor.style.top = `${touch.pageY}px`;
+    moveCursor(touch.pageX, touch.pageY);
+});
+
+document.addEventListener('mousedown', function() {
+    setCursorState('big');
+});
+
+document.addEventListener('mouseup', function() {
+    setCursorState('');
 });
 
 document.addEventListener('touchstart', function() {
-    const cursor = document.getElementById('cursor');
-    cursor.classList.add('big');
+    setCursorState('big');
 });
 
 document.addEventListener('touchend', function() {
-    const cursor = document.getElementById('cursor');
-    cursor.classList.remove('big');
+    setCursorState('');
 });
+
+function moveCursor(x, y) {
+    const cursor = document.getElementById('cursor');
+    cursor.style.left = `${x}px`;
+    cursor.style.top = `${y}px`;
+
+    const target = document.elementFromPoint(x, y);
+    if (target && (target.tagName === 'BUTTON' || target.tagName === 'A')) {
+        setCursorState('holding');
+    } else {
+        setCursorState('');
+    }
+}
+
+function setCursorState(state) {
+    const cursor = document.getElementById('cursor');
+    cursor.className = 'cursor ' + state;
+}
