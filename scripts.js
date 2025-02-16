@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const cursor = document.getElementById('cursor');
     const eye = document.getElementById('eye');
     const eyeball = document.getElementById('eyeball');
+    const passwordField = document.getElementById('encryptPassword');
     let cursorTimeout;
 
     links.forEach(link => {
@@ -110,6 +111,26 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('touchmove', function(e) {
         const touch = e.touches[0];
         moveEyeball(touch);
+    });
+
+    eye.addEventListener('click', function() {
+        if (eye.classList.contains('closed')) {
+            eye.classList.remove('closed');
+            passwordField.type = 'text';
+            document.addEventListener('mousemove', moveEyeball);
+            document.addEventListener('touchmove', function(e) {
+                const touch = e.touches[0];
+                moveEyeball(touch);
+            });
+        } else {
+            eye.classList.add('closed');
+            passwordField.type = 'password';
+            document.removeEventListener('mousemove', moveEyeball);
+            document.removeEventListener('touchmove', function(e) {
+                const touch = e.touches[0];
+                moveEyeball(touch);
+            });
+        }
     });
 });
 
