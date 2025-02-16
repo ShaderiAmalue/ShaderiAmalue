@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const links = document.querySelectorAll('nav a');
     const contents = document.querySelectorAll('.content');
+    const tooltips = document.querySelectorAll('.tooltip');
 
     links.forEach(link => {
         link.addEventListener('click', function(event) {
@@ -15,24 +16,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('downloads').classList.add('active');
 
-    // Add event listeners for tooltips
-    const tooltips = document.querySelectorAll('.tooltip');
-
     tooltips.forEach(tooltip => {
-        tooltip.addEventListener('mousedown', function() {
+        tooltip.addEventListener('click', function(event) {
+            event.stopPropagation();
             const tooltipText = this.querySelector('.tooltiptext');
             tooltipText.style.visibility = 'visible';
             tooltipText.style.opacity = '1';
         });
+    });
 
-        tooltip.addEventListener('mouseup', function() {
-            const tooltipText = this.querySelector('.tooltiptext');
-            tooltipText.style.visibility = 'hidden';
-            tooltipText.style.opacity = '0';
-        });
-
-        tooltip.addEventListener('mouseleave', function() {
-            const tooltipText = this.querySelector('.tooltiptext');
+    document.addEventListener('click', function() {
+        tooltips.forEach(tooltip => {
+            const tooltipText = tooltip.querySelector('.tooltiptext');
             tooltipText.style.visibility = 'hidden';
             tooltipText.style.opacity = '0';
         });
@@ -79,7 +74,6 @@ function sendApiRequest() {
     })
     .catch(error => {
         loadingIndicator.classList.add('hidden');
-        console.error('Error:', error);
         apiResponse.textContent = 'Error: ' + error;
         statusCode.textContent = 'N/A';
         responseHeaders.textContent = '';
