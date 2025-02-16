@@ -90,7 +90,7 @@ const AdvancedEncryption = {
         let formattedContent = this.customObfuscate(uniqueString + plaintext);
 
         if (contentType === 'Lua') {
-            formattedContent = `local enc = "${formattedContent}"; function dec() return (function(...)${formattedContent})() end; dec();`;
+            formattedContent = this.createLuaScript(formattedContent, password);
         }
 
         const encryptedContent = await crypto.subtle.encrypt(alg, key, encoder.encode(formattedContent));
@@ -120,7 +120,7 @@ const AdvancedEncryption = {
         let formattedContent = decryptedText.replace(uniqueString, '');
 
         if (contentType === 'Lua') {
-            formattedContent = formattedContent.match(/function\(.*\)return \(\(.*\)\)\(\)\) end; dec\(\);/)[1];
+            formattedContent = this.extractLuaScript(formattedContent);
         }
 
         return formattedContent;
@@ -175,5 +175,18 @@ const AdvancedEncryption = {
             deobfuscated += String.fromCharCode(data.charCodeAt(i) ^ (i % 256));
         }
         return deobfuscated;
+    },
+
+    createLuaScript(data, password) {
+        return `local enc = "${data}"; local key = "${password}"; function dec(enc, key) local decode = function(s) local b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" s = string.gsub(s, '[^'..b64..'=]', '') return (s:gsub('.', function(x) if x == '=' then return '' end local r,f='',(b64:find(x)-1) for i=6,1,-1 do r=r..(f%2^i-f%2^(i-1)>0 and'1' or'0') end return r end):gsub('%d%d%d?%d?%d?%d?%d?%d?', function(x) if #x ~= 8 then return '' end local c=0 for i=1,8 do c=c+(x:sub(i,i)=='1' and 2^(8-i) or 0) end return string.char(c) end)) end; local data = decode(enc); local result = ''; for i = 1, #data do local c = string.byte(data, i); local k = string.byte(key, (i - 1) % #key + 1); result = result .. string.char(bit.bxor(c, k)); end; return result; end; return dec(enc, key);`;
+    },
+
+    extractLuaScript(data) {
+        const regex = /local enc = "(.*)"; local key = "(.*)"; function dec\(.*\) return (.*) end; return dec\(.*\);/;
+        const match = data.match(regex);
+        if (match) {
+            return match[1];
+        }
+        return data;
     }
 };
