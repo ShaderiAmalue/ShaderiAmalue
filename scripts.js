@@ -2,9 +2,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const links = document.querySelectorAll('.url-link, .button-link, .channel-link, nav a[data-target]');
     const contents = document.querySelectorAll('.content');
     const cursor = document.getElementById('cursor');
-    const eye = document.getElementById('eye');
-    const eyeball = document.getElementById('eyeball');
-    const passwordField = document.getElementById('encryptPassword');
+    const eyes = [document.getElementById('eye1'), document.getElementById('eye2')];
+    const eyeballs = [document.getElementById('eyeball1'), document.getElementById('eyeball2')];
+    const passwordFields = [document.getElementById('encryptPassword'), document.getElementById('decryptPassword')];
     let cursorTimeout;
 
     links.forEach(link => {
@@ -97,14 +97,16 @@ document.addEventListener('DOMContentLoaded', function() {
     resetCursorTimeout();
 
     function moveEyeball(event) {
-        const rect = eye.getBoundingClientRect();
-        const eyeCenterX = rect.left + rect.width / 2;
-        const eyeCenterY = rect.top + rect.height / 2;
-        const angle = Math.atan2(event.clientY - eyeCenterY, event.clientX - eyeCenterX);
-        const distance = Math.min(8, Math.hypot(event.clientX - eyeCenterX, event.clientY - eyeCenterY));
-        const x = Math.cos(angle) * distance;
-        const y = Math.sin(angle) * distance;
-        eyeball.style.transform = `translate(${x}px, ${y}px)`;
+        eyes.forEach((eye, index) => {
+            const rect = eye.getBoundingClientRect();
+            const eyeCenterX = rect.left + rect.width / 2;
+            const eyeCenterY = rect.top + rect.height / 2;
+            const angle = Math.atan2(event.clientY - eyeCenterY, event.clientX - eyeCenterX);
+            const distance = Math.min(8, Math.hypot(event.clientX - eyeCenterX, event.clientY - eyeCenterY));
+            const x = Math.cos(angle) * distance;
+            const y = Math.sin(angle) * distance;
+            eyeballs[index].style.transform = `translate(${x}px, ${y}px)`;
+        });
     }
 
     document.addEventListener('mousemove', moveEyeball);
@@ -113,24 +115,19 @@ document.addEventListener('DOMContentLoaded', function() {
         moveEyeball(touch);
     });
 
-    eye.addEventListener('click', function() {
-        if (eye.classList.contains('closed')) {
-            eye.classList.remove('closed');
-            passwordField.type = 'text';
-            document.addEventListener('mousemove', moveEyeball);
-            document.addEventListener('touchmove', function(e) {
-                const touch = e.touches[0];
-                moveEyeball(touch);
-            });
-        } else {
-            eye.classList.add('closed');
-            passwordField.type = 'password';
-            document.removeEventListener('mousemove', moveEyeball);
-            document.removeEventListener('touchmove', function(e) {
-                const touch = e.touches[0];
-                moveEyeball(touch);
-            });
-        }
+    eyes.forEach((eye, index) => {
+        eye.classList.add('blinking');
+        eye.addEventListener('click', function() {
+            if (eye.classList.contains('closed')) {
+                eye.classList.remove('closed');
+                passwordFields[index].type = 'text';
+                eye.classList.add('blinking');
+            } else {
+                eye.classList.add('closed');
+                passwordFields[index].type = 'password';
+                eye.classList.remove('blinking');
+            }
+        });
     });
 });
 
