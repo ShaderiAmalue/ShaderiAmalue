@@ -11,7 +11,7 @@
         <a href="#" data-target="downloads">Downloads</a>
         <a href="#" data-target="scripts">Game Guardian Scripts</a>
         <a href="#" data-target="aes-encode">AES Encode</a>
-        <a href="#" data-target="packet-sender">Packet Sender</a>
+        <a href="#" data-target="api-sender">API Request Sender</a>
     </nav>
     <div id="downloads" class="content active">
         <h2>Downloads</h2>
@@ -66,23 +66,30 @@
             </div>
         </div>
     </div>
-    <div id="packet-sender" class="content">
-        <h2>Packet Sender</h2>
-        <button id="sendPacketButton">Send Packet</button>
+    <div id="api-sender" class="content">
+        <h2>API Request Sender</h2>
+        <form id="apiForm" class="api-form">
+            <label for="host">Host:</label>
+            <input type="text" id="host" name="host" placeholder="https://example.com" required>
+            <label for="endpoint">Endpoint:</label>
+            <input type="text" id="endpoint" name="endpoint" placeholder="/api/endpoint" required>
+            <label for="method">Method:</label>
+            <select id="method" name="method" required>
+                <option value="GET">GET</option>
+                <option value="POST">POST</option>
+                <option value="PUT">PUT</option>
+                <option value="DELETE">DELETE</option>
+            </select>
+            <label for="payload">Payload:</label>
+            <textarea id="payload" name="payload" placeholder='{"key":"value"}' rows="4" cols="50"></textarea>
+            <button type="button" onclick="sendApiRequest()">Send Request</button>
+        </form>
+        <div id="apiResult" class="api-result hidden">
+            <h3>Response</h3>
+            <pre id="apiResponse"></pre>
+        </div>
     </div>
     <div id="cursor" class="cursor"></div>
     <script src="scripts.js"></script>
-    <script>
-        document.getElementById('sendPacketButton').addEventListener('click', function() {
-            fetch('https://116.198.14.137/', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: 'Upset predator donation' })
-            })
-            .then(response => response.json())
-            .then(data => console.log('Success:', data))
-            .catch(error => console.error('Error:', error));
-        });
-    </script>
 </body>
 </html>
