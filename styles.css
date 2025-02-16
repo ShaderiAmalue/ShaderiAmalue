@@ -301,6 +301,13 @@ h2 {
     overflow-x: auto;
 }
 
+#loading {
+    text-align: center;
+    color: #ecf0f1;
+    font-size: 1.2em;
+    margin-top: 1em;
+}
+
 @media (max-width: 600px) {
     nav {
         flex-direction: column;
