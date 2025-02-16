@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const links = document.querySelectorAll('.url-link, .button-link, .channel-link, nav a[data-target]');
     const contents = document.querySelectorAll('.content');
     const cursor = document.getElementById('cursor');
+    const eye = document.getElementById('eye');
+    const eyeball = document.getElementById('eyeball');
     let cursorTimeout;
 
     links.forEach(link => {
@@ -26,22 +28,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let lastX = 0, lastY = 0;
     document.addEventListener('mousemove', function(e) {
-        if (Math.abs(lastX - e.pageX) > 1 || Math.abs(lastY - e.pageY) > 1) {
-            moveCursor(e.pageX, e.pageY);
-            lastX = e.pageX;
-            lastY = e.pageY;
-        }
+        moveCursor(e.pageX, e.pageY);
+        lastX = e.pageX;
+        lastY = e.pageY;
         showCursor();
         resetCursorTimeout();
     });
 
     document.addEventListener('touchmove', function(e) {
         const touch = e.touches[0];
-        if (Math.abs(lastX - touch.pageX) > 1 || Math.abs(lastY - touch.pageY) > 1) {
-            moveCursor(touch.pageX, touch.pageY);
-            lastX = touch.pageX;
-            lastY = touch.pageY;
-        }
+        moveCursor(touch.pageX, touch.pageY);
+        lastX = touch.pageX;
+        lastY = touch.pageY;
         showCursor();
         resetCursorTimeout();
     });
@@ -63,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function moveCursor(x, y) {
-        cursor.style.transition = 'transform 0.1s ease-out';
+        cursor.style.transition = 'transform 0.05s ease-out';
         cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`;
 
         const target = document.elementFromPoint(x, y);
@@ -96,6 +94,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     resetCursorTimeout();
+
+    function moveEyeball(event) {
+        const rect = eye.getBoundingClientRect();
+        const eyeCenterX = rect.left + rect.width / 2;
+        const eyeCenterY = rect.top + rect.height / 2;
+        const angle = Math.atan2(event.clientY - eyeCenterY, event.clientX - eyeCenterX);
+        const distance = Math.min(8, Math.hypot(event.clientX - eyeCenterX, event.clientY - eyeCenterY));
+        const x = Math.cos(angle) * distance;
+        const y = Math.sin(angle) * distance;
+        eyeball.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    document.addEventListener('mousemove', moveEyeball);
+    document.addEventListener('touchmove', function(e) {
+        const touch = e.touches[0];
+        moveEyeball(touch);
+    });
 });
 
 async function encrypt() {
