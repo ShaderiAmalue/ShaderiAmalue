@@ -20,8 +20,9 @@ nav {
     justify-content: space-around;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     z-index: 2;
-    border-radius: 5px;
+    border-radius: 10px;
     margin: 1em;
+    transition: all 0.3s ease;
 }
 
 nav a {
@@ -33,10 +34,12 @@ nav a {
     border-radius: 5px;
     border: 1px solid #3498db;
     background-color: rgba(52, 152, 219, 0.5);
+    transition: all 0.3s ease;
 }
 
 nav a:hover {
     background-color: rgba(52, 152, 219, 0.8);
+    transform: scale(1.05);
 }
 
 .content {
@@ -67,13 +70,14 @@ h2 {
     text-decoration: none;
     display: block;
     margin-bottom: 1em;
-    padding: 1em;
+    padding: 1em 1.5em;
     border: 1px solid #3498db;
-    border-radius: 5px;
-    transition: box-shadow 0.3s, border-color 0.3s, background-color 0.3s;
+    border-radius: 10px;
+    transition: all 0.3s ease;
     box-shadow: 2px 2px 5px rgba(52, 152, 219, 0.5);
     background-color: #34495e;
     text-align: center;
+    font-weight: bold;
 }
 
 .downloads a:hover, .scripts a:hover, .button-link:hover {
@@ -81,7 +85,7 @@ h2 {
     border-color: #5dade2;
     box-shadow: 4px 4px 15px rgba(52, 152, 219, 0.8);
     background-color: #2980b9;
-    transition: box-shadow 0.3s ease-out;
+    transform: scale(1.05);
 }
 
 .profiles {
@@ -100,7 +104,7 @@ h2 {
     border: 2px solid #3498db;
     background: linear-gradient(120deg, rgba(52, 73, 94, 0.8), rgba(44, 62, 80, 0.8));
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: all 0.3s ease;
 }
 
 .profile:hover {
@@ -145,7 +149,7 @@ h2 {
     border-radius: 5px;
     margin-top: 0.5em;
     background-color: rgba(41, 128, 185, 0.8);
-    transition: color 0.3s, border-color 0.3s, background-color 0.3s;
+    transition: all 0.3s ease;
 }
 
 .channel-link:hover {
@@ -153,6 +157,7 @@ h2 {
     border-color: #ecf0f1;
     background-color: rgba(52, 152, 219, 0.8);
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    transform: scale(1.05);
 }
 
 .button-link {
@@ -160,13 +165,14 @@ h2 {
     background-color: #2980b9;
     text-decoration: none;
     padding: 1em;
-    border-radius: 5px;
+    border-radius: 10px;
     display: inline-block;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
 }
 
 .button-link:hover {
     background-color: #3498db;
+    transform: scale(1.05);
 }
 
 .toast {
@@ -185,32 +191,22 @@ h2 {
     bottom: 30px;
     font-size: 17px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
 }
 
 .toast.show {
     visibility: visible;
-    -webkit-animation: fadeInOut 0.5s, fadeOut 0.5s 2.5s;
     animation: fadeInOut 0.5s, fadeOut 0.5s 2.5s;
 }
 
-@-webkit-keyframes fadeInOut {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 30px; opacity: 1;}
-}
-
 @keyframes fadeInOut {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 30px; opacity: 1;}
-}
-
-@-webkit-keyframes fadeOut {
-    from {opacity: 1;}
-    to {opacity: 0;}
+    from { bottom: 0; opacity: 0; }
+    to { bottom: 30px; opacity: 1; }
 }
 
 @keyframes fadeOut {
-    from {opacity: 1;}
-    to {opacity: 0;}
+    from { opacity: 1; }
+    to { opacity: 0; }
 }
 
 @media (max-width: 600px) {
