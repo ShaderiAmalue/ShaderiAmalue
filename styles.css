@@ -139,9 +139,9 @@ h2 {
     border: 1px solid #3498db;
     padding: 0.5em 1em;
     border-radius: 5px;
-    background-color: rgba(41, 128, 185, 0.8);
+    background-color: rgba(52, 73, 94, 0.8);
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .channel-link {
@@ -151,7 +151,7 @@ h2 {
     border: 1px solid #3498db;
     border-radius: 5px;
     margin-top: 0.5em;
-    background-color: rgba(41, 128, 185, 0.8);
+    background-color: rgba(52, 73, 94, 0.8);
     transition: all 0.3s ease;
 }
 
