@@ -88,11 +88,11 @@ const AdvancedEncryption = {
 
         const uniqueString = this.generateUniqueString(contentType);
         let formattedContent = this.customObfuscate(uniqueString + plaintext);
-        
+
         if (contentType === 'Lua') {
             formattedContent = `local enc = "${formattedContent}"; function dec() return (function(...)${formattedContent})() end; dec();`;
         }
-        
+
         const encryptedContent = await crypto.subtle.encrypt(alg, key, encoder.encode(formattedContent));
 
         const encryptedBytes = new Uint8Array(encryptedContent);
@@ -118,7 +118,7 @@ const AdvancedEncryption = {
 
         const uniqueString = this.generateUniqueString(contentType);
         let formattedContent = decryptedText.replace(uniqueString, '');
-        
+
         if (contentType === 'Lua') {
             formattedContent = formattedContent.match(/function\(.*\)return \(\(.*\)\)\(\)\) end; dec\(\);/)[1];
         }
