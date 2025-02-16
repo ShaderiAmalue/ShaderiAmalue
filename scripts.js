@@ -96,6 +96,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     resetCursorTimeout();
+
+    // Check cursor position every 100ms and set cursor state accordingly
+    setInterval(() => {
+        const rect = cursor.getBoundingClientRect();
+        moveCursor(rect.left + rect.width / 2, rect.top + rect.height / 2);
+    }, 100);
 });
 
 async function encrypt() {
