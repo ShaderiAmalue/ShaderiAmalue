@@ -248,8 +248,8 @@ h2 {
 }
 
 .eye {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     background-color: #fff;
     border: 2px solid #3498db;
@@ -259,6 +259,7 @@ h2 {
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
 }
 
 .eyeball {
@@ -268,6 +269,10 @@ h2 {
     background-color: #2980b9;
     position: relative;
     transition: transform 0.1s ease-out;
+}
+
+.eye.closed .eyeball {
+    display: none;
 }
 
 @media (max-width: 600px) {
@@ -289,7 +294,7 @@ h2 {
     pointer-events: none;
     mix-blend-mode: difference;
     transform: translate(-50%, -50%);
-    transition: transform 0.1s ease-out, opacity 0.3s;
+    transition: transform 0.05s ease-out, opacity 0.3s;
     z-index: 9999;
     opacity: 0;
 }
