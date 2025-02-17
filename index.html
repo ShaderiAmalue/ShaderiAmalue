@@ -12,6 +12,7 @@
         <a href="#" data-target="scripts">Game Guardian Scripts</a>
         <a href="#" data-target="aes-encode">AES Encode</a>
         <a href="#" data-target="api-sender">API Request Sender</a>
+        <a href="#" data-target="url-encode-decode">URL Decode/Encode</a>
     </nav>
     <div id="downloads" class="content active">
         <h2>Downloads</h2>
@@ -20,7 +21,7 @@
                 <h3 class="tooltip">Blockman Mod
                     <span class="tooltiptext">Modified SQL Trust part to allow API access in HTTP Canary(For Blockman).</span>
                 </h3>
-                <a href="https://www.mediafire.com/file/5xdnhx8kn5zwq2a/Blockman_GO_2.104.1.apk/file" target="_blank" class="url-link button-link">Download</a>
+                <a href="https://1drv.ms/u/s!Aggzh8g6tvvple8M8xVeFAa-ME0NQQ?e=Op7PdP" target="_blank" class="url-link button-link">Download</a>
             </div>
             <div class="download-item">
                 <h3 class="tooltip">HTTP Capture, Sniffer (Free Premium)
@@ -46,7 +47,7 @@
                 </div>
             </div>
             <div class="profile">
-                <a href="https://discord.gg/3xUY7DQwHa" target="_blank" class="channel-link button-link">Discord Server</a> <!-- Properly positioned Discord link -->
+                <a href="https://discord.gg/3xUY7DQwHa" target="_blank" class="channel-link button-link">Discord Server</a>
             </div>
         </div>
     </div>
@@ -57,25 +58,42 @@
         </div>
     </div>
     <div id="aes-encode" class="content">
-        <h2>AES Encode</h2>
-        <form id="encryptForm" class="encryption-form">
-            <label for="plaintext">Text to Encrypt:</label>
-            <textarea id="plaintext" name="plaintext" rows="4" cols="50"></textarea>
-            <label for="password">Password:</label>
-            <input type="password" id="encryptPassword" name="password">
-            <button type="button" onclick="encrypt()">Encrypt</button>
+        <h2>AES Encode/Decode</h2>
+        <form id="aesForm" class="encryption-form">
+            <label for="aes-action">Action:</label>
+            <select id="aes-action" name="aes-action">
+                <option value="encrypt">Encrypt</option>
+                <option value="decrypt">Decrypt</option>
+            </select>
+            <label for="aes-text">Text:</label>
+            <textarea id="aes-text" name="aes-text" rows="4" cols="50"></textarea>
+            <label for="aes-password">Password:</label>
+            <input type="password" id="aes-password" name="aes-password">
+            <button type="button" onclick="handleAES()">Submit</button>
         </form>
-        <form id="decryptForm" class="encryption-form">
-            <label for="ciphertext">Text to Decrypt:</label>
-            <textarea id="ciphertext" name="ciphertext" rows="4" cols="50"></textarea>
-            <label for="password">Password:</label>
-            <input type="password" id="decryptPassword" name="password">
-            <button type="button" onclick="decrypt()">Decrypt</button>
+        <div id="aes-result-container" class="hidden">
+            <label id="aes-result-label"></label>
+            <div id="aes-result-box" class="result-box">
+                <span id="aes-result-text"></span>
+            </div>
+        </div>
+    </div>
+    <div id="url-encode-decode" class="content">
+        <h2>URL Decode/Encode</h2>
+        <form id="urlForm" class="encryption-form">
+            <label for="url-action">Action:</label>
+            <select id="url-action" name="url-action">
+                <option value="encode">Encode</option>
+                <option value="decode">Decode</option>
+            </select>
+            <label for="url-text">URL Text:</label>
+            <textarea id="url-text" name="url-text" rows="4" cols="50"></textarea>
+            <button type="button" onclick="handleURL()">Submit</button>
         </form>
-        <div id="result-container" class="hidden">
-            <label id="result-label"></label>
-            <div id="result-box" class="result-box">
-                <span id="result-text"></span>
+        <div id="url-result-container" class="hidden">
+            <label id="url-result-label"></label>
+            <div id="url-result-box" class="result-box">
+                <span id="url-result-text"></span>
             </div>
         </div>
     </div>
