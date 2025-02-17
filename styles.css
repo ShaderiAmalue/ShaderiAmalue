@@ -99,7 +99,7 @@ h2 {
     text-align: center;
     display: inline-block;
     transition: background-color 0.3s, transform 0.3s;
-    margin-top: 0.5em; /* Adjust the position of the button */
+    margin-top: 0.5em;
 }
 
 .button-link:hover {
