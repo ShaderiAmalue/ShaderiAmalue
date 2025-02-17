@@ -246,6 +246,76 @@ h2 {
     transform: scale(1.05);
 }
 
+.custom-select-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.custom-select {
+    display: none; /* Hide the default select element */
+}
+
+.custom-select-trigger {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0.75em;
+    font-size: 16px;
+    color: #ecf0f1;
+    background: rgba(44, 62, 80, 0.8);
+    border: 1px solid #3498db;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.custom-select-trigger::after {
+    content: '\25BC';
+    position: absolute;
+    right: 1em;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s;
+}
+
+.custom-select-wrapper.open .custom-select-trigger::after {
+    transform: translateY(-50%) rotate(-180deg);
+}
+
+.custom-options {
+    position: absolute;
+    display: none;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: rgba(44, 62, 80, 0.8);
+    border: 1px solid #3498db;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.custom-select-wrapper.open .custom-options {
+    display: block;
+}
+
+.custom-option {
+    padding: 0.75em;
+    font-size: 16px;
+    color: #ecf0f1;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.custom-option:hover, .custom-option.selected {
+    background-color: rgba(52, 152, 219, 0.8);
+}
+
 .hidden {
     display: none;
 }
@@ -262,6 +332,24 @@ h2 {
 #result-text {
     white-space: pre-wrap;
     word-wrap: break-word;
+}
+
+#copy-button {
+    margin-top: 1em;
+    background-color: #2980b9;
+    color: #ecf0f1;
+    padding: 0.75em 1.5em;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-block;
+    transition: background-color 0.3s, transform 0.3s;
+    position: relative;
+    bottom: 0;
+}
+
+#copy-button:hover {
+    background-color: #3498db;
+    transform: scale(1.05);
 }
 
 .api-form {
@@ -328,24 +416,6 @@ h2 {
     border-radius: 5px;
     color: #ecf0f1;
     overflow-x: auto;
-}
-
-#copy-button {
-    margin-top: 1em;
-    background-color: #2980b9;
-    color: #ecf0f1;
-    padding: 0.75em 1.5em;
-    border-radius: 5px;
-    text-align: center;
-    display: inline-block;
-    transition: background-color 0.3s, transform 0.3s;
-    position: relative;
-    bottom: 0;
-}
-
-#copy-button:hover {
-    background-color: #3498db;
-    transform: scale(1.05);
 }
 
 #loading {
