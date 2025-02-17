@@ -42,20 +42,27 @@ function handleUrl() {
     const resultContainer = document.getElementById('url-result-container');
     const copyButton = document.getElementById('copy-button');
 
-    if (action === 'encode') {
-        const encodedText = encodeURIComponent(text);
-        resultLabel.textContent = 'Encoded URL:';
-        resultText.textContent = encodedText;
-    } else if (action === 'decode') {
-        const decodedText = decodeURIComponent(text.replace(/\+/g, ' '));
-        resultLabel.textContent = 'Decoded URL:';
-        resultText.textContent = decodedText;
-    }
+    try {
+        if (action === 'encode') {
+            const encodedText = encodeURIComponent(text);
+            resultLabel.textContent = 'Encoded URL:';
+            resultText.textContent = encodedText;
+        } else if (action === 'decode') {
+            const decodedText = decodeURIComponent(text.replace(/\+/g, ' '));
+            resultLabel.textContent = 'Decoded URL:';
+            resultText.textContent = decodedText;
+        }
 
-    resultContainer.classList.remove('hidden');
-    if (resultText.textContent) {
-        copyButton.classList.remove('hidden');
-    } else {
+        resultContainer.classList.remove('hidden');
+        if (resultText.textContent) {
+            copyButton.classList.remove('hidden');
+        } else {
+            copyButton.classList.add('hidden');
+        }
+    } catch (error) {
+        resultLabel.textContent = 'Error:';
+        resultText.textContent = 'Invalid input for encoding/decoding.';
+        resultContainer.classList.remove('hidden');
         copyButton.classList.add('hidden');
     }
 }
