@@ -34,28 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function handleAES() {
-    const action = document.getElementById('aes-action').value;
-    const text = document.getElementById('aes-text').value;
-    const password = document.getElementById('aes-password').value;
-    const resultLabel = document.getElementById('aes-result-label');
-    const resultText = document.getElementById('aes-result-text');
-    const resultContainer = document.getElementById('aes-result-container');
-
-    if (action === 'encrypt') {
-        const encryptedText = CryptoJS.AES.encrypt(text, password).toString();
-        resultLabel.textContent = 'Encrypted Text:';
-        resultText.textContent = encryptedText;
-    } else if (action === 'decrypt') {
-        const decryptedBytes = CryptoJS.AES.decrypt(text, password);
-        const decryptedText = decryptedBytes.toString(CryptoJS.enc.Utf8);
-        resultLabel.textContent = 'Decrypted Text:';
-        resultText.textContent = decryptedText;
-    }
-
-    resultContainer.classList.remove('hidden');
-}
-
 function handleUrl() {
     const action = document.getElementById('url-action').value;
     const text = document.getElementById('url-text').value;
@@ -75,10 +53,6 @@ function handleUrl() {
 
     resultContainer.classList.remove('hidden');
 }
-
-const script = document.createElement('script');
-script.src = 'https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js';
-document.head.appendChild(script);
 
 function sendApiRequest() {
     const host = document.getElementById('host').value;
