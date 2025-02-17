@@ -40,6 +40,7 @@ function handleUrl() {
     const resultLabel = document.getElementById('url-result-label');
     const resultText = document.getElementById('url-result-text');
     const resultContainer = document.getElementById('url-result-container');
+    const copyButton = document.getElementById('copy-button');
 
     if (action === 'encode') {
         const encodedText = encodeURIComponent(text);
@@ -52,6 +53,11 @@ function handleUrl() {
     }
 
     resultContainer.classList.remove('hidden');
+    if (resultText.textContent) {
+        copyButton.classList.remove('hidden');
+    } else {
+        copyButton.classList.add('hidden');
+    }
 }
 
 function copyResult() {
