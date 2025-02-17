@@ -59,6 +59,43 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('method').addEventListener('change', function() {
         localStorage.setItem('apiMethod', this.value);
     });
+
+    customSelects.forEach(wrapper => {
+        const select = wrapper.querySelector('.custom-select');
+        const trigger = document.createElement('div');
+        trigger.classList.add('custom-select-trigger');
+        trigger.textContent = select.options[select.selectedIndex].text;
+        wrapper.appendChild(trigger);
+
+        const optionsWrapper = document.createElement('div');
+        optionsWrapper.classList.add('custom-options');
+
+        Array.from(select.options).forEach(option => {
+            const customOption = document.createElement('div');
+            customOption.classList.add('custom-option');
+            customOption.textContent = option.text;
+            customOption.addEventListener('click', () => {
+                select.value = option.value;
+                trigger.textContent = option.text;
+                wrapper.classList.remove('open');
+                const event = new Event('change');
+                select.dispatchEvent(event);
+            });
+            optionsWrapper.appendChild(customOption);
+        });
+
+        wrapper.appendChild(optionsWrapper);
+
+        trigger.addEventListener('click', () => {
+            wrapper.classList.toggle('open');
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!wrapper.contains(event.target)) {
+                wrapper.classList.remove('open');
+            }
+        });
+    });
 });
 
 function loadSavedValues() {
