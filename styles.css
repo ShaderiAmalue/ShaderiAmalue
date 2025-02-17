@@ -340,7 +340,7 @@ h2 {
     display: inline-block;
     transition: background-color 0.3s, transform 0.3s;
     position: relative;
-    bottom: -10px;
+    bottom: 0;
 }
 
 #copy-button:hover {
