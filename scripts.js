@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const links = document.querySelectorAll('nav a');
     const contents = document.querySelectorAll('.content');
     const tooltips = document.querySelectorAll('.tooltip');
+    const customSelects = document.querySelectorAll('.custom-select-wrapper');
 
     links.forEach(link => {
         link.addEventListener('click', function(event) {
@@ -30,6 +31,43 @@ document.addEventListener('DOMContentLoaded', function() {
             const tooltipText = tooltip.querySelector('.tooltiptext');
             tooltipText.style.visibility = 'hidden';
             tooltipText.style.opacity = '0';
+        });
+    });
+
+    customSelects.forEach(wrapper => {
+        const select = wrapper.querySelector('.custom-select');
+        const trigger = document.createElement('div');
+        trigger.classList.add('custom-select-trigger');
+        trigger.textContent = select.options[select.selectedIndex].text;
+        wrapper.appendChild(trigger);
+
+        const optionsWrapper = document.createElement('div');
+        optionsWrapper.classList.add('custom-options');
+
+        Array.from(select.options).forEach(option => {
+            const customOption = document.createElement('div');
+            customOption.classList.add('custom-option');
+            customOption.textContent = option.text;
+            customOption.addEventListener('click', () => {
+                select.value = option.value;
+                trigger.textContent = option.text;
+                wrapper.classList.remove('open');
+                const event = new Event('change');
+                select.dispatchEvent(event);
+            });
+            optionsWrapper.appendChild(customOption);
+        });
+
+        wrapper.appendChild(optionsWrapper);
+
+        trigger.addEventListener('click', () => {
+            wrapper.classList.toggle('open');
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!wrapper.contains(event.target)) {
+                wrapper.classList.remove('open');
+            }
         });
     });
 });
