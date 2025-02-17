@@ -63,7 +63,7 @@ function handleUrl() {
 function copyResult() {
     const resultText = document.getElementById('url-result-text').innerText;
     navigator.clipboard.writeText(resultText).then(() => {
-        alert('Copied to clipboard');
+        console.log('Copied to clipboard');
     });
 }
 
