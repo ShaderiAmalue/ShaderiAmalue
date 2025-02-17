@@ -330,8 +330,6 @@ h2 {
     overflow-x: auto;
 }
 
-/* btn e */
-
 #copy-button {
     margin-top: 1em;
     background-color: #2980b9;
@@ -341,6 +339,8 @@ h2 {
     text-align: center;
     display: inline-block;
     transition: background-color 0.3s, transform 0.3s;
+    position: relative;
+    bottom: -10px;
 }
 
 #copy-button:hover {
