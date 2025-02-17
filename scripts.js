@@ -46,12 +46,19 @@ function handleUrl() {
         resultLabel.textContent = 'Encoded URL:';
         resultText.textContent = encodedText;
     } else if (action === 'decode') {
-        const decodedText = decodeURIComponent(text);
+        const decodedText = decodeURIComponent(text.replace(/\+/g, ' '));
         resultLabel.textContent = 'Decoded URL:';
         resultText.textContent = decodedText;
     }
 
     resultContainer.classList.remove('hidden');
+}
+
+function copyResult() {
+    const resultText = document.getElementById('url-result-text').innerText;
+    navigator.clipboard.writeText(resultText).then(() => {
+        alert('Copied to clipboard');
+    });
 }
 
 function sendApiRequest() {
