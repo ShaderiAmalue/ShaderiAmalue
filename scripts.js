@@ -34,43 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    customSelects.forEach(wrapper => {
-        const select = wrapper.querySelector('.custom-select');
-        const trigger = document.createElement('div');
-        trigger.classList.add('custom-select-trigger');
-        trigger.textContent = select.options[select.selectedIndex].text;
-        wrapper.appendChild(trigger);
-
-        const optionsWrapper = document.createElement('div');
-        optionsWrapper.classList.add('custom-options');
-
-        Array.from(select.options).forEach(option => {
-            const customOption = document.createElement('div');
-            customOption.classList.add('custom-option');
-            customOption.textContent = option.text;
-            customOption.addEventListener('click', () => {
-                select.value = option.value;
-                trigger.textContent = option.text;
-                wrapper.classList.remove('open');
-                const event = new Event('change');
-                select.dispatchEvent(event);
-            });
-            optionsWrapper.appendChild(customOption);
-        });
-
-        wrapper.appendChild(optionsWrapper);
-
-        trigger.addEventListener('click', () => {
-            wrapper.classList.toggle('open');
-        });
-
-        document.addEventListener('click', (event) => {
-            if (!wrapper.contains(event.target)) {
-                wrapper.classList.remove('open');
-            }
-        });
-    });
-
     loadSavedValues();
 
     document.getElementById('url-text').addEventListener('input', function() {
@@ -151,11 +114,7 @@ function handleUrl() {
         }
 
         resultContainer.classList.remove('hidden');
-        if (resultText.textContent) {
-            copyButton.classList.remove('hidden');
-        } else {
-            copyButton.classList.add('hidden');
-        }
+        copyButton.classList.toggle('hidden', !resultText.textContent);
     } catch (error) {
         resultLabel.textContent = 'Error:';
         resultText.textContent = 'Invalid input for encoding/decoding.';
@@ -227,14 +186,4 @@ function clearApiForm() {
     document.getElementById('statusCode').textContent = '';
     document.getElementById('responseHeaders').textContent = '';
     document.getElementById('apiResult').classList.add('hidden');
-}
-
-function clearLocalStorage() {
-    localStorage.removeItem('urlText');
-    localStorage.removeItem('apiHost');
-    localStorage.removeItem('apiEndpoint');
-    localStorage.removeItem('apiPayload');
-    localStorage.removeItem('urlAction');
-    localStorage.removeItem('apiMethod');
-    loadSavedValues();
 }
