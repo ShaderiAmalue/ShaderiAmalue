@@ -1,6 +1,6 @@
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(120deg, #2c3e50, #3498db);
+    background: linear-gradient(120deg, #34495e, #2ecc71);
     color: #ecf0f1;
     margin: 0;
     padding: 0;
@@ -10,7 +10,7 @@ body {
 }
 
 header {
-    background: rgba(41, 128, 185, 0.9);
+    background: rgba(52, 152, 219, 0.9);
     padding: 1em;
     text-align: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -68,7 +68,7 @@ h2 {
     padding: 1em;
     margin: 1em 0;
     width: 100%;
-    max-width: 500px;
+    max-width: 400px; /* Reduced max-width for better sizing */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -76,6 +76,18 @@ h2 {
 .download-item:hover, .profile:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.avatar {
+    border-radius: 50%;
+    width: 50px; /* Fixed size for avatars */
+    height: 50px; /* Fixed size for avatars */
+    margin-right: 1em;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
 }
 
 .button {
@@ -130,7 +142,7 @@ h2 {
 footer {
     text-align: center;
     padding: 1em;
-    background: rgba(41, 128, 185, 0.9);
+    background: rgba(52, 152, 219, 0.9);
 }
 
 @media (max-width: 600px) {
