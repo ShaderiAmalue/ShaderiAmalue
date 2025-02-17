@@ -70,7 +70,66 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    loadSavedValues();
+
+    document.getElementById('url-text').addEventListener('input', function() {
+        localStorage.setItem('urlText', this.value);
+    });
+
+    document.getElementById('host').addEventListener('input', function() {
+        localStorage.setItem('apiHost', this.value);
+    });
+
+    document.getElementById('endpoint').addEventListener('input', function() {
+        localStorage.setItem('apiEndpoint', this.value);
+    });
+
+    document.getElementById('payload').addEventListener('input', function() {
+        localStorage.setItem('apiPayload', this.value);
+    });
+
+    document.getElementById('url-action').addEventListener('change', function() {
+        localStorage.setItem('urlAction', this.value);
+    });
+
+    document.getElementById('method').addEventListener('change', function() {
+        localStorage.setItem('apiMethod', this.value);
+    });
 });
+
+function loadSavedValues() {
+    const savedUrlText = localStorage.getItem('urlText');
+    const savedApiHost = localStorage.getItem('apiHost');
+    const savedApiEndpoint = localStorage.getItem('apiEndpoint');
+    const savedApiPayload = localStorage.getItem('apiPayload');
+    const savedUrlAction = localStorage.getItem('urlAction');
+    const savedApiMethod = localStorage.getItem('apiMethod');
+
+    if (savedUrlText) {
+        document.getElementById('url-text').value = savedUrlText;
+    }
+
+    if (savedApiHost) {
+        document.getElementById('host').value = savedApiHost;
+    }
+
+    if (savedApiEndpoint) {
+        document.getElementById('endpoint').value = savedApiEndpoint;
+    }
+
+    if (savedApiPayload) {
+        document.getElementById('payload').value = savedApiPayload;
+    }
+
+    if (savedUrlAction) {
+        document.getElementById('url-action').value = savedUrlAction;
+    }
+
+    if (savedApiMethod) {
+        document.getElementById('method').value = savedApiMethod;
+    }
+}
 
 function handleUrl() {
     const action = document.getElementById('url-action').value;
@@ -168,4 +227,14 @@ function clearApiForm() {
     document.getElementById('statusCode').textContent = '';
     document.getElementById('responseHeaders').textContent = '';
     document.getElementById('apiResult').classList.add('hidden');
+}
+
+function clearLocalStorage() {
+    localStorage.removeItem('urlText');
+    localStorage.removeItem('apiHost');
+    localStorage.removeItem('apiEndpoint');
+    localStorage.removeItem('apiPayload');
+    localStorage.removeItem('urlAction');
+    localStorage.removeItem('apiMethod');
+    loadSavedValues();
 }
