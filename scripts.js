@@ -4,19 +4,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const tooltips = document.querySelectorAll('.tooltip');
     const customSelects = document.querySelectorAll('.custom-select-wrapper');
 
+    // Navigation handling
     links.forEach(link => {
         link.addEventListener('click', function(event) {
             event.preventDefault();
             const targetId = this.dataset.target;
-            contents.forEach(content => {
-                content.classList.remove('active');
-            });
+            contents.forEach(content => content.classList.remove('active'));
             document.getElementById(targetId).classList.add('active');
         });
     });
 
+    // Activate default tab
     document.getElementById('downloads').classList.add('active');
 
+    // Tooltip functionality
     tooltips.forEach(tooltip => {
         tooltip.addEventListener('click', function(event) {
             event.stopPropagation();
@@ -26,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    document.addEventListener('click', function() {
+    document.addEventListener('click', () => {
         tooltips.forEach(tooltip => {
             const tooltipText = tooltip.querySelector('.tooltiptext');
             tooltipText.style.visibility = 'hidden';
@@ -34,52 +35,26 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    loadSavedValues();
-
-    document.getElementById('url-text').addEventListener('input', function() {
-        localStorage.setItem('urlText', this.value);
-    });
-
-    document.getElementById('host').addEventListener('input', function() {
-        localStorage.setItem('apiHost', this.value);
-    });
-
-    document.getElementById('endpoint').addEventListener('input', function() {
-        localStorage.setItem('apiEndpoint', this.value);
-    });
-
-    document.getElementById('payload').addEventListener('input', function() {
-        localStorage.setItem('apiPayload', this.value);
-    });
-
-    document.getElementById('url-action').addEventListener('change', function() {
-        localStorage.setItem('urlAction', this.value);
-    });
-
-    document.getElementById('method').addEventListener('change', function() {
-        localStorage.setItem('apiMethod', this.value);
-    });
-
+    // Custom select components
     customSelects.forEach(wrapper => {
-        const select = wrapper.querySelector('.custom-select');
+        const select = wrapper.querySelector('select');
         const trigger = document.createElement('div');
-        trigger.classList.add('custom-select-trigger');
+        trigger.className = 'custom-select-trigger';
         trigger.textContent = select.options[select.selectedIndex].text;
         wrapper.appendChild(trigger);
 
         const optionsWrapper = document.createElement('div');
-        optionsWrapper.classList.add('custom-options');
+        optionsWrapper.className = 'custom-options';
 
         Array.from(select.options).forEach(option => {
             const customOption = document.createElement('div');
-            customOption.classList.add('custom-option');
+            customOption.className = 'custom-option';
             customOption.textContent = option.text;
             customOption.addEventListener('click', () => {
                 select.value = option.value;
                 trigger.textContent = option.text;
                 wrapper.classList.remove('open');
-                const event = new Event('change');
-                select.dispatchEvent(event);
+                select.dispatchEvent(new Event('change'));
             });
             optionsWrapper.appendChild(customOption);
         });
@@ -95,123 +70,192 @@ document.addEventListener('DOMContentLoaded', function() {
                 wrapper.classList.remove('open');
             }
         });
+
+        // Sync custom select with original element
+        select.addEventListener('change', () => {
+            trigger.textContent = select.options[select.selectedIndex].text;
+        });
     });
+
+    // Load saved values and initialize
+    loadSavedValues();
+    setupEventListeners();
 });
 
+function setupEventListeners() {
+    // URL Tools
+    document.getElementById('url-text').addEventListener('input', function() {
+        localStorage.setItem('urlText', this.value);
+    });
+
+    document.getElementById('url-action').addEventListener('change', function() {
+        localStorage.setItem('urlAction', this.value);
+    });
+
+    // API Tools
+    document.getElementById('host').addEventListener('input', function() {
+        localStorage.setItem('apiHost', this.value);
+    });
+
+    document.getElementById('endpoint').addEventListener('input', function() {
+        localStorage.setItem('apiEndpoint', this.value);
+    });
+
+    document.getElementById('payload').addEventListener('input', function() {
+        localStorage.setItem('apiPayload', this.value);
+    });
+
+    document.getElementById('method').addEventListener('change', function() {
+        localStorage.setItem('apiMethod', this.value);
+    });
+}
+
 function loadSavedValues() {
-    const savedUrlText = localStorage.getItem('urlText');
-    const savedApiHost = localStorage.getItem('apiHost');
-    const savedApiEndpoint = localStorage.getItem('apiEndpoint');
-    const savedApiPayload = localStorage.getItem('apiPayload');
-    const savedUrlAction = localStorage.getItem('urlAction');
-    const savedApiMethod = localStorage.getItem('apiMethod');
+    // URL Tools
+    document.getElementById('url-text').value = localStorage.getItem('urlText') || '';
+    document.getElementById('url-action').value = localStorage.getItem('urlAction') || 'encode';
 
-    if (savedUrlText) {
-        document.getElementById('url-text').value = savedUrlText;
-    }
+    // API Tools
+    document.getElementById('host').value = localStorage.getItem('apiHost') || '';
+    document.getElementById('endpoint').value = localStorage.getItem('apiEndpoint') || '';
+    document.getElementById('payload').value = localStorage.getItem('apiPayload') || '';
+    document.getElementById('method').value = localStorage.getItem('apiMethod') || 'GET';
 
-    if (savedApiHost) {
-        document.getElementById('host').value = savedApiHost;
-    }
-
-    if (savedApiEndpoint) {
-        document.getElementById('endpoint').value = savedApiEndpoint;
-    }
-
-    if (savedApiPayload) {
-        document.getElementById('payload').value = savedApiPayload;
-    }
-
-    if (savedUrlAction) {
-        document.getElementById('url-action').value = savedUrlAction;
-    }
-
-    if (savedApiMethod) {
-        document.getElementById('method').value = savedApiMethod;
-    }
+    // Update custom selects
+    document.querySelectorAll('.custom-select-wrapper select').forEach(select => {
+        select.dispatchEvent(new Event('change'));
+    });
 }
 
 function handleUrl() {
     const action = document.getElementById('url-action').value;
-    const text = document.getElementById('url-text').value;
+    const text = document.getElementById('url-text').value.trim();
     const resultLabel = document.getElementById('url-result-label');
     const resultText = document.getElementById('url-result-text');
     const resultContainer = document.getElementById('url-result-container');
-    const copyButton = document.getElementById('copy-button');
 
     try {
+        if (!text) throw new Error('Input text is required');
+        
         if (action === 'encode') {
-            const encodedText = encodeURIComponent(text);
+            resultText.textContent = encodeURIComponent(text);
             resultLabel.textContent = 'Encoded URL:';
-            resultText.textContent = encodedText;
-        } else if (action === 'decode') {
-            const decodedText = decodeURIComponent(text.replace(/\+/g, ' '));
+        } else {
+            const decoded = decodeURIComponent(text.replace(/\+/g, '%20'));
+            resultText.textContent = decoded;
             resultLabel.textContent = 'Decoded URL:';
-            resultText.textContent = decodedText;
         }
-
+        
         resultContainer.classList.remove('hidden');
-        copyButton.classList.toggle('hidden', !resultText.textContent);
+        document.getElementById('copy-button').classList.remove('hidden');
     } catch (error) {
         resultLabel.textContent = 'Error:';
-        resultText.textContent = 'Invalid input for encoding/decoding.';
+        resultText.textContent = error.message.includes('URI') 
+            ? 'Invalid URL encoding' 
+            : error.message;
         resultContainer.classList.remove('hidden');
-        copyButton.classList.add('hidden');
+        document.getElementById('copy-button').classList.add('hidden');
     }
 }
 
 function copyResult() {
-    const resultText = document.getElementById('url-result-text').innerText;
-    navigator.clipboard.writeText(resultText).then(() => {
-        console.log('Copied to clipboard');
+    const resultText = document.getElementById('url-result-text');
+    navigator.clipboard.writeText(resultText.textContent).then(() => {
+        const copyButton = document.getElementById('copy-button');
+        copyButton.textContent = 'Copied!';
+        setTimeout(() => {
+            copyButton.textContent = 'Copy';
+        }, 2000);
     });
 }
 
 function sendApiRequest() {
-    const host = document.getElementById('host').value;
-    const endpoint = document.getElementById('endpoint').value;
+    const host = document.getElementById('host').value.trim();
+    const endpoint = document.getElementById('endpoint').value.trim();
     const method = document.getElementById('method').value;
-    const payload = document.getElementById('payload').value;
-
-    const url = `${host}${endpoint}`;
-    const loadingIndicator = document.getElementById('loading');
+    const payload = document.getElementById('payload').value.trim();
+    const loading = document.getElementById('loading');
     const apiResult = document.getElementById('apiResult');
-    const apiResponse = document.getElementById('apiResponse');
-    const statusCode = document.getElementById('statusCode');
-    const responseHeaders = document.getElementById('responseHeaders');
+    const errorContainer = document.getElementById('api-error');
 
-    loadingIndicator.classList.remove('hidden');
+    // Clear previous results
+    errorContainer.textContent = '';
     apiResult.classList.add('hidden');
+    loading.classList.remove('hidden');
 
-    fetch(url, {
-        method: method,
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: method !== 'GET' ? payload : null
-    })
-    .then(response => {
-        loadingIndicator.classList.add('hidden');
-        statusCode.textContent = response.status;
+    // Validate inputs
+    if (!host || !endpoint) {
+        showApiError('Host and Endpoint are required');
+        return;
+    }
 
-        let headers = '';
-        response.headers.forEach((value, name) => {
-            headers += `${name}: ${value}\n`;
-        });
-        responseHeaders.textContent = headers;
+    // Construct URL
+    let url;
+    try {
+        url = new URL(endpoint, host).href;
+    } catch (error) {
+        showApiError('Invalid URL format');
+        return;
+    }
 
-        return response.json().then(data => {
-            apiResponse.textContent = JSON.stringify(data, null, 2);
+    // Prepare request config
+    const config = { method };
+    
+    // Handle GET parameters
+    if (method === 'GET' && payload) {
+        try {
+            const params = new URLSearchParams(JSON.parse(payload));
+            url += `?${params}`;
+        } catch (error) {
+            showApiError('Invalid GET parameters format');
+            return;
+        }
+    }
+    // Handle request body
+    else if (method !== 'GET' && payload) {
+        try {
+            config.headers = { 'Content-Type': 'application/json' };
+            config.body = JSON.stringify(JSON.parse(payload));
+        } catch (error) {
+            showApiError('Invalid JSON payload');
+            return;
+        }
+    }
+
+    // Execute request
+    fetch(url, config)
+        .then(async response => {
+            const statusCode = document.getElementById('statusCode');
+            const responseHeaders = document.getElementById('responseHeaders');
+            const apiResponse = document.getElementById('apiResponse');
+
+            statusCode.textContent = response.status;
+            responseHeaders.textContent = Array.from(response.headers)
+                .map(([name, value]) => `${name}: ${value}`)
+                .join('\n');
+
+            const data = await response.text();
+            try {
+                apiResponse.textContent = JSON.stringify(JSON.parse(data), null, 2);
+            } catch {
+                apiResponse.textContent = data;
+            }
+            
             apiResult.classList.remove('hidden');
+        })
+        .catch(error => {
+            showApiError(error.message || 'Failed to send request');
+        })
+        .finally(() => {
+            loading.classList.add('hidden');
         });
-    })
-    .catch(error => {
-        loadingIndicator.classList.add('hidden');
-        apiResponse.textContent = 'Error: ' + error;
-        statusCode.textContent = 'N/A';
-        responseHeaders.textContent = '';
-        apiResult.classList.remove('hidden');
-    });
+}
+
+function showApiError(message) {
+    const errorContainer = document.getElementById('api-error');
+    errorContainer.textContent = message;
+    document.getElementById('loading').classList.add('hidden');
+    document.getElementById('apiResult').classList.add('hidden');
 }
 
 function clearApiForm() {
@@ -223,4 +267,8 @@ function clearApiForm() {
     document.getElementById('statusCode').textContent = '';
     document.getElementById('responseHeaders').textContent = '';
     document.getElementById('apiResult').classList.add('hidden');
+    localStorage.removeItem('apiHost');
+    localStorage.removeItem('apiEndpoint');
+    localStorage.removeItem('apiPayload');
+    localStorage.removeItem('apiMethod');
 }
