@@ -353,6 +353,13 @@ h2 {
     transform: scale(1.05);
 }
 
+#loading {
+    text-align: center;
+    color: #ecf0f1;
+    font-size: 1.2em;
+    margin-top: 1em;
+}
+
 @media (max-width: 600px) {
     nav ul {
         flex-direction: column;
