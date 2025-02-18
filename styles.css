@@ -1,17 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-:root {
-    --primary-color: #f1c40f; /* Yellow */
-    --secondary-color: #2ecc71; /* Green */
-    --accent-color: #3498db; /* Blue */
-    --background-color: #ecf0f1; /* Light background */
-    --text-color: #2c3e50; /* Dark text */
-}
-
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, var(--background-color), var(--primary-color));
-    color: var(--text-color);
+    background: linear-gradient(120deg, #2c3e50, #3498db);
+    color: #ecf0f1;
     margin: 0;
     padding: 0;
     display: flex;
@@ -21,7 +13,7 @@ body {
 }
 
 header {
-    background: var(--secondary-color);
+    background: rgba(41, 128, 185, 0.9);
     padding: 1.5em;
     text-align: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -44,18 +36,18 @@ nav ul li {
 }
 
 nav a {
-    color: var(--background-color);
+    color: #ecf0f1;
     text-decoration: none;
     padding: 0.75em 1.5em;
     border-radius: 5px;
-    border: 1px solid var(--accent-color);
-    background-color: var(--primary-color);
+    border: 1px solid #3498db;
+    background-color: rgba(52, 152, 219, 0.5);
     transition: background-color 0.3s, transform 0.3s;
     font-weight: 700;
 }
 
 nav a:hover {
-    background-color: var(--accent-color);
+    background-color: rgba(52, 152, 219, 0.8);
     transform: scale(1.05);
 }
 
@@ -81,12 +73,12 @@ main {
 h2 {
     text-align: center;
     margin-bottom: 1em;
-    color: var(--text-color);
+    color: #ecf0f1;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-    border: 1px solid var(--accent-color);
+    border: 1px solid #3498db;
     padding: 0.5em;
     border-radius: 10px;
-    background-color: var(--secondary-color);
+    background-color: rgba(44, 62, 80, 0.8);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -99,8 +91,8 @@ h2 {
 }
 
 .download-item {
-    background: var(--background-color);
-    border: 1px solid var(--accent-color);
+    background: rgba(52, 73, 94, 0.8);
+    border: 1px solid #3498db;
     border-radius: 10px;
     padding: 1.5em;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -114,12 +106,12 @@ h2 {
 
 .download-item h3 {
     margin: 0 0 0.5em;
-    color: var(--text-color);
+    color: #ecf0f1;
 }
 
 .button-link {
-    background-color: var(--accent-color);
-    color: var(--background-color);
+    background-color: #2980b9;
+    color: #ecf0f1;
     padding: 0.75em 1.5em;
     border-radius: 5px;
     text-align: center;
@@ -132,7 +124,7 @@ h2 {
 }
 
 .button-link:hover {
-    background-color: var(--secondary-color);
+    background-color: #3498db;
     transform: scale(1.05);
 }
 
@@ -170,9 +162,9 @@ h2 {
     flex-direction: column;
     gap: 1em;
     padding: 1em;
-    border: 1px solid var(--accent-color);
+    border: 1px solid #3498db;
     border-radius: 10px;
-    background: var(--background-color);
+    background: rgba(44, 62, 80, 0.8);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -181,7 +173,7 @@ h2 {
     align-items: center;
     padding: 1em;
     border-radius: 10px;
-    background: var(--secondary-color);
+    background: linear-gradient(120deg, rgba(52, 73, 94, 0.8), rgba(44, 62, 80, 0.8));
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease;
 }
@@ -211,11 +203,11 @@ h2 {
 
 .profile-info p {
     margin: 0;
-    color: var(--text-color);
-    border: 1px solid var(--accent-color);
+    color: #ecf0f1;
+    border: 1px solid #3498db;
     padding: 0.5em 1em;
     border-radius: 5px;
-    background-color: var(--background-color);
+    background-color: rgba(52, 73, 94, 0.8);
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
     transition: background-color 0.3s, box-shadow 0.3s;
 }
@@ -226,9 +218,9 @@ h2 {
     gap: 1em;
     margin-top: 1em;
     padding: 1.5em;
-    border: 1px solid var(--accent-color);
+    border: 1px solid #3498db;
     border-radius: 10px;
-    background: var(--background-color);
+    background: rgba(44, 62, 80, 0.8);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     width: 100%;
     max-width: 500px;
@@ -237,7 +229,7 @@ h2 {
 
 .encryption-form label {
     margin-bottom: 0.5em;
-    color: var(--text-color);
+    color: #ecf0f1;
     font-weight: 700;
 }
 
@@ -246,21 +238,21 @@ h2 {
 .encryption-form button {
     padding: 0.75em;
     font-size: 16px;
-    border: 1px solid var(--accent-color);
+    border: 1px solid #3498db;
     border-radius: 5px;
-    background: var(--background-color);
-    color: var(--text-color);
+    background: rgba(44, 62, 80, 0.8);
+    color: #ecf0f1;
     transition: all 0.3s ease;
 }
 
 .encryption-form button {
-    background: var(--accent-color);
+    background: #2980b9;
     cursor: pointer;
     font-weight: 700;
 }
 
 .encryption-form button:hover {
-    background: var(--secondary-color);
+    background: #3498db;
     transform: scale(1.05);
 }
 
@@ -282,9 +274,9 @@ h2 {
     width: 100%;
     padding: 0.75em;
     font-size: 16px;
-    color: var(--text-color);
-    background: var(--background-color);
-    border: 1px solid var(--accent-color);
+    color: #ecf0f1;
+    background: rgba(44, 62, 80, 0.8);
+    border: 1px solid #3498db;
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -310,8 +302,8 @@ h2 {
     margin: 0;
     padding: 0;
     list-style: none;
-    background: var(--background-color);
-    border: 1px solid var(--accent-color);
+    background: rgba(44, 62, 80, 0.8);
+    border: 1px solid #3498db;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     box-sizing: border-box;
@@ -327,7 +319,7 @@ h2 {
 .custom-option {
     padding: 0.75em;
     font-size: 16px;
-    color: var(--text-color);
+    color: #ecf0f1;
     cursor: pointer;
     transition: background-color 0.3s;
     box-sizing: border-box;
@@ -335,7 +327,7 @@ h2 {
 
 .custom-option:hover,
 .custom-option.selected {
-    background-color: var(--secondary-color);
+    background-color: rgba(52, 152, 219, 0.8);
 }
 
 .hidden {
@@ -343,9 +335,9 @@ h2 {
 }
 
 .result-box {
-    border: 1px solid var(--accent-color);
+    border: 1px solid #3498db;
     border-radius: 5px;
-    background: var(--background-color);
+    background: rgba(44, 62, 80, 0.8);
     padding: 1em;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     overflow: hidden;
@@ -358,8 +350,8 @@ h2 {
 
 #copy-button {
     margin-top: 1em;
-    background-color: var(--accent-color);
-    color: var(--background-color);
+    background-color: #2980b9;
+    color: #ecf0f1;
     padding: 0.75em 1.5em;
     border-radius: 5px;
     text-align: center;
@@ -369,13 +361,13 @@ h2 {
 }
 
 #copy-button:hover {
-    background-color: var(--secondary-color);
+    background-color: #3498db;
     transform: scale(1.05);
 }
 
 #loading {
     text-align: center;
-    color: var(--text-color);
+    color: #ecf0f1;
     font-size: 1.2em;
     margin-top: 1em;
 }
