@@ -95,18 +95,21 @@ function handleUrl() {
             resultText.textContent = encodeURIComponent(text);
             resultLabel.textContent = 'Encoded URL:';
         } else {
-            const decoded = decodeURIComponent(text.replace(/\+/g, '%20'));
-            resultText.textContent = decoded;
-            resultLabel.textContent = 'Decoded URL:';
+            // Decode the URL and handle any errors
+            try {
+                const decoded = decodeURIComponent(text);
+                resultText.textContent = decoded;
+                resultLabel.textContent = 'Decoded URL:';
+            } catch (error) {
+                throw new Error('Invalid URL encoding');
+            }
         }
         
         resultContainer.classList.remove('hidden');
         document.getElementById('copy-button').classList.remove('hidden');
     } catch (error) {
         resultLabel.textContent = 'Error:';
-        resultText.textContent = error.message.includes('URI') 
-            ? 'Invalid URL encoding' 
-            : error.message;
+        resultText.textContent = error.message;
         resultContainer.classList.remove('hidden');
         document.getElementById('copy-button').classList.add('hidden');
     }
