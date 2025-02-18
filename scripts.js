@@ -79,53 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Load saved values and initialize
     loadSavedValues();
-    setupEventListeners();
 });
-
-function setupEventListeners() {
-    // URL Tools
-    document.getElementById('url-text').addEventListener('input', function() {
-        localStorage.setItem('urlText', this.value);
-    });
-
-    document.getElementById('url-action').addEventListener('change', function() {
-        localStorage.setItem('urlAction', this.value);
-    });
-
-    // API Tools
-    document.getElementById('host').addEventListener('input', function() {
-        localStorage.setItem('apiHost', this.value);
-    });
-
-    document.getElementById('endpoint').addEventListener('input', function() {
-        localStorage.setItem('apiEndpoint', this.value);
-    });
-
-    document.getElementById('payload').addEventListener('input', function() {
-        localStorage.setItem('apiPayload', this.value);
-    });
-
-    document.getElementById('method').addEventListener('change', function() {
-        localStorage.setItem('apiMethod', this.value);
-    });
-}
-
-function loadSavedValues() {
-    // URL Tools
-    document.getElementById('url-text').value = localStorage.getItem('urlText') || '';
-    document.getElementById('url-action').value = localStorage.getItem('urlAction') || 'encode';
-
-    // API Tools
-    document.getElementById('host').value = localStorage.getItem('apiHost') || '';
-    document.getElementById('endpoint').value = localStorage.getItem('apiEndpoint') || '';
-    document.getElementById('payload').value = localStorage.getItem('apiPayload') || '';
-    document.getElementById('method').value = localStorage.getItem('apiMethod') || 'GET';
-
-    // Update custom selects
-    document.querySelectorAll('.custom-select-wrapper select').forEach(select => {
-        select.dispatchEvent(new Event('change'));
-    });
-}
 
 function handleUrl() {
     const action = document.getElementById('url-action').value;
@@ -169,106 +123,8 @@ function copyResult() {
     });
 }
 
-function sendApiRequest() {
-    const host = document.getElementById('host').value.trim();
-    const endpoint = document.getElementById('endpoint').value.trim();
-    const method = document.getElementById('method').value;
-    const payload = document.getElementById('payload').value.trim();
-    const loading = document.getElementById('loading');
-    const apiResult = document.getElementById('apiResult');
-    const errorContainer = document.getElementById('api-error');
-
-    // Clear previous results
-    errorContainer.textContent = '';
-    apiResult.classList.add('hidden');
-    loading.classList.remove('hidden');
-
-    // Validate inputs
-    if (!host || !endpoint) {
-        showApiError('Host and Endpoint are required');
-        return;
-    }
-
-    // Construct URL
-    let url;
-    try {
-        url = new URL(endpoint, host).href;
-    } catch (error) {
-        showApiError('Invalid URL format');
-        return;
-    }
-
-    // Prepare request config
-    const config = { method };
-    
-    // Handle GET parameters
-    if (method === 'GET' && payload) {
-        try {
-            const params = new URLSearchParams(JSON.parse(payload));
-            url += `?${params}`;
-        } catch (error) {
-            showApiError('Invalid GET parameters format');
-            return;
-        }
-    }
-    // Handle request body
-    else if (method !== 'GET' && payload) {
-        try {
-            config.headers = { 'Content-Type': 'application/json' };
-            config.body = JSON.stringify(JSON.parse(payload));
-        } catch (error) {
-            showApiError('Invalid JSON payload');
-            return;
-        }
-    }
-
-    // Execute request
-    fetch(url, config)
-        .then(async response => {
-            const statusCode = document.getElementById('statusCode');
-            const responseHeaders = document.getElementById('responseHeaders');
-            const apiResponse = document.getElementById('apiResponse');
-
-            statusCode.textContent = response.status;
-            responseHeaders.textContent = Array.from(response.headers)
-                .map(([name, value]) => `${name}: ${value}`)
-                .join('\n');
-
-            const data = await response.text();
-            try {
-                apiResponse.textContent = JSON.stringify(JSON.parse(data), null, 2);
-            } catch {
-                apiResponse.textContent = data;
-            }
-            
-            apiResult.classList.remove('hidden');
-        })
-        .catch(error => {
-            showApiError(error.message || 'Failed to send request');
-        })
-        .finally(() => {
-            loading.classList.add('hidden');
-        });
-}
-
-function showApiError(message) {
-    const errorContainer = document.getElementById('api-error');
-    errorContainer.textContent = message;
-    document.getElementById('loading').classList.add('hidden');
-    document.getElementById('apiResult').classList.add('hidden');
-}
-
-function clearApiForm() {
-    document.getElementById('host').value = '';
-    document.getElementById('endpoint').value = '';
-    document.getElementById('method').value = 'GET';
-    document.getElementById('payload').value = '';
-    document.getElementById('apiResponse').textContent = '';
-    document.getElementById('statusCode').textContent = '';
-    document.getElementById('responseHeaders').textContent = '';
-    document.getElementById('apiResult').classList.add('hidden');
-    localStorage.removeItem('apiHost');
-    localStorage.removeItem('apiEndpoint');
-    localStorage.removeItem('apiPayload');
-    localStorage.removeItem('apiMethod');
+function loadSavedValues() {
+    // URL Tools
+    document.getElementById('url-text').value = localStorage.getItem('urlText') || '';
+    document.getElementById('url-action').value = localStorage.getItem('urlAction') || 'encode';
 }
