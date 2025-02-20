@@ -27,12 +27,12 @@ nav ul {
     list-style: none;
     padding: 0;
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap; /* Ensure categories wrap properly */
+    justify-content: flex-end; /* Align items from right to left */
+    flex-direction: row-reverse; /* Reverse the direction to right-to-left */
 }
 
 nav ul li {
-    margin: 0.5em 1em;
+    margin: 0 1em; /* Adjust margin to ensure proper spacing */
 }
 
 nav a {
@@ -380,12 +380,12 @@ h2 {
 
 @media (max-width: 600px) {
     nav ul {
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row-reverse;
+        justify-content: center;
     }
 
     nav ul li {
-        margin: 0.5em 0;
+        margin: 0.5em 1em;
     }
 
     .downloads a,
