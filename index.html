@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RegionG - Home</title>
+    <title>RegionG</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
 </head>
@@ -23,6 +23,16 @@
         <section id="home" class="content active">
             <h2>Welcome to RegionG</h2>
             <p>Your go-to source for Game Guardian scripts, downloads, and more.</p>
+            <div class="home-content">
+                <div class="home-section">
+                    <h3>About Us</h3>
+                    <p>RegionG provides scripts and tools for Game Guardian. Join our community and enhance your gaming experience.</p>
+                </div>
+                <div class="home-section">
+                    <h3>Latest Updates</h3>
+                    <p>Stay tuned for the latest updates and new features. Follow us on Discord and YouTube for more information.</p>
+                </div>
+            </div>
         </section>
         <section id="downloads" class="content">
             <h2>Downloads</h2>
@@ -71,10 +81,12 @@
             <h2>URL Decode/Encode</h2>
             <form id="urlForm" class="encryption-form">
                 <label for="url-action">Action:</label>
-                <select id="url-action" name="url-action" class="custom-select">
-                    <option value="encode">Encode</option>
-                    <option value="decode">Decode</option>
-                </select>
+                <div class="custom-select-wrapper">
+                    <select id="url-action" name="url-action" class="custom-select">
+                        <option value="encode">Encode</option>
+                        <option value="decode">Decode</option>
+                    </select>
+                </div>
                 <label for="url-text">URL Text:</label>
                 <textarea id="url-text" name="url-text" rows="4" cols="50"></textarea>
                 <button type="button" onclick="handleUrl()">Submit</button>
