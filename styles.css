@@ -9,7 +9,33 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    overflow: hidden; /* This will be updated */
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+body.desktop-mode-enabled {
+    opacity: 1;
+}
+
+.desktop-prompt {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.desktop-prompt-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
 }
 
 header {
@@ -27,12 +53,12 @@ nav ul {
     list-style: none;
     padding: 0;
     display: flex;
-    justify-content: flex-end; /* Align items from right to left */
-    flex-direction: row-reverse; /* Reverse the direction to right-to-left */
+    justify-content: flex-end;
+    flex-direction: row-reverse;
 }
 
 nav ul li {
-    margin: 0 1em; /* Adjust margin to ensure proper spacing */
+    margin: 0 1em;
 }
 
 nav a {
@@ -54,7 +80,7 @@ nav a:hover {
 main {
     flex: 1;
     padding: 2em;
-    overflow-y: auto; /* Enable scrolling */
+    overflow-y: auto;
 }
 
 .content {
@@ -452,4 +478,4 @@ h2 {
     .result-box {
         padding: 0.5em;
     }
-}
+    }
