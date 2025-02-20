@@ -4,13 +4,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const customSelects = document.querySelectorAll('.custom-select-wrapper');
 
     // Navigation handling
-    links.forEach(link => {
-        link.addEventListener('click', function(event) {
+    document.querySelector('nav').addEventListener('click', function(event) {
+        if (event.target.tagName === 'A') {
             event.preventDefault();
-            const targetId = this.dataset.target;
+            const targetId = event.target.dataset.target;
             contents.forEach(content => content.classList.remove('active'));
-            document.getElementById(targetId).classList.add('active');
-        });
+            document.getElementById(targetId).classList.add('active', 'fade-in'); // Add fade-in animation class
+        }
     });
 
     // Activate default tab
@@ -79,14 +79,9 @@ function handleUrl() {
             resultText.textContent = encodeURIComponent(text);
             resultLabel.textContent = 'Encoded URL:';
         } else {
-            // Decode the URL and handle any errors
-            try {
-                const decoded = decodeURIComponent(text);
-                resultText.textContent = decoded;
-                resultLabel.textContent = 'Decoded URL:';
-            } catch (error) {
-                throw new Error('Invalid URL encoding');
-            }
+            const decoded = decodeURIComponent(text);
+            resultText.textContent = decoded;
+            resultLabel.textContent = 'Decoded URL:';
         }
         
         resultContainer.classList.remove('hidden');
