@@ -19,17 +19,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Tooltip functionality
     tooltips.forEach(tooltip => {
-        tooltip.addEventListener('click', function(event) {
-            event.stopPropagation();
+        tooltip.addEventListener('mouseenter', function() {
             const tooltipText = this.querySelector('.tooltiptext');
             tooltipText.style.visibility = 'visible';
             tooltipText.style.opacity = '1';
         });
-    });
 
-    document.addEventListener('click', () => {
-        tooltips.forEach(tooltip => {
-            const tooltipText = tooltip.querySelector('.tooltiptext');
+        tooltip.addEventListener('mouseleave', function() {
+            const tooltipText = this.querySelector('.tooltiptext');
             tooltipText.style.visibility = 'hidden';
             tooltipText.style.opacity = '0';
         });
