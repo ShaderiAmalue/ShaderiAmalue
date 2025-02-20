@@ -1,28 +1,32 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function() {
+    const prompt = document.getElementById("desktop-prompt");
+
+    document.getElementById("enable-desktop-mode").addEventListener("click", function() {
+        document.body.classList.add("desktop-mode-enabled");
+        document.body.style.overflow = "auto";
+        prompt.style.display = "none";
+    });
+
     const links = document.querySelectorAll('nav a');
     const contents = document.querySelectorAll('.content');
     const customSelects = document.querySelectorAll('.custom-select-wrapper');
 
-    // Navigation handling
     document.querySelector('nav').addEventListener('click', function(event) {
         if (event.target.tagName === 'A') {
             event.preventDefault();
             const targetId = event.target.dataset.target;
             contents.forEach(content => content.classList.remove('active'));
-            document.getElementById(targetId).classList.add('active', 'fade-in'); // Add fade-in animation class
+            document.getElementById(targetId).classList.add('active', 'fade-in');
         }
     });
 
-    // Activate default tab
     document.getElementById('home').classList.add('active');
 
-    // Handle URL encoding/decoding
     document.querySelector('form').addEventListener('submit', function(event) {
         event.preventDefault();
         handleUrl();
     });
 
-    // Custom select components
     customSelects.forEach(wrapper => {
         const select = wrapper.querySelector('select');
         const trigger = document.createElement('div');
@@ -58,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Sync custom select with original element
         select.addEventListener('change', () => {
             trigger.textContent = select.options[select.selectedIndex].text;
         });
@@ -74,7 +77,7 @@ function handleUrl() {
 
     try {
         if (!text) throw new Error('Input text is required');
-        
+
         if (action === 'encode') {
             resultText.textContent = encodeURIComponent(text);
             resultLabel.textContent = 'Encoded URL:';
@@ -83,7 +86,7 @@ function handleUrl() {
             resultText.textContent = decoded;
             resultLabel.textContent = 'Decoded URL:';
         }
-        
+
         resultContainer.classList.remove('hidden');
         document.getElementById('copy-button').classList.remove('hidden');
     } catch (error) {
