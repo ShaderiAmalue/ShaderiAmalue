@@ -76,6 +76,27 @@ h2 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+.home-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    margin-top: 1em;
+}
+
+.home-section {
+    background: rgba(52, 73, 94, 0.8);
+    border: 1px solid #3498db;
+    border-radius: 10px;
+    padding: 1.5em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.home-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
 .downloads, .profiles, .scripts {
     display: flex;
     flex-direction: column;
