@@ -9,7 +9,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    overflow: hidden;
+    overflow: hidden; /* This will be updated */
 }
 
 header {
@@ -28,7 +28,7 @@ nav ul {
     padding: 0;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Ensure categories wrap properly */
 }
 
 nav ul li {
@@ -54,7 +54,7 @@ nav a:hover {
 main {
     flex: 1;
     padding: 2em;
-    overflow-y: auto;
+    overflow-y: auto; /* Enable scrolling */
 }
 
 .content {
