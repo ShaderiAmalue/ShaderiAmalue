@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const links = document.querySelectorAll('nav a');
     const contents = document.querySelectorAll('.content');
+    const customSelects = document.querySelectorAll('.custom-select-wrapper');
 
     // Navigation handling
     links.forEach(link => {
@@ -19,6 +20,48 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('form').addEventListener('submit', function(event) {
         event.preventDefault();
         handleUrl();
+    });
+
+    // Custom select components
+    customSelects.forEach(wrapper => {
+        const select = wrapper.querySelector('select');
+        const trigger = document.createElement('div');
+        trigger.className = 'custom-select-trigger';
+        trigger.textContent = select.options[select.selectedIndex].text;
+        wrapper.appendChild(trigger);
+
+        const optionsWrapper = document.createElement('div');
+        optionsWrapper.className = 'custom-options';
+
+        Array.from(select.options).forEach(option => {
+            const customOption = document.createElement('div');
+            customOption.className = 'custom-option';
+            customOption.textContent = option.text;
+            customOption.addEventListener('click', () => {
+                select.value = option.value;
+                trigger.textContent = option.text;
+                wrapper.classList.remove('open');
+                select.dispatchEvent(new Event('change'));
+            });
+            optionsWrapper.appendChild(customOption);
+        });
+
+        wrapper.appendChild(optionsWrapper);
+
+        trigger.addEventListener('click', () => {
+            wrapper.classList.toggle('open');
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!wrapper.contains(event.target)) {
+                wrapper.classList.remove('open');
+            }
+        });
+
+        // Sync custom select with original element
+        select.addEventListener('change', () => {
+            trigger.textContent = select.options[select.selectedIndex].text;
+        });
     });
 });
 
