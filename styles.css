@@ -28,10 +28,11 @@ nav ul {
     padding: 0;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 nav ul li {
-    margin: 0 1em;
+    margin: 0.5em 1em;
 }
 
 nav a {
@@ -415,6 +416,37 @@ h2 {
 
     .encryption-form {
         padding: 1em;
+    }
+
+    .result-box {
+        padding: 0.5em;
+    }
+}
+
+@media (max-width: 400px) {
+    nav a {
+        padding: 0.5em;
+        font-size: 14px;
+    }
+
+    .button-link {
+        padding: 0.5em 1em;
+        font-size: 14px;
+    }
+
+    .home-section,
+    .download-item,
+    .profile {
+        padding: 1em;
+    }
+
+    .profile img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .encryption-form {
+        padding: 0.5em;
     }
 
     .result-box {
