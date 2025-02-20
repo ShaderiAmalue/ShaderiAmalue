@@ -245,6 +245,14 @@ h2 {
     transition: all 0.3s ease;
 }
 
+.encryption-form textarea:focus,
+.encryption-form input:focus,
+.encryption-form button:focus {
+    outline: none;
+    border-color: #2980b9;
+    box-shadow: 0 0 8px rgba(41, 128, 185, 0.8);
+}
+
 .encryption-form button {
     background: #2980b9;
     cursor: pointer;
