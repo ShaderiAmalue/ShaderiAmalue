@@ -76,6 +76,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Load saved values and initialize
     loadSavedValues();
+    // Save values when form is submitted
+    document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        saveValues();
+        handleUrl();
+    });
 });
 
 function handleUrl() {
@@ -127,4 +133,12 @@ function loadSavedValues() {
     // URL Tools
     document.getElementById('url-text').value = localStorage.getItem('urlText') || '';
     document.getElementById('url-action').value = localStorage.getItem('urlAction') || 'encode';
+}
+
+function saveValues() {
+    // URL Tools
+    const urlText = document.getElementById('url-text').value;
+    const urlAction = document.getElementById('url-action').value;
+    localStorage.setItem('urlText', urlText);
+    localStorage.setItem('urlAction', urlAction);
 }
