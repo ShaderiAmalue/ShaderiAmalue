@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RegionG</title>
+    <title>RegionG - Home</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
 </head>
@@ -12,6 +12,7 @@
         <h1>RegionG</h1>
         <nav>
             <ul>
+                <li><a href="#" data-target="home">Home</a></li>
                 <li><a href="#" data-target="downloads">Downloads</a></li>
                 <li><a href="#" data-target="scripts">Game Guardian Scripts</a></li>
                 <li><a href="#" data-target="url-encode-decode">URL Decode/Encode</a></li>
@@ -19,7 +20,11 @@
         </nav>
     </header>
     <main>
-        <section id="downloads" class="content active">
+        <section id="home" class="content active">
+            <h2>Welcome to RegionG</h2>
+            <p>Your go-to source for Game Guardian scripts, downloads, and more.</p>
+        </section>
+        <section id="downloads" class="content">
             <h2>Downloads</h2>
             <div class="downloads">
                 <div class="download-item">
@@ -66,17 +71,10 @@
             <h2>URL Decode/Encode</h2>
             <form id="urlForm" class="encryption-form">
                 <label for="url-action">Action:</label>
-                <div class="custom-select-wrapper">
-                    <select id="url-action" name="url-action" class="custom-select">
-                        <option value="encode">Encode</option>
-                        <option value="decode">Decode</option>
-                    </select>
-                    <div class="custom-select-trigger">Select action</div>
-                    <ul class="custom-options">
-                        <li class="custom-option" data-value="encode">Encode</li>
-                        <li class="custom-option" data-value="decode">Decode</li>
-                    </ul>
-                </div>
+                <select id="url-action" name="url-action" class="custom-select">
+                    <option value="encode">Encode</option>
+                    <option value="decode">Decode</option>
+                </select>
                 <label for="url-text">URL Text:</label>
                 <textarea id="url-text" name="url-text" rows="4" cols="50"></textarea>
                 <button type="button" onclick="handleUrl()">Submit</button>
