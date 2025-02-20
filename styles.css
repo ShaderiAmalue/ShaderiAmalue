@@ -149,57 +149,6 @@ nav a:hover {
     opacity: 1;
 }
 
-.profiles {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5em;
-    margin-top: 1em;
-}
-
-.profile {
-    display: flex;
-    align-items: center;
-    padding: 1em;
-    border-radius: 10px;
-    background: linear-gradient(120deg, rgba(52, 73, 94, 0.8), rgba(44, 62, 80, 0.8));
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-    transition: all 0.3s ease;
-}
-
-.profile:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-}
-
-.profile img {
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    margin-right: 1em;
-    transition: transform 0.3s;
-}
-
-.profile img:hover {
-    transform: scale(1.1);
-}
-
-.profile-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.profile-info p {
-    margin: 0;
-    color: #ecf0f1;
-    border: 1px solid #3498db;
-    padding: 0.5em 1em;
-    border-radius: 5px;
-    background-color: rgba(52, 73, 94, 0.8);
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-    transition: background-color 0.3s, box-shadow 0.3s;
-}
-
 .encryption-form {
     display: flex;
     flex-direction: column;
@@ -365,22 +314,6 @@ nav a:hover {
         font-size: 14px;
     }
 
-    .profiles {
-        flex-direction: column;
-    }
-
-    .profile {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .profile img {
-        width: 80px;
-        height: 80px;
-        margin-bottom: 0.5em;
-    }
-
     .encryption-form {
         padding: 1em;
     }
@@ -412,11 +345,6 @@ nav a:hover {
 
     .card {
         padding: 1em;
-    }
-
-    .profile img {
-        width: 50px;
-        height: 50px;
     }
 
     .encryption-form {
