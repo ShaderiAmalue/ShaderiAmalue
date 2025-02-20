@@ -1,12 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const prompt = document.getElementById("desktop-prompt");
-
-    document.getElementById("enable-desktop-mode").addEventListener("click", function() {
-        document.body.classList.add("desktop-mode-enabled");
-        document.body.style.overflow = "auto";
-        prompt.style.display = "none";
-    });
-
+document.addEventListener('DOMContentLoaded', function() {
     const links = document.querySelectorAll('nav a');
     const contents = document.querySelectorAll('.content');
     const customSelects = document.querySelectorAll('.custom-select-wrapper');
@@ -16,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
             event.preventDefault();
             const targetId = event.target.dataset.target;
             contents.forEach(content => content.classList.remove('active'));
-            document.getElementById(targetId).classList.add('active', 'fade-in');
+            document.getElementById(targetId).classList.add('active');
         }
     });
 
