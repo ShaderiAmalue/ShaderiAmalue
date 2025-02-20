@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     background: linear-gradient(120deg, #2c3e50, #3498db);
     color: #ecf0f1;
     margin: 0;
@@ -10,55 +10,30 @@ body {
     flex-direction: column;
     height: 100vh;
     overflow: hidden;
-    opacity: 0;
     transition: opacity 1s ease-in-out;
-}
-
-body.desktop-mode-enabled {
-    opacity: 1;
-}
-
-.desktop-prompt {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
-
-.desktop-prompt-content {
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
 }
 
 header {
     background: rgba(41, 128, 185, 0.9);
-    padding: 1em;
+    padding: 1em 0;
     text-align: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-nav {
-    margin: 1em 0;
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1em;
 }
 
 nav ul {
     list-style: none;
     padding: 0;
     display: flex;
-    justify-content: flex-end;
-    flex-direction: row-reverse;
-}
-
-nav ul li {
-    margin: 0 1em;
+    gap: 1em;
 }
 
 nav a {
@@ -66,7 +41,6 @@ nav a {
     text-decoration: none;
     padding: 0.5em 1em;
     border-radius: 5px;
-    border: 1px solid #3498db;
     background-color: rgba(52, 152, 219, 0.5);
     transition: background-color 0.3s, transform 0.3s;
     font-weight: 700;
@@ -77,10 +51,32 @@ nav a:hover {
     transform: scale(1.05);
 }
 
-main {
+.main {
     flex: 1;
-    padding: 2em;
+    padding: 2em 0;
     overflow-y: auto;
+}
+
+.hero {
+    background: rgba(44, 62, 80, 0.8);
+    color: #ecf0f1;
+    text-align: center;
+    padding: 4em 0;
+}
+
+.hero h2 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+}
+
+.hero p {
+    font-size: 1.2em;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1em;
 }
 
 .content {
@@ -91,63 +87,19 @@ main {
     display: block;
 }
 
-h2 {
-    text-align: center;
-    margin-bottom: 1em;
-    color: #ecf0f1;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    border: 1px solid #3498db;
-    padding: 0.5em;
-    border-radius: 10px;
-    background-color: rgba(44, 62, 80, 0.8);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.home-content {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5em;
-    margin-top: 1em;
-}
-
-.home-section {
+.card {
     background: rgba(52, 73, 94, 0.8);
     border: 1px solid #3498db;
     border-radius: 10px;
     padding: 1.5em;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s, box-shadow 0.3s;
+    margin-bottom: 1.5em;
 }
 
-.home-section:hover {
+.card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-}
-
-.downloads, .profiles, .scripts {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5em;
-    margin-top: 1em;
-}
-
-.download-item {
-    background: rgba(52, 73, 94, 0.8);
-    border: 1px solid #3498db;
-    border-radius: 10px;
-    padding: 1.5em;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.download-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-}
-
-.download-item h3 {
-    margin: 0 0 0.5em;
-    color: #ecf0f1;
 }
 
 .button-link {
@@ -198,15 +150,10 @@ h2 {
 }
 
 .profiles {
-    margin-top: 1em;
     display: flex;
-    flex-direction: column;
-    gap: 1em;
-    padding: 1em;
-    border: 1px solid #3498db;
-    border-radius: 10px;
-    background: rgba(44, 62, 80, 0.8);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    flex-wrap: wrap;
+    gap: 1.5em;
+    margin-top: 1em;
 }
 
 .profile {
@@ -405,27 +352,21 @@ h2 {
 }
 
 @media (max-width: 600px) {
+    header .container {
+        flex-direction: column;
+    }
+
     nav ul {
-        flex-direction: row-reverse;
         justify-content: center;
     }
 
-    nav ul li {
-        margin: 0.5em 1em;
-    }
-
-    .downloads a,
-    .scripts a,
-    .button-link,
-    .profile-info p,
-    .channel-link {
+    nav a {
         padding: 0.75em 1em;
-        margin-bottom: 0.75em;
         font-size: 14px;
     }
 
-    h2 {
-        font-size: 1.5em;
+    .profiles {
+        flex-direction: column;
     }
 
     .profile {
@@ -460,9 +401,7 @@ h2 {
         font-size: 14px;
     }
 
-    .home-section,
-    .download-item,
-    .profile {
+    .card {
         padding: 1em;
     }
 
@@ -478,4 +417,4 @@ h2 {
     .result-box {
         padding: 0.5em;
     }
-    }
+}
