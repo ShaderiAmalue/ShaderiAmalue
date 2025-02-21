@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
             trigger.textContent = select.options[select.selectedIndex].text;
         });
     });
+});
 
 function handleUrl() {
     const action = document.getElementById('url-action').value;
