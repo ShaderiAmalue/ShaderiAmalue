@@ -427,8 +427,8 @@ nav a:hover {
     background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: rainbow 1s infinite;
-    background-size: 400%;
+    animation: rainbow 5s ease-in-out infinite;
+    background-size: 400% 100%;
 }
 
 @keyframes rainbow {
