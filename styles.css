@@ -391,38 +391,6 @@ nav a:hover {
     }
 }
 
-/* Support Section Styles */
-#support {
-    background-color: #f9f9f9; /* Light background for support section */
-    padding: 20px; /* Padding around the section */
-    border: 1px solid #ddd; /* Light border */
-    border-radius: 8px; /* Rounded corners */
-    margin: 20px 0; /* Margin above and below the section */
-    text-align: center; /* Center align text */
-}
-
-#support h2 {
-    margin-bottom: 10px; /* Space below the title */
-    font-size: 24px; /* Font size for the title */
-    color: #333; /* Dark text color */
-}
-
-#support p {
-    margin-bottom: 15px; /* Space below the paragraph */
-    font-size: 16px; /* Font size for the paragraph */
-    color: #555; /* Slightly lighter text color */
-}
-
-.ad-container {
-    margin: 20px 0; /* Margin around the ad container */
-}
-
-/* Optional: Style for the ad unit */
-.adsbygoogle {
-    display: block; /* Ensure the ad is displayed as a block element */
-    margin: 0 auto; /* Center the ad */
-}
-
 .rainbow-text {
     background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
     -webkit-background-clip: text;
