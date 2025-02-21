@@ -20,6 +20,26 @@ header {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
+.rainbow-text {
+    background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: rainbow 5s infinite;
+    background-size: 400% 100%;
+}
+
+@keyframes rainbow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
 header .container {
     display: flex;
     justify-content: space-between;
