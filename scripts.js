@@ -102,3 +102,10 @@ function copyResult() {
         }, 2000);
     });
 }
+
+const rainbowText = document.getElementById('rainbow-text');
+if (rainbowText) {
+    setInterval(() => {
+        rainbowText.style.backgroundPosition = `${Math.random() * 100}% ${Math.random() * 100}%`;
+    }, 300);
+}
