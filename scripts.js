@@ -58,6 +58,25 @@ document.addEventListener('DOMContentLoaded', function() {
             trigger.textContent = select.options[select.selectedIndex].text;
         });
     });
+
+    // Display update dialog
+    const updateDialog = document.createElement('div');
+    updateDialog.className = 'update-dialog';
+    updateDialog.innerHTML = `
+        <div class="update-content">
+            <h3>New Updates</h3>
+            <p>We have added new features and fixed issues with button dimensions and layout on small screens.</p>
+            <button onclick="closeUpdateDialog()">Close</button>
+        </div>
+    `;
+    document.body.appendChild(updateDialog);
+
+    function closeUpdateDialog() {
+        updateDialog.style.display = 'none';
+    }
+
+    // Automatically close update dialog after 10 seconds
+    setTimeout(closeUpdateDialog, 10000);
 });
 
 function handleUrl() {
