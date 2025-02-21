@@ -58,6 +58,9 @@ document.addEventListener('DOMContentLoaded', function() {
             trigger.textContent = select.options[select.selectedIndex].text;
         });
     });
+
+    // Add fade-in animation to the body
+    document.body.classList.add('fade-in');
 });
 
 function handleUrl() {
