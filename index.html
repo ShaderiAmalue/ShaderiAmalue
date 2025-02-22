@@ -78,10 +78,14 @@
                             <option value="url-decode">URL Decode</option>
                             <option value="base64-encode">Base64 Encode</option>
                             <option value="base64-decode">Base64 Decode</option>
+                            <option value="aes-encrypt">AES Encrypt</option>
+                            <option value="aes-decrypt">AES Decrypt</option>
                         </select>
                     </div>
                     <label for="text">Text:</label>
                     <textarea id="text" name="text" rows="4" cols="50"></textarea>
+                    <label for="password">Password (for AES):</label>
+                    <input type="password" id="password" name="password">
                     <button type="button" onclick="handleEncodeDecode()">Submit</button>
                 </form>
                 <div id="result-container" class="hidden">
