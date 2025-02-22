@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function handleEncodeDecode() {
     const action = document.getElementById('action').value;
     const text = document.getElementById('text').value.trim();
+    const password = document.getElementById('password').value.trim();
     const resultLabel = document.getElementById('result-label');
     const resultText = document.getElementById('result-text');
     const resultContainer = document.getElementById('result-container');
@@ -86,6 +87,14 @@ function handleEncodeDecode() {
         } else if (action === 'base64-decode') {
             result = atob(text);
             resultLabel.textContent = 'Base64 Decoded:';
+        } else if (action === 'aes-encrypt') {
+            if (!password) throw new Error('Password is required for AES encryption');
+            result = aesEncrypt(text, password);
+            resultLabel.textContent = 'AES Encrypted:';
+        } else if (action === 'aes-decrypt') {
+            if (!password) throw new Error('Password is required for AES decryption');
+            result = aesDecrypt(text, password);
+            resultLabel.textContent = 'AES Decrypted:';
         }
 
         resultText.textContent = result;
@@ -108,6 +117,31 @@ function copyResult() {
             copyButton.textContent = 'Copy';
         }, 2000);
     });
+}
+
+function aesEncrypt(text, password) {
+    const key = CryptoJS.enc.Utf8.parse(password);
+    const iv = CryptoJS.lib.WordArray.random(16);
+    const encrypted = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(text), key, {
+        iv: iv,
+        padding: CryptoJS.pad.Pkcs7,
+        mode: CryptoJS.mode.CBC
+    });
+
+    return iv.toString() + encrypted.toString();
+}
+
+function aesDecrypt(text, password) {
+    const key = CryptoJS.enc.Utf8.parse(password);
+    const iv = CryptoJS.enc.Hex.parse(text.substr(0, 32));
+    const encrypted = text.substr(32);
+    const decrypted = CryptoJS.AES.decrypt(encrypted, key, {
+        iv: iv,
+        padding: CryptoJS.pad.Pkcs7,
+        mode: CryptoJS.mode.CBC
+    });
+
+    return decrypted.toString(CryptoJS.enc.Utf8);
 }
 
 const rainbowText = document.getElementById('rainbow-text');
