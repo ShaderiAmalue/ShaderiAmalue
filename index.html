@@ -29,7 +29,7 @@
         </div>
     </header>
     <main>
-        <section id="hero" class="hero">
+        <section id="hero" class="hero hidden">
             <div class="container">
                 <h2>Welcome to RegionG</h2>
                 <p>Your go-to source for Game Guardian scripts, downloads, and more.</p>
@@ -73,7 +73,7 @@
                 <form id="encodeDecodeForm" class="encryption-form">
                     <label for="action">Action:</label>
                     <div class="custom-select-wrapper">
-                        <select id="action" name="action" class="custom-select">
+                        <select id="action" name="action" class="custom-select" onchange="togglePasswordInput()">
                             <option value="url-encode">URL Encode</option>
                             <option value="url-decode">URL Decode</option>
                             <option value="base64-encode">Base64 Encode</option>
@@ -84,8 +84,10 @@
                     </div>
                     <label for="text">Text:</label>
                     <textarea id="text" name="text" rows="4" cols="50"></textarea>
-                    <label for="password">Password (for AES):</label>
-                    <input type="password" id="password" name="password">
+                    <div id="password-container" class="hidden">
+                        <label for="password">Password (for AES):</label>
+                        <input type="password" id="password" name="password">
+                    </div>
                     <button type="button" onclick="handleEncodeDecode()">Submit</button>
                 </form>
                 <div id="result-container" class="hidden">
