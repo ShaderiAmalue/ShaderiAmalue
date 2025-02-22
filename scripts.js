@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const links = document.querySelectorAll('nav a');
     const contents = document.querySelectorAll('.content');
     const customSelects = document.querySelectorAll('.custom-select-wrapper');
+    const heroSection = document.getElementById('hero');
 
     document.querySelector('nav').addEventListener('click', function(event) {
         if (event.target.tagName === 'A') {
@@ -9,10 +10,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetId = event.target.dataset.target;
             contents.forEach(content => content.classList.remove('active'));
             document.getElementById(targetId).classList.add('active');
+            heroSection.classList.toggle('hidden', targetId !== 'home');
         }
     });
 
     document.getElementById('home').classList.add('active');
+    heroSection.classList.remove('hidden');
 
     document.querySelector('form').addEventListener('submit', function(event) {
         event.preventDefault();
@@ -62,6 +65,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add fade-in animation to the body
     document.body.classList.add('fade-in');
 });
+
+function togglePasswordInput() {
+    const action = document.getElementById('action').value;
+    const passwordContainer = document.getElementById('password-container');
+    if (action === 'aes-encrypt' || action === 'aes-decrypt') {
+        passwordContainer.classList.remove('hidden');
+    } else {
+        passwordContainer.classList.add('hidden');
+    }
+}
 
 function handleEncodeDecode() {
     const action = document.getElementById('action').value;
@@ -128,7 +141,7 @@ function aesEncrypt(text, password) {
         mode: CryptoJS.mode.CBC
     });
 
-    return iv.toString() + encrypted.toString();
+    return iv.toString(CryptoJS.enc.Hex) + encrypted.toString();
 }
 
 function aesDecrypt(text, password) {
