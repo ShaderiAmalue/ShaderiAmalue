@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.querySelector('form').addEventListener('submit', function(event) {
         event.preventDefault();
-        handleUrl();
+        handleEncodeDecode();
     });
 
     customSelects.forEach(wrapper => {
@@ -63,25 +63,32 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.classList.add('fade-in');
 });
 
-function handleUrl() {
-    const action = document.getElementById('url-action').value;
-    const text = document.getElementById('url-text').value.trim();
-    const resultLabel = document.getElementById('url-result-label');
-    const resultText = document.getElementById('url-result-text');
-    const resultContainer = document.getElementById('url-result-container');
+function handleEncodeDecode() {
+    const action = document.getElementById('action').value;
+    const text = document.getElementById('text').value.trim();
+    const resultLabel = document.getElementById('result-label');
+    const resultText = document.getElementById('result-text');
+    const resultContainer = document.getElementById('result-container');
 
     try {
         if (!text) throw new Error('Input text is required');
 
-        if (action === 'encode') {
-            resultText.textContent = encodeURIComponent(text);
+        let result;
+        if (action === 'url-encode') {
+            result = encodeURIComponent(text);
             resultLabel.textContent = 'Encoded URL:';
-        } else {
-            const decoded = decodeURIComponent(text);
-            resultText.textContent = decoded;
+        } else if (action === 'url-decode') {
+            result = decodeURIComponent(text);
             resultLabel.textContent = 'Decoded URL:';
+        } else if (action === 'base64-encode') {
+            result = btoa(text);
+            resultLabel.textContent = 'Base64 Encoded:';
+        } else if (action === 'base64-decode') {
+            result = atob(text);
+            resultLabel.textContent = 'Base64 Decoded:';
         }
 
+        resultText.textContent = result;
         resultContainer.classList.remove('hidden');
         document.getElementById('copy-button').classList.remove('hidden');
     } catch (error) {
@@ -93,7 +100,7 @@ function handleUrl() {
 }
 
 function copyResult() {
-    const resultText = document.getElementById('url-result-text');
+    const resultText = document.getElementById('result-text');
     navigator.clipboard.writeText(resultText.textContent).then(() => {
         const copyButton = document.getElementById('copy-button');
         copyButton.textContent = 'Copied!';
