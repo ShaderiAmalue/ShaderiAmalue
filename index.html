@@ -23,7 +23,7 @@
                     <li><a href="#" data-target="home">Home</a></li>
                     <li><a href="#" data-target="downloads">Downloads</a></li>
                     <li><a href="#" data-target="scripts">Game Guardian Scripts</a></li>
-                    <li><a href="#" data-target="url-encode-decode">URL Decode/Encode</a></li>
+                    <li><a href="#" data-target="encode-decode">Encode/Decode Tools</a></li>
                 </ul>
             </nav>
         </div>
@@ -67,25 +67,27 @@
                 <a href="https://www.mediafire.com/file/phdn555ku2r137q/GGScripts.zip/file" target="_blank" class="button-link">Download Game Guardian Scripts</a>
             </div>
         </section>
-        <section id="url-encode-decode" class="content">
+        <section id="encode-decode" class="content">
             <div class="container">
-                <h2>URL Decode/Encode</h2>
-                <form id="urlForm" class="encryption-form">
-                    <label for="url-action">Action:</label>
+                <h2>Encode/Decode Tools</h2>
+                <form id="encodeDecodeForm" class="encryption-form">
+                    <label for="action">Action:</label>
                     <div class="custom-select-wrapper">
-                        <select id="url-action" name="url-action" class="custom-select">
-                            <option value="encode">Encode</option>
-                            <option value="decode">Decode</option>
+                        <select id="action" name="action" class="custom-select">
+                            <option value="url-encode">URL Encode</option>
+                            <option value="url-decode">URL Decode</option>
+                            <option value="base64-encode">Base64 Encode</option>
+                            <option value="base64-decode">Base64 Decode</option>
                         </select>
                     </div>
-                    <label for="url-text">URL Text:</label>
-                    <textarea id="url-text" name="url-text" rows="4" cols="50"></textarea>
-                    <button type="button" onclick="handleUrl()">Submit</button>
+                    <label for="text">Text:</label>
+                    <textarea id="text" name="text" rows="4" cols="50"></textarea>
+                    <button type="button" onclick="handleEncodeDecode()">Submit</button>
                 </form>
-                <div id="url-result-container" class="hidden">
-                    <label id="url-result-label"></label>
+                <div id="result-container" class="hidden">
+                    <label id="result-label"></label>
                     <div class="result-box">
-                        <span id="url-result-text"></span>
+                        <span id="result-text"></span>
                     </div>
                     <button id="copy-button" type="button" onclick="copyResult()" class="hidden">Copy</button>
                 </div>
