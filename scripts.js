@@ -17,11 +17,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('home').classList.add('active');
     heroSection.classList.remove('hidden');
 
-    document.querySelector('form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        handleEncodeDecode();
-    });
-
     customSelects.forEach(wrapper => {
         const select = wrapper.querySelector('select');
         const trigger = document.createElement('div');
