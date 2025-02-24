@@ -109,7 +109,7 @@
                     <button type="button" onclick="handleEncodeDecode()">Submit</button>
                 </form>
                 <div id="result-container" class="hidden">
-                    <label id="result-label"></label>
+                    <label id="result-label">Encoded Text:</label>
                     <div class="result-box">
                         <span id="result-text"></span>
                     </div>
@@ -124,5 +124,26 @@
         </section>
     </main>
     <script src="scripts.js"></script>
+    <script>
+        // Adjust layout dimensions based on screen size
+        function adjustLayout() {
+            const resultBox = document.querySelector('.result-box');
+            const copyButton = document.getElementById('copy-button');
+            
+            if (window.innerWidth > 1200) {
+                resultBox.style.width = '70%';
+                copyButton.style.width = '70%';
+            } else {
+                resultBox.style.width = '100%';
+                copyButton.style.width = '100%';
+            }
+        }
+        
+        // Event listener for window resize
+        window.addEventListener('resize', adjustLayout);
+
+        // Initial call to set layout dimensions
+        adjustLayout();
+    </script>
 </body>
 </html>
