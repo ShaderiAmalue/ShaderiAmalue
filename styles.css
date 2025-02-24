@@ -293,3 +293,44 @@ nav a:hover {
 .hover-animation {
     transition: all 0.3s ease;
 }
+
+.result-box {
+    background: rgba(52, 73, 94, 0.8);
+    border: 1px solid #3498db;
+    border-radius: 10px;
+    padding: 1.5em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin-top: 1em;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    color: #ecf0f1;
+    text-align: center;
+}
+
+.result-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+#copy-button {
+    background-color: #2980b9;
+    color: #ecf0f1;
+    padding: 0.75em 1.5em;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-block;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: 0.5em;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#copy-button:hover {
+    background-color: #3498db;
+    transform: scale(1.1);
+}
