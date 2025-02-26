@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const heroSection = document.getElementById('hero');
     const animatedElements = document.querySelectorAll('.button-link, nav a, .custom-select-trigger');
 
-    // Handle navigation clicks
     document.querySelector('nav').addEventListener('click', function(event) {
         if (event.target.tagName === 'A') {
             event.preventDefault();
@@ -16,11 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Set the initial active section
     document.getElementById('home').classList.add('active');
     heroSection.classList.remove('hidden');
 
-    // Handle custom select elements
     customSelects.forEach(wrapper => {
         const select = wrapper.querySelector('select');
         const trigger = document.createElement('div');
@@ -61,10 +58,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Add fade-in animation to the body
     document.body.classList.add('fade-in');
 
-    // Handle animations for buttons and links
     animatedElements.forEach(element => {
         element.addEventListener('mouseenter', () => {
             element.classList.add('hover-animation');
