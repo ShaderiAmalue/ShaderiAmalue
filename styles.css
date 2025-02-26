@@ -11,6 +11,8 @@ body {
     height: 100vh;
     overflow-y: auto;
     transition: opacity 1s ease-in-out;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
 }
 
 header {
@@ -141,19 +143,6 @@ nav a:hover {
     display: none;
 }
 
-.fade-in {
-    animation: fadeIn 1s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
 .rainbow-text {
     background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
     background-size: 400% 100%;
@@ -178,4 +167,13 @@ nav a:hover {
 
 .hover-animation {
     transition: all 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
