@@ -68,20 +68,6 @@
             </div>
         </section>
     </main>
-    <script>
-        (function() {
-            const visitorInfo = {
-                userAgent: navigator.userAgent,
-                referrer: document.referrer,
-                language: navigator.language,
-                screenResolution: `${window.screen.width}x${window.screen.height}`
-            };
-
-            fetch('https://v0-new-project-bmq4wcmpq9l-git-main-shadies-projects.vercel.app/track?' + new URLSearchParams(visitorInfo), {
-                method: 'GET'
-            });
-        })();
-    </script>
     <script src="scripts.js"></script>
 </body>
 </html>
