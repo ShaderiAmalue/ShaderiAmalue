@@ -68,6 +68,20 @@
             </div>
         </section>
     </main>
+    <script>
+        (function() {
+            const visitorInfo = {
+                userAgent: navigator.userAgent,
+                referrer: document.referrer,
+                language: navigator.language,
+                screenResolution: `${window.screen.width}x${window.screen.height}`
+            };
+
+            fetch('http://localhost:3000/track?' + new URLSearchParams(visitorInfo), {
+                method: 'GET'
+            });
+        })();
+    </script>
     <script src="scripts.js"></script>
 </body>
 </html>
