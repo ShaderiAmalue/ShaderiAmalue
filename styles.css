@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -10,6 +10,8 @@ body {
     height: 100vh;
     overflow-y: auto;
     transition: opacity 1s ease-in-out;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
 }
 
 header {
@@ -17,6 +19,8 @@ header {
     padding: 1em 0;
     text-align: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    margin-bottom: 2em; /* Add space below the header */
+    width: 100%; /* Ensure the header spans the full width */
 }
 
 header .container {
@@ -59,6 +63,7 @@ nav a {
     transition: background-color 0.3s ease, transform 0.3s ease;
     font-weight: 700;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1em; /* Add spacing between navigation links */
 }
 
 nav a:hover {
@@ -73,11 +78,11 @@ nav a:hover {
     border-radius: 5px;
     text-align: center;
     display: block;
-    margin-top: 0.5em;
+    margin: 0.5em 0; /* Add spacing between buttons */
     border: none;
     cursor: pointer;
     font-weight: 700;
-    width: 100%;
+    width: 100%; /* Ensure buttons span the full width */
     box-sizing: border-box;
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -94,6 +99,8 @@ nav a:hover {
     text-align: center;
     padding: 4em 0;
     animation: fadeInUp 1s ease-in-out;
+    margin-bottom: 2em; /* Add space below the hero section */
+    width: 100%; /* Ensure the hero section spans the full width */
 }
 
 @keyframes fadeInUp {
@@ -129,7 +136,9 @@ nav a:hover {
     padding: 1.5em;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin-bottom: 1.5em;
+    margin-bottom: 1.5em; /* Add space between cards */
+    width: 100%; /* Ensure cards span the full width */
+    box-sizing: border-box;
 }
 
 .card:hover {
