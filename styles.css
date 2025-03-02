@@ -7,7 +7,6 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    flex-direction: column;
     height: 100vh;
     overflow-y: auto;
     transition: opacity 1s ease-in-out;
@@ -47,6 +46,7 @@ nav ul {
     list-style: none;
     padding: 0;
     display: flex;
+    flex-direction: column;
     gap: 1em;
 }
 
@@ -69,10 +69,10 @@ nav a:hover {
 .button-link {
     background-color: #2980b9;
     color: #ecf0f1;
-    padding: 0.75em 1.5em;
+    padding: 1em 2em;
     border-radius: 5px;
     text-align: center;
-    display: inline-block;
+    display: block;
     margin-top: 0.5em;
     border: none;
     cursor: pointer;
