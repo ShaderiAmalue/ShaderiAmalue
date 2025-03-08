@@ -1,24 +1,31 @@
 export default function handler(req, res) {
     const visitorInfo = {
         IP: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
-        "User Agent": req.headers['user-agent'] || 'N/A',
-        Language: req.headers['accept-language'] || 'N/A',
-        Host: req.headers['host'] || 'N/A',
-        Referer: req.headers['referer'] || 'N/A',
-        Method: req.method || 'N/A',
+        "User Agent": req.headers['user-agent'],
+        Language: req.headers['accept-language'],
+        Host: req.headers['host'],
+        Referer: req.headers['referer'],
+        Method: req.method,
         Protocol: req.connection.encrypted ? 'https' : 'http',
-        Path: req.url || 'N/A',
-        Country: req.headers['x-vercel-ip-country'] || 'N/A',
-        Region: req.headers['x-vercel-ip-country-region'] || 'N/A',
-        City: req.headers['x-vercel-ip-city'] || 'N/A',
-        Latitude: req.headers['x-vercel-ip-latitude'] || 'N/A',
-        Longitude: req.headers['x-vercel-ip-longitude'] || 'N/A',
-        Continent: req.headers['x-vercel-ip-continent'] || 'N/A',
-        Timezone: req.headers['x-vercel-ip-timezone'] || 'N/A',
-        ISP: req.headers['x-vercel-ip-isp'] || 'N/A',
-        Organization: req.headers['x-vercel-ip-org'] || 'N/A',
-        ASN: req.headers['x-vercel-ip-asn'] || 'N/A'
+        Path: req.url,
+        Country: req.headers['x-vercel-ip-country'],
+        Region: req.headers['x-vercel-ip-country-region'],
+        City: req.headers['x-vercel-ip-city'],
+        Latitude: req.headers['x-vercel-ip-latitude'],
+        Longitude: req.headers['x-vercel-ip-longitude'],
+        Continent: req.headers['x-vercel-ip-continent'],
+        Timezone: req.headers['x-vercel-ip-timezone'],
+        ISP: req.headers['x-vercel-ip-isp'],
+        Organization: req.headers['x-vercel-ip-org'],
+        ASN: req.headers['x-vercel-ip-asn']
     };
+
+    // Remove undefined values
+    Object.keys(visitorInfo).forEach(key => {
+        if (visitorInfo[key] === undefined) {
+            delete visitorInfo[key];
+        }
+    });
 
     let visitorInfoHtml = `<h1>Hi hi noob! Is this yo info? Hahaha Lelelelellele 🤪</h1>`;
     visitorInfoHtml += `<ul>`;
@@ -47,10 +54,12 @@ export default function handler(req, res) {
             <script>
                 const clientInfo = {
                     screenResolution: \`\${window.screen.width}x\${window.screen.height}\`,
-                    colorDepth: window.screen.colorDepth || 'N/A',
+                    colorDepth: window.screen.colorDepth,
                     javaEnabled: navigator.javaEnabled(),
                     online: navigator.onLine,
                     connectionType: navigator.connection ? navigator.connection.effectiveType : 'N/A',
+                    wifi: navigator.connection ? navigator.connection.type === 'wifi' : 'N/A',
+                    network: navigator.connection ? navigator.connection.type === 'cellular' : 'N/A',
                     deviceMemory: navigator.deviceMemory || 'N/A',
                     hardwareConcurrency: navigator.hardwareConcurrency || 'N/A',
                     platform: navigator.platform || 'N/A',
