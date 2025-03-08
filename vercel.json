@@ -4,7 +4,9 @@
     { "src": "api/hello.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/hello.js" },
-    { "src": "/(.*)", "dest": "/" }
+    { "src": "/api/(.*)", "dest": "/api/hello.js" }
+  ],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/" }
   ]
 }
