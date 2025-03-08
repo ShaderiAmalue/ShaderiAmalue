@@ -18,7 +18,7 @@
         async function sendVisitorData() {
             const ipResponse = await fetch('https://api64.ipify.org?format=json');
             const ipData = await ipResponse.json();
-            
+
             const geoResponse = await fetch(`https://ipinfo.io/${ipData.ip}/json?token=YOUR_TOKEN_HERE`);
             const geoData = await geoResponse.json();
 
@@ -41,7 +41,7 @@
                 time: new Date().toISOString()
             };
 
-            fetch('/api/hello.js', {
+            fetch('/api/visitor', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
