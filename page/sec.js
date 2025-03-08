@@ -27,7 +27,7 @@ export default function handler(req, res) {
         }
     });
 
-    let visitorInfoHtml = `<h1>Hi hi noob! Is this yo info? Hahaha Lelelelellele 🤪</h1>`;
+    let visitorInfoHtml = `<h1>🤪</h1>`;
     visitorInfoHtml += `<ul>`;
     for (const [key, value] of Object.entries(visitorInfo)) {
         visitorInfoHtml += `<li><strong>${key}:</strong> ${value}</li>`;
@@ -52,23 +52,52 @@ export default function handler(req, res) {
         <body>
             ${visitorInfoHtml}
             <script>
+                function getNetworkInformation() {
+                    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+                    return connection ? {
+                        effectiveType: connection.effectiveType || 'N/A',
+                        type: connection.type || 'N/A',
+                        downlinkMax: connection.downlinkMax || 'N/A',
+                        rtt: connection.rtt || 'N/A',
+                        downlink: connection.downlink || 'N/A',
+                        saveData: connection.saveData || false,
+                        wifi: connection.type === 'wifi',
+                        network: connection.type === 'cellular'
+                    } : {
+                        effectiveType: 'N/A',
+                        type: 'N/A',
+                        downlinkMax: 'N/A',
+                        rtt: 'N/A',
+                        downlink: 'N/A',
+                        saveData: false,
+                        wifi: false,
+                        network: false
+                    };
+                }
+
                 const clientInfo = {
                     screenResolution: \`\${window.screen.width}x\${window.screen.height}\`,
                     colorDepth: window.screen.colorDepth,
                     javaEnabled: navigator.javaEnabled(),
                     online: navigator.onLine,
-                    connectionType: navigator.connection ? navigator.connection.effectiveType : 'N/A',
-                    wifi: navigator.connection ? navigator.connection.type === 'wifi' : 'N/A',
-                    network: navigator.connection ? navigator.connection.type === 'cellular' : 'N/A',
                     deviceMemory: navigator.deviceMemory || 'N/A',
                     hardwareConcurrency: navigator.hardwareConcurrency || 'N/A',
                     platform: navigator.platform || 'N/A',
                     devicePixelRatio: window.devicePixelRatio || 'N/A',
                     vendor: navigator.vendor || 'N/A',
                     language: navigator.language || 'N/A',
-                    userAgent: navigator.userAgent || 'N/A'
+                    userAgent: navigator.userAgent || 'N/A',
+                    appCodeName: navigator.appCodeName || 'N/A',
+                    appName: navigator.appName || 'N/A',
+                    appVersion: navigator.appVersion || 'N/A',
+                    product: navigator.product || 'N/A',
+                    productSub: navigator.productSub || 'N/A',
+                    vendorSub: navigator.vendorSub || 'N/A',
+                    mimeTypes: Array.from(navigator.mimeTypes).map(mime => mime.type).join(', ') || 'N/A',
+                    plugins: Array.from(navigator.plugins).map(plugin => plugin.name).join(', ') || 'N/A',
+                    ...getNetworkInformation()
                 };
-                
+
                 const list = document.querySelector('ul');
                 for (const [key, value] of Object.entries(clientInfo)) {
                     const li = document.createElement('li');
