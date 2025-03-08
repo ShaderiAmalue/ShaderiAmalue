@@ -1,47 +1,65 @@
 export default function handler(req, res) {
     const visitorInfo = {
-        ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
-        ipv4: req.headers['x-vercel-ip-v4'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress,
-        ipv6: req.headers['x-vercel-ip-v6'] || req.connection.remoteAddress,
-        userAgent: req.headers['user-agent'],
-        language: req.headers['accept-language'],
-        host: req.headers['host'],
-        connection: req.headers['connection'],
-        referer: req.headers['referer'],
-        method: req.method,
-        protocol: req.connection.encrypted ? 'https' : 'http',
-        path: req.url,
-        cookies: req.headers['cookie'],
-        time: new Date().toISOString(),
-        networkIP: req.socket.remoteAddress,
-        clientIP: req.connection.remoteAddress,
-        clientPort: req.connection.remotePort,
-        localAddress: req.connection.localAddress,
-        localPort: req.connection.localPort,
-        country: req.headers['x-vercel-ip-country'],
-        region: req.headers['x-vercel-ip-country-region'],
-        city: req.headers['x-vercel-ip-city'],
-        latitude: req.headers['x-vercel-ip-latitude'],
-        longitude: req.headers['x-vercel-ip-longitude'],
-        regionCode: req.headers['x-vercel-ip-country-region-code'],
-        countryCode: req.headers['x-vercel-ip-country-code'],
-        continent: req.headers['x-vercel-ip-continent'],
-        timezone: req.headers['x-vercel-ip-timezone'],
-        isp: req.headers['x-vercel-ip-isp'],
-        org: req.headers['x-vercel-ip-org'],
-        asn: req.headers['x-vercel-ip-asn'],
-        postalCode: req.headers['x-vercel-ip-postal-code'],
-        geonameId: req.headers['x-vercel-ip-geoname-id'],
-        headers: req.headers // Including all headers for completeness
+        IP: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+        IPv4: req.headers['x-vercel-ip-v4'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+        IPv6: req.headers['x-vercel-ip-v6'] || req.connection.remoteAddress,
+        "User Agent": req.headers['user-agent'],
+        Language: req.headers['accept-language'],
+        Host: req.headers['host'],
+        Connection: req.headers['connection'],
+        Referer: req.headers['referer'],
+        Method: req.method,
+        Protocol: req.connection.encrypted ? 'https' : 'http',
+        Path: req.url,
+        Cookies: req.headers['cookie'],
+        Time: new Date().toISOString(),
+        "Network IP": req.socket.remoteAddress,
+        "Client IP": req.connection.remoteAddress,
+        "Client Port": req.connection.remotePort,
+        "Local Address": req.connection.localAddress,
+        "Local Port": req.connection.localPort,
+        Country: req.headers['x-vercel-ip-country'],
+        Region: req.headers['x-vercel-ip-country-region'],
+        City: req.headers['x-vercel-ip-city'],
+        Latitude: req.headers['x-vercel-ip-latitude'],
+        Longitude: req.headers['x-vercel-ip-longitude'],
+        "Region Code": req.headers['x-vercel-ip-country-region-code'],
+        "Country Code": req.headers['x-vercel-ip-country-code'],
+        Continent: req.headers['x-vercel-ip-continent'],
+        Timezone: req.headers['x-vercel-ip-timezone'],
+        ISP: req.headers['x-vercel-ip-isp'],
+        Organization: req.headers['x-vercel-ip-org'],
+        ASN: req.headers['x-vercel-ip-asn'],
+        "Postal Code": req.headers['x-vercel-ip-postal-code'],
+        "Geoname ID": req.headers['x-vercel-ip-geoname-id'],
+        Headers: req.headers // Including all headers for completeness
     };
 
-    const responseMessage = `
-        Hi hi noob! Is this yo info? Hahaha Lelelelellele 🤪
+    let visitorInfoHtml = `<h1>Hi hi noob! Is this yo info? Hahaha Lelelelellele 🤪</h1>`;
+    visitorInfoHtml += `<ul>`;
+    for (const [key, value] of Object.entries(visitorInfo)) {
+        visitorInfoHtml += `<li><strong>${key}:</strong> ${value}</li>`;
+    }
+    visitorInfoHtml += `</ul>`;
 
-        ${JSON.stringify(visitorInfo, null, 2)}
-    `;
-
-    res.status(200).json({
-        visitorInfo: responseMessage
-    });
+    res.status(200).send(`
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Visitor Info</title>
+            <style>
+                body { font-family: Arial, sans-serif; background-color: #f0f0f0; margin: 0; padding: 20px; }
+                h1 { color: #333; }
+                ul { list-style-type: none; padding: 0; }
+                li { background-color: #fff; margin: 5px 0; padding: 10px; border-radius: 5px; }
+                strong { color: #333; }
+            </style>
+        </head>
+        <body>
+            ${visitorInfoHtml}
+        </body>
+        </html>
+    `);
 }
