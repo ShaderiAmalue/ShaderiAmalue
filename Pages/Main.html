@@ -16,17 +16,11 @@
     </script>
     <script>
         async function sendVisitorData() {
-            const ipResponse = await fetch('https://api64.ipify.org?format=json');
-            const ipData = await ipResponse.json();
-
-            const geoResponse = await fetch(`https://ipinfo.io/${ipData.ip}/json?token=YOUR_TOKEN_HERE`);
-            const geoData = await geoResponse.json();
-
             const visitorData = {
-                ip: geoData.ip,
-                city: geoData.city,
-                region: geoData.region,
-                country: geoData.country,
+                ip: '', // IP address cannot be fetched without an external service
+                city: '',
+                region: '',
+                country: '',
                 userAgent: navigator.userAgent,
                 language: navigator.language,
                 platform: navigator.platform,
