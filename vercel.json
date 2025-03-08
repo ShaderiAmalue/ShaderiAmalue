@@ -3,9 +3,6 @@
   "rewrites": [
     { "source": "/(.*)", "destination": "/$1" }
   ],
-  "builds": [
-    { "src": "api/hello.js", "use": "@vercel/node" }
-  ],
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/hello.js" }
   ]
