@@ -14,9 +14,7 @@
 </head>
 <body>
     <h1>Visitor Information</h1>
-    <ul id="visitor-info">
-        <li>uhhh... loading visitor information...</li>
-    </ul>
+    <ul id="visitor-info"></ul>
     <script>
         async function fetchVisitorInfo() {
             try {
@@ -24,7 +22,6 @@
                 const visitorInfo = await response.json();
 
                 const ul = document.getElementById('visitor-info');
-                ul.innerHTML = ''; // Clear the loading message
                 
                 for (const [key, value] of Object.entries(visitorInfo)) {
                     const li = document.createElement('li');
