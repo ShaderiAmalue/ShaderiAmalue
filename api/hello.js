@@ -25,7 +25,14 @@ export default function handler(req, res) {
     const visitor = {
         ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
         userAgent: req.headers['user-agent'],
-        language: req.headers['accept-language']
+        language: req.headers['accept-language'],
+        host: req.headers['host'],
+        connection: req.headers['connection'],
+        referer: req.headers['referer'],
+        method: req.method,
+        protocol: req.protocol || (req.connection.encrypted ? 'https' : 'http'),
+        path: req.url,
+        cookies: req.headers['cookie']
     };
 
     res.status(200).json({
