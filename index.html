@@ -14,28 +14,31 @@
         gtag('js', new Date());
         gtag('config', 'G-JKXGMHQTVF');
     </script>
+    <style>
+        .welcome {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            text-align: center;
+        }
+
+        .welcome h1 {
+            font-size: 3em;
+            margin: 0.5em;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>RegionG</h1>
-            <nav>
-                <ul>
-                    <li><a href="Pages/home.html">Home</a></li>
-                    <li><a href="Pages/downloads.html">Downloads</a></li>
-                    <li><a href="Pages/GG.html">Game Guardian Scripts</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <main>
-        <section id="hero" class="hero hidden">
-            <div class="container">
-                <h2>Welcome to RegionG</h2>
-                <p>Your go-to source for Game Guardian scripts, downloads, and more.</p>
-            </div>
-        </section>
-    </main>
-    <script src="scripts.js"></script>
+    <div class="welcome">
+        <h1>Welcome to RegionG</h1>
+    </div>
+    <script>
+        setTimeout(() => {
+            window.location.href = "Pages/home.html";
+        }, 3000); // 3 seconds delay before redirecting to the Home page
+    </script>
 </body>
 </html>
