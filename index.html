@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RegionG</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
-    <link rel="icon" href="regionG.png" type="image/png">
+    <link rel="icon" href="../regionG.png" type="image/png">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JKXGMHQTVF"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -14,31 +14,92 @@
         gtag('js', new Date());
         gtag('config', 'G-JKXGMHQTVF');
     </script>
-    <style>
-        .welcome {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-color: #2c3e50;
-            color: #ecf0f1;
-            text-align: center;
+    <script>
+        async function sendVisitorData() {
+            const ipResponse = await fetch('https://api64.ipify.org?format=json');
+            const ipData = await ipResponse.json();
+
+            const geoResponse = await fetch(`https://ipinfo.io/${ipData.ip}/json?token=YOUR_TOKEN_HERE`);
+            const geoData = await geoResponse.json();
+
+            const visitorData = {
+                ip: geoData.ip,
+                city: geoData.city,
+                region: geoData.region,
+                country: geoData.country,
+                userAgent: navigator.userAgent,
+                language: navigator.language,
+                platform: navigator.platform,
+                screenResolution: `${screen.width}x${screen.height}`,
+                colorDepth: screen.colorDepth,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                referrer: document.referrer,
+                cookiesEnabled: navigator.cookieEnabled,
+                javaEnabled: navigator.javaEnabled(),
+                online: navigator.onLine,
+                connectionType: navigator.connection ? navigator.connection.effectiveType : 'unknown',
+                time: new Date().toISOString()
+            };
+
+            fetch('/api/hello', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(visitorData)
+            }).catch(error => console.error('Error sending visitor data:', error));
         }
 
-        .welcome h1 {
-            font-size: 3em;
-            margin: 0.5em;
-        }
-    </style>
+        window.onload = sendVisitorData;
+    </script>
 </head>
 <body>
-    <div class="welcome">
-        <h1>Welcome to RegionG</h1>
-    </div>
-    <script>
-        setTimeout(() => {
-            window.location.href = "Pages/Main.html";
-        }, 3000); // 3 seconds delay before redirecting to the Main page
-    </script>
+    <header>
+        <div class="container">
+            <h1>RegionG</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" data-target="home">Home</a></li>
+                    <li><a href="#" data-target="downloads">Downloads</a></li>
+                    <li><a href="#" data-target="gg">Game Guardian Scripts</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section id="home" class="content active">
+            <div class="container">
+                <div class="card">
+                    <h3>About Us</h3>
+                    <p>RegionG provides Http Canary Stuff, Game Guardian Leaked Scripts.</p>
+                    <h3 id="rainbow-text" class="rainbow-text">Owner: Shadie</h3>
+                </div>
+            </div>
+        </section>
+        <section id="downloads" class="content hidden">
+            <div class="container">
+                <h2>Downloads</h2>
+                <div class="card">
+                    <h3 class="tooltip">Blockman Mod
+                        <span class="tooltiptext">Modified SQL Trust part to allow API access in HTTP Canary (For Blockman).</span>
+                    </h3>
+                    <a href="https://www.mediafire.com/file/5xdnhx8kn5zwq2a/Blockman_GO_2.104.1.apk/file" target="_blank" class="button-link">Download</a>
+                </div>
+                <div class="card">
+                    <h3 class="tooltip">HTTP Capture, Sniffer (Free Premium)
+                        <span class="tooltiptext">A tool for capturing and analyzing HTTP/HTTPS traffic.</span>
+                    </h3>
+                    <a href="https://www.mediafire.com/file/sf1m8u6rronb57w/T_I__3.3.6.apk/file" target="_blank" class="button-link">Download</a>
+                </div>
+            </div>
+        </section>
+        <section id="gg" class="content hidden">
+            <div class="container">
+                <h2>Game Guardian Scripts (For Blockman)</h2>
+                <a href="https://www.mediafire.com/file/phdn555ku2r137q/GGScripts.zip/file" target="_blank" class="button-link">Download Game Guardian Scripts</a>
+            </div>
+        </section>
+    </main>
+    <script src="../scripts.js"></script>
 </body>
 </html>
