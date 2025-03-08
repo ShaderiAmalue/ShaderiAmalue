@@ -8,12 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     links.forEach(link => {
         link.addEventListener('click', function(event) {
             event.preventDefault();
-            const targetId = this.getAttribute('href').split('.html')[0];
-            contents.forEach(content => content.classList.remove('active'));
-            document.querySelector(`#${targetId}`).classList.add('active');
-            if (heroSection) {
-                heroSection.classList.toggle('hidden', targetId !== 'home');
-            }
+            window.location.href = link.getAttribute('href');
         });
     });
 
