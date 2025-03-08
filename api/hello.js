@@ -1,28 +1,34 @@
 export default function handler(req, res) {
-    if (req.method === 'POST') {
-        const visitorData = req.body;
-        const logEntry = `
-            Visitor Data:
-            IP: ${visitorData.ip}
-            City: ${visitorData.city}
-            Region: ${visitorData.region}
-            Country: ${visitorData.country}
-            User-Agent: ${visitorData.userAgent}
-            Language: ${visitorData.language}
-            Platform: ${visitorData.platform}
-            Screen Resolution: ${visitorData.screenResolution}
-            Color Depth: ${visitorData.colorDepth}
-            Timezone: ${visitorData.timezone}
-            Referrer: ${visitorData.referrer}
-            Cookies Enabled: ${visitorData.cookiesEnabled}
-            Java Enabled: ${visitorData.javaEnabled}
-            Online: ${visitorData.online}
-            Connection Type: ${visitorData.connectionType}
-            Time: ${visitorData.time}
-        `;
-        console.log(logEntry);
-        res.status(200).json({ message: 'Visitor data received' });
-    } else {
-        res.status(405).json({ message: 'Method not allowed' });
-    }
+    const visitorInfo = {
+        ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+        userAgent: req.headers['user-agent'],
+        language: req.headers['accept-language'],
+        host: req.headers['host'],
+        connection: req.headers['connection'],
+        referer: req.headers['referer'],
+        method: req.method,
+        protocol: req.protocol || (req.connection.encrypted ? 'https' : 'http'),
+        path: req.url,
+        cookies: req.headers['cookie'],
+        time: new Date().toISOString(),
+        networkIP: req.socket.remoteAddress,
+        clientIP: req.connection.remoteAddress,
+        clientPort: req.connection.remotePort,
+        localAddress: req.connection.localAddress,
+        localPort: req.connection.localPort,
+        country: req.headers['x-vercel-ip-country'],
+        region: req.headers['x-vercel-ip-country-region'],
+        city: req.headers['x-vercel-ip-city'],
+        latitude: req.headers['x-vercel-ip-latitude'],
+        longitude: req.headers['x-vercel-ip-longitude'],
+        regionCode: req.headers['x-vercel-ip-country-region-code'],
+        countryCode: req.headers['x-vercel-ip-country-code'],
+        continent: req.headers['x-vercel-ip-continent'],
+        timezone: req.headers['x-vercel-ip-timezone']
+    };
+
+    res.status(200).json({
+        message: "Hello from Vercel!",
+        visitorInfo: visitorInfo
+    });
 }
