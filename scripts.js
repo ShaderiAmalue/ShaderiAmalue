@@ -5,18 +5,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const heroSection = document.getElementById('hero');
     const animatedElements = document.querySelectorAll('.button-link, nav a, .custom-select-trigger');
 
-    document.querySelector('nav').addEventListener('click', function(event) {
-        if (event.target.tagName === 'A') {
+    links.forEach(link => {
+        link.addEventListener('click', function(event) {
             event.preventDefault();
-            const targetId = event.target.dataset.target;
+            const targetId = this.getAttribute('href').split('.html')[0];
             contents.forEach(content => content.classList.remove('active'));
-            document.getElementById(targetId).classList.add('active');
-            heroSection.classList.toggle('hidden', targetId !== 'home');
-        }
+            document.querySelector(`#${targetId}`).classList.add('active');
+            if (heroSection) {
+                heroSection.classList.toggle('hidden', targetId !== 'home');
+            }
+        });
     });
-
-    document.getElementById('home').classList.add('active');
-    heroSection.classList.remove('hidden');
 
     customSelects.forEach(wrapper => {
         const select = wrapper.querySelector('select');
