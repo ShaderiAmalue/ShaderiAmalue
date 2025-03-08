@@ -1,38 +1,23 @@
 export default function handler(req, res) {
     const visitorInfo = {
         IP: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
-        IPv4: req.headers['x-vercel-ip-v4'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress,
-        IPv6: req.headers['x-vercel-ip-v6'] || req.connection.remoteAddress,
         "User Agent": req.headers['user-agent'],
         Language: req.headers['accept-language'],
         Host: req.headers['host'],
-        Connection: req.headers['connection'],
         Referer: req.headers['referer'],
         Method: req.method,
         Protocol: req.connection.encrypted ? 'https' : 'http',
         Path: req.url,
-        Cookies: req.headers['cookie'],
-        Time: new Date().toISOString(),
-        "Network IP": req.socket.remoteAddress,
-        "Client IP": req.connection.remoteAddress,
-        "Client Port": req.connection.remotePort,
-        "Local Address": req.connection.localAddress,
-        "Local Port": req.connection.localPort,
         Country: req.headers['x-vercel-ip-country'],
         Region: req.headers['x-vercel-ip-country-region'],
         City: req.headers['x-vercel-ip-city'],
         Latitude: req.headers['x-vercel-ip-latitude'],
         Longitude: req.headers['x-vercel-ip-longitude'],
-        "Region Code": req.headers['x-vercel-ip-country-region-code'],
-        "Country Code": req.headers['x-vercel-ip-country-code'],
         Continent: req.headers['x-vercel-ip-continent'],
         Timezone: req.headers['x-vercel-ip-timezone'],
         ISP: req.headers['x-vercel-ip-isp'],
         Organization: req.headers['x-vercel-ip-org'],
-        ASN: req.headers['x-vercel-ip-asn'],
-        "Postal Code": req.headers['x-vercel-ip-postal-code'],
-        "Geoname ID": req.headers['x-vercel-ip-geoname-id'],
-        Headers: req.headers // Including all headers for completeness
+        ASN: req.headers['x-vercel-ip-asn']
     };
 
     let visitorInfoHtml = `<h1>Hi hi noob! Is this yo info? Hahaha Lelelelellele 🤪</h1>`;
@@ -51,14 +36,37 @@ export default function handler(req, res) {
             <title>Visitor Info</title>
             <style>
                 body { font-family: Arial, sans-serif; background-color: #f0f0f0; margin: 0; padding: 20px; }
-                h1 { color: #333; }
-                ul { list-style-type: none; padding: 0; }
-                li { background-color: #fff; margin: 5px 0; padding: 10px; border-radius: 5px; }
-                strong { color: #333; }
+                h1 { color: #333; text-align: center; }
+                ul { list-style-type: none; padding: 0; max-width: 600px; margin: 20px auto; }
+                li { background-color: #fff; margin: 5px 0; padding: 10px; border-radius: 5px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); }
+                strong { color: #007BFF; }
             </style>
         </head>
         <body>
             ${visitorInfoHtml}
+            <script>
+                const clientInfo = {
+                    screenResolution: \`\${window.screen.width}x\${window.screen.height}\`,
+                    colorDepth: window.screen.colorDepth,
+                    javaEnabled: navigator.javaEnabled(),
+                    online: navigator.onLine,
+                    connectionType: navigator.connection ? navigator.connection.effectiveType : 'unknown',
+                    deviceMemory: navigator.deviceMemory,
+                    hardwareConcurrency: navigator.hardwareConcurrency,
+                    platform: navigator.platform,
+                    devicePixelRatio: window.devicePixelRatio,
+                    vendor: navigator.vendor,
+                    language: navigator.language,
+                    userAgent: navigator.userAgent
+                };
+                
+                const list = document.querySelector('ul');
+                for (const [key, value] of Object.entries(clientInfo)) {
+                    const li = document.createElement('li');
+                    li.innerHTML = \`<strong>\${key}:</strong> \${value}\`;
+                    list.appendChild(li);
+                }
+            </script>
         </body>
         </html>
     `);
