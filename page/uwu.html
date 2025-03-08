@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>uwu</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f0f0f0; margin: 0; padding: 20px; }
+        h1 { color: #333; text-align: center; }
+        ul { list-style-type: none; padding: 0; max-width: 600px; margin: 20px auto; }
+        li { background-color: #fff; margin: 5px 0; padding: 10px; border-radius: 5px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); }
+        strong { color: #007BFF; }
+    </style>
+</head>
+<body>
+    <h1>Visitor Information</h1>
+    <ul id="visitor-info">
+        <li>uhhh... loading visitor information...</li>
+    </ul>
+    <script>
+        async function fetchVisitorInfo() {
+            try {
+                const response = await fetch('/page/sec.js');
+                const visitorInfo = await response.json();
+
+                const ul = document.getElementById('visitor-info');
+                ul.innerHTML = ''; // Clear the loading message
+                
+                for (const [key, value] of Object.entries(visitorInfo)) {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<strong>${key}:</strong> ${value}`;
+                    ul.appendChild(li);
+                }
+
+                // Additional Client-Side Information
+                const clientInfo = {
+                    screenResolution: \`\${window.screen.width}x\${window.screen.height}\`,
+                    colorDepth: window.screen.colorDepth || 'N/A',
+                    javaEnabled: navigator.javaEnabled(),
+                    online: navigator.onLine,
+                    deviceMemory: navigator.deviceMemory || 'N/A',
+                    hardwareConcurrency: navigator.hardwareConcurrency || 'N/A',
+                    platform: navigator.platform || 'N/A',
+                    devicePixelRatio: window.devicePixelRatio || 'N/A',
+                    vendor: navigator.vendor || 'N/A',
+                    language: navigator.language || 'N/A',
+                    userAgent: navigator.userAgent || 'N/A',
+                    appCodeName: navigator.appCodeName || 'N/A',
+                    appName: navigator.appName || 'N/A',
+                    appVersion: navigator.appVersion || 'N/A',
+                    product: navigator.product || 'N/A',
+                    productSub: navigator.productSub || 'N/A',
+                    vendorSub: navigator.vendorSub || 'N/A',
+                    mimeTypes: Array.from(navigator.mimeTypes).map(mime => mime.type).join(', ') || 'N/A',
+                    plugins: Array.from(navigator.plugins).map(plugin => plugin.name).join(', ') || 'N/A',
+                    networkType: navigator.connection ? navigator.connection.type || 'N/A' : 'N/A',
+                    effectiveNetworkType: navigator.connection ? navigator.connection.effectiveType || 'N/A' : 'N/A',
+                    downlink: navigator.connection ? navigator.connection.downlink || 'N/A' : 'N/A',
+                    rtt: navigator.connection ? navigator.connection.rtt || 'N/A' : 'N/A',
+                    saveData: navigator.connection ? navigator.connection.saveData || 'N/A' : 'N/A'
+                };
+
+                for (const [key, value] of Object.entries(clientInfo)) {
+                    if (value !== 'N/A') {
+                        const li = document.createElement('li');
+                        li.innerHTML = `<strong>${key}:</strong> ${value}`;
+                        ul.appendChild(li);
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching visitor information:', error);
+            }
+        }
+
+        fetchVisitorInfo();
+    </script>
+</body>
+</html>
