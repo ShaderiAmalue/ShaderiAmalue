@@ -27,7 +27,7 @@ export default function handler(req, res) {
         }
     });
 
-    let visitorInfoHtml = `<h1>Hi hi noob! Is this yo info? Hahaha Lelelelellele 🤪</h1>`;
+    let visitorInfoHtml = `<h1>baby shark ddodoodododood baby shark dododoodododood</h1>`;
     visitorInfoHtml += `<ul>`;
     for (const [key, value] of Object.entries(visitorInfo)) {
         visitorInfoHtml += `<li><strong>${key}:</strong> ${value}</li>`;
