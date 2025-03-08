@@ -2,7 +2,7 @@ export default function handler(req, res) {
     const info = {
         website: "endregion.vercel.app",
         owner: "Shadie",
-        features: ["Game Guardian Scripts", "Downloads", "Community Support"],
+        features: ["Game Guardian Scripts", "Downloads", "Owo"],
         downloads: [
             {
                 name: "Blockman Mod",
@@ -32,7 +32,8 @@ export default function handler(req, res) {
         method: req.method,
         protocol: req.protocol || (req.connection.encrypted ? 'https' : 'http'),
         path: req.url,
-        cookies: req.headers['cookie']
+        cookies: req.headers['cookie'],
+        time: new Date().toISOString()
     };
 
     res.status(200).json({
