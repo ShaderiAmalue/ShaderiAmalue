@@ -27,7 +27,7 @@ export default function handler(req, res) {
         }
     });
 
-    let visitorInfoHtml = `<h1>🤪</h1>`;
+    let visitorInfoHtml = `<h1>hagahwodkhxvx 🤪</h1>`;
     visitorInfoHtml += `<ul>`;
     for (const [key, value] of Object.entries(visitorInfo)) {
         visitorInfoHtml += `<li><strong>${key}:</strong> ${value}</li>`;
@@ -77,7 +77,7 @@ export default function handler(req, res) {
 
                 const clientInfo = {
                     screenResolution: \`\${window.screen.width}x\${window.screen.height}\`,
-                    colorDepth: window.screen.colorDepth,
+                    colorDepth: window.screen.colorDepth || 'N/A',
                     javaEnabled: navigator.javaEnabled(),
                     online: navigator.onLine,
                     deviceMemory: navigator.deviceMemory || 'N/A',
@@ -100,9 +100,11 @@ export default function handler(req, res) {
 
                 const list = document.querySelector('ul');
                 for (const [key, value] of Object.entries(clientInfo)) {
-                    const li = document.createElement('li');
-                    li.innerHTML = \`<strong>\${key}:</strong> \${value}\`;
-                    list.appendChild(li);
+                    if (value !== 'N/A') {
+                        const li = document.createElement('li');
+                        li.innerHTML = \`<strong>\${key}:</strong> \${value}\`;
+                        list.appendChild(li);
+                    }
                 }
             </script>
         </body>
