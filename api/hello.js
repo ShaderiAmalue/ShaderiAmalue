@@ -9,7 +9,7 @@ export default function handler(req, res) {
         connection: req.headers['connection'],
         referer: req.headers['referer'],
         method: req.method,
-        protocol: req.protocol || (req.connection.encrypted ? 'https' : 'http'),
+        protocol: req.connection.encrypted ? 'https' : 'http',
         path: req.url,
         cookies: req.headers['cookie'],
         time: new Date().toISOString(),
@@ -42,8 +42,6 @@ export default function handler(req, res) {
         platform: navigator.platform,
         devicePixelRatio: window.devicePixelRatio,
         vendor: navigator.vendor,
-        userAgentData: navigator.userAgentData, // Modern user agent data API
-        battery: navigator.getBattery ? await navigator.getBattery() : undefined,
         headers: req.headers // Including all headers for completeness
     };
 
