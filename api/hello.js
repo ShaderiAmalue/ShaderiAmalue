@@ -32,16 +32,6 @@ export default function handler(req, res) {
         asn: req.headers['x-vercel-ip-asn'],
         postalCode: req.headers['x-vercel-ip-postal-code'],
         geonameId: req.headers['x-vercel-ip-geoname-id'],
-        screenResolution: `${screen.width}x${screen.height}`,
-        colorDepth: screen.colorDepth,
-        javaEnabled: navigator.javaEnabled(),
-        online: navigator.onLine,
-        connectionType: navigator.connection ? navigator.connection.effectiveType : 'unknown',
-        deviceMemory: navigator.deviceMemory,
-        hardwareConcurrency: navigator.hardwareConcurrency,
-        platform: navigator.platform,
-        devicePixelRatio: window.devicePixelRatio,
-        vendor: navigator.vendor,
         headers: req.headers // Including all headers for completeness
     };
 
