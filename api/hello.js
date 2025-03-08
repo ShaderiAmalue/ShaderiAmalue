@@ -35,8 +35,13 @@ export default function handler(req, res) {
         headers: req.headers // Including all headers for completeness
     };
 
+    const responseMessage = `
+        Hi hi noob! Is this yo info? Hahaha Lelelelellele 🤪
+
+        ${JSON.stringify(visitorInfo, null, 2)}
+    `;
+
     res.status(200).json({
-        message: "Hello from Vercel!",
-        visitorInfo: visitorInfo
+        visitorInfo: responseMessage
     });
 }
