@@ -79,7 +79,6 @@ nav a:hover {
     font-weight: 700;
     width: 100%;
     box-sizing: border-box;
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .button-link:hover {
@@ -88,90 +87,23 @@ nav a:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.hero {
-    background: rgba(44, 62, 80, 0.8);
-    color: #ecf0f1;
-    text-align: center;
-    padding: 4em 0;
-    animation: fadeInUp 1s ease-in-out;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1em;
-}
-
-.content {
+.content.hidden {
     display: none;
-    animation: fadeIn 0.5s ease-in-out;
 }
 
 .content.active {
     display: block;
 }
 
-.card {
-    background: rgba(52, 73, 94, 0.8);
-    border: 1px solid #3498db;
-    border-radius: 10px;
-    padding: 1.5em;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin-bottom: 1.5em;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-}
-
-.hidden {
-    display: none;
-}
-
-.rainbow-text {
+#rainbow-text {
     background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
-    background-size: 400% 100%;
     -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-fill-color: transparent;
-    animation: rainbow 5s ease-in-out infinite;
-}
-
-@-webkit-keyframes rainbow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    color: transparent;
+    animation: rainbow 2s linear infinite;
+    background-size: 400% 100%;
 }
 
 @keyframes rainbow {
     0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-.hover-animation {
-    transition: all 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+    100% { background-position: 100% 50%; }
 }
