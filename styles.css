@@ -151,11 +151,11 @@ nav a:hover {
 }
 
 #rainbow-text {
-    background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    background: linear-gradient(270deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3, #ff0000);
+    background-size: 1600% 1600%;
     -webkit-background-clip: text;
     color: transparent;
-    animation: rainbow 2s linear infinite;
-    background-size: 400% 100%;
+    animation: rainbow 20s ease infinite;
     border: 2px solid var(--accent-color);
     padding: 0.5em;
     border-radius: 10px;
@@ -163,7 +163,8 @@ nav a:hover {
 
 @keyframes rainbow {
     0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 #roblox-script {
