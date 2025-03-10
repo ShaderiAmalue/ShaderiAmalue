@@ -2,8 +2,8 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: #f5f5f5;
-    color: #333;
+    background: #121212;
+    color: #9c27b0;
     margin: 0;
     padding: 0;
     display: flex;
@@ -12,8 +12,7 @@ body {
 }
 
 header {
-    background: #6200ea;
-    color: #fff;
+    background: #1f1f1f;
     padding: 1em 0;
     text-align: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -22,6 +21,10 @@ header {
 header h1 {
     margin: 0;
     font-size: 2rem;
+    color: #9c27b0;
+    border: 2px solid #9c27b0;
+    padding: 0.5em;
+    border-radius: 10px;
 }
 
 .container {
@@ -31,8 +34,7 @@ header h1 {
 
 .sidebar {
     width: 20%;
-    background-color: #333;
-    color: #fff;
+    background-color: #2c2c2c;
     padding: 1rem;
     box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
 }
@@ -48,12 +50,13 @@ nav ul li {
 }
 
 nav a {
-    color: #fff;
+    color: #9c27b0;
     text-decoration: none;
     font-size: 1.2rem;
     display: block;
     padding: 0.5rem;
     border-radius: 4px;
+    border: 2px solid #9c27b0;
     transition: background 0.3s ease, transform 0.3s ease;
 }
 
@@ -66,14 +69,19 @@ nav a:hover {
     width: 80%;
     padding: 2rem;
     overflow-y: auto;
+    background: #1f1f1f;
+    color: #9c27b0;
+    border: 2px solid #9c27b0;
+    border-radius: 10px;
 }
 
 .card {
-    background-color: #fff;
+    background-color: #2c2c2c;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 1rem;
     margin-bottom: 1rem;
+    border: 2px solid #9c27b0;
 }
 
 .button-link {
@@ -112,6 +120,9 @@ nav a:hover {
     color: transparent;
     animation: rainbow 2s linear infinite;
     background-size: 400% 100%;
+    border: 2px solid #9c27b0;
+    padding: 0.5em;
+    border-radius: 10px;
 }
 
 @keyframes rainbow {
