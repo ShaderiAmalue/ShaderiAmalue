@@ -2,8 +2,8 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: #121212;
-    color: #ecf0f1;
+    background: #f5f5f5;
+    color: #333;
     margin: 0;
     padding: 0;
     display: flex;
@@ -12,7 +12,8 @@ body {
 }
 
 header {
-    background: #1f1f1f;
+    background: #6200ea;
+    color: #fff;
     padding: 1em 0;
     text-align: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -30,13 +31,16 @@ header h1 {
 
 .sidebar {
     width: 20%;
-    background-color: #1f1f1f;
+    background-color: #333;
+    color: #fff;
     padding: 1rem;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
 }
 
 nav ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 nav ul li {
@@ -44,32 +48,37 @@ nav ul li {
 }
 
 nav a {
-    color: #ecf0f1;
+    color: #fff;
     text-decoration: none;
     font-size: 1.2rem;
-    transition: color 0.3s ease, transform 0.3s ease;
+    display: block;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background 0.3s ease, transform 0.3s ease;
 }
 
 nav a:hover {
-    color: #6200ea;
+    background: #6200ea;
     transform: scale(1.05);
 }
 
 .content-area {
     width: 80%;
     padding: 2rem;
+    overflow-y: auto;
 }
 
 .card {
-    background-color: #333333;
+    background-color: #fff;
     border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 1rem;
     margin-bottom: 1rem;
 }
 
 .button-link {
     background-color: #6200ea;
-    color: #ecf0f1;
+    color: #fff;
     padding: 0.75em 1.5em;
     border-radius: 5px;
     text-align: center;
@@ -80,12 +89,13 @@ nav a:hover {
     font-weight: 700;
     width: 100%;
     box-sizing: border-box;
+    transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .button-link:hover {
-    background-color: #3498db;
+    background-color: #3700b3;
     transform: scale(1.05);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .content.hidden {
