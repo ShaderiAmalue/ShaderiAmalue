@@ -116,7 +116,37 @@ nav a:hover {
     background: var(--gradient);
     color: var(--text-color);
     padding: 0.75em 1.5em;
-    border-radius:: 1;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-block;
+    margin-top: 0.5em;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    width: 100%;
+    box-sizing: border-box;
+    transition: background var(--transition), transform var(--transition);
+}
+
+.button-link:hover {
+    background: var(--secondary-color);
+    transform: scale(1.05);
+    box-shadow: var(--box-shadow);
+}
+
+.button-link:active {
+    background: var(--secondary-color);
+    transform: scale(1.05);
+    box-shadow: var(--box-shadow);
+}
+
+.content.hidden {
+    display: none;
+}
+
+.content.active {
+    display: block;
+    opacity: 1;
     transform: translateY(0);
 }
 
