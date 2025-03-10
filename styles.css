@@ -3,7 +3,7 @@
 body {
     font-family: 'Poppins', sans-serif;
     background: #121212;
-    color: #9c27b0;
+    color: #ffffff;
     margin: 0;
     padding: 0;
     display: flex;
@@ -13,18 +13,22 @@ body {
 
 header {
     background: #1f1f1f;
-    padding: 1em 0;
     text-align: center;
+    padding: 1em 0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.header-container {
+    display: inline-block;
+    border: 2px solid #9c27b0;
+    padding: 0.5em;
+    border-radius: 10px;
 }
 
 header h1 {
     margin: 0;
     font-size: 2rem;
-    color: #9c27b0;
-    border: 2px solid #9c27b0;
-    padding: 0.5em;
-    border-radius: 10px;
+    color: #ffffff;
 }
 
 .container {
@@ -50,7 +54,7 @@ nav ul li {
 }
 
 nav a {
-    color: #9c27b0;
+    color: #ffffff;
     text-decoration: none;
     font-size: 1.2rem;
     display: block;
@@ -70,7 +74,7 @@ nav a:hover {
     padding: 2rem;
     overflow-y: auto;
     background: #1f1f1f;
-    color: #9c27b0;
+    color: #ffffff;
     border: 2px solid #9c27b0;
     border-radius: 10px;
 }
