@@ -2,72 +2,73 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: #2c3e50;
+    background: #121212;
     color: #ecf0f1;
     margin: 0;
     padding: 0;
     display: flex;
-    flex-direction: column;
     height: 100vh;
-    overflow-y: auto;
     transition: opacity 1s ease-in-out;
 }
 
 header {
-    background: rgba(41, 128, 185, 0.9);
+    background: #1f1f1f;
     padding: 1em 0;
     text-align: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1em;
-}
-
 header h1 {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    animation: text-shadow-pulse 1.5s ease-in-out infinite;
+    margin: 0;
+    font-size: 2rem;
 }
 
-@keyframes text-shadow-pulse {
-    0%, 100% {
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    }
-    50% {
-        text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7);
-    }
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.sidebar {
+    width: 20%;
+    background-color: #1f1f1f;
+    padding: 1rem;
 }
 
 nav ul {
     list-style: none;
     padding: 0;
-    display: flex;
-    gap: 1em;
+}
+
+nav ul li {
+    margin: 1rem 0;
 }
 
 nav a {
     color: #ecf0f1;
     text-decoration: none;
-    padding: 0.5em 1em;
-    border-radius: 5px;
-    background-color: rgba(52, 152, 219, 0.5);
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    font-weight: 700;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: 1.2rem;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 nav a:hover {
-    background-color: rgba(52, 152, 219, 0.8);
+    color: #6200ea;
     transform: scale(1.05);
 }
 
+.content {
+    width: 80%;
+    padding: 2rem;
+}
+
+.card {
+    background-color: #333333;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
 .button-link {
-    background-color: #2980b9;
+    background-color: #6200ea;
     color: #ecf0f1;
     padding: 0.75em 1.5em;
     border-radius: 5px;
