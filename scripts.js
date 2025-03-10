@@ -21,4 +21,12 @@ document.addEventListener('DOMContentLoaded', function() {
             rainbowText.style.backgroundPosition = `${Math.random() * 100}% ${Math.random() * 100}%`;
         }, 300);
     }
+
+    document.addEventListener('contextmenu', function(event) {
+        event.preventDefault();
+    });
+
+    document.addEventListener('selectstart', function(event) {
+        event.preventDefault();
+    });
 });
