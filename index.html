@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RegionG</title>
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
-    <link rel="icon" href="../regionG.png" type="image/png">
+    <link rel="icon" href="regionG.png" type="image/png">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JKXGMHQTVF"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -17,28 +17,24 @@
 </head>
 <body>
     <header>
-        <div class="container">
-            <h1>RegionG</h1>
-            <nav>
-                <ul>
-                    <li><a href="#" data-target="home">Home</a></li>
-                    <li><a href="#" data-target="blockman">Blockman</a></li>
-                </ul>
-            </nav>
-        </div>
+        <h1>RegionG</h1>
     </header>
-    <main>
-        <section id="home" class="content active">
-            <div class="container">
+    <div class="container">
+        <nav class="sidebar">
+            <ul>
+                <li><a href="#" data-target="home">Home</a></li>
+                <li><a href="#" data-target="blockman">Blockman</a></li>
+            </ul>
+        </nav>
+        <main class="content">
+            <section id="home" class="content active">
                 <div class="card">
                     <h3>About Us</h3>
                     <p>RegionG provides Http Canary Stuff, Game Guardian Leaked Scripts.</p>
                     <h3 id="rainbow-text" class="rainbow-text">Owner: Shadie</h3>
                 </div>
-            </div>
-        </section>
-        <section id="blockman" class="content hidden">
-            <div class="container">
+            </section>
+            <section id="blockman" class="content hidden">
                 <h2>Blockman</h2>
                 <div class="card">
                     <h3 class="tooltip">Blockman Mod
@@ -56,9 +52,9 @@
                     <h3>Game Guardian Scripts</h3>
                     <a href="https://www.mediafire.com/file/phdn555ku2r137q/GGScripts.zip/file" target="_blank" class="button-link">Download Game Guardian Scripts</a>
                 </div>
-            </div>
-        </section>
-    </main>
-    <script src="../scripts.js"></script>
+            </section>
+        </main>
+    </div>
+    <script src="scripts.js"></script>
 </body>
 </html>
