@@ -1,9 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
+:root {
+    --primary-color: #6200ea;
+    --secondary-color: #3700b3;
+    --background-color: #121212;
+    --header-background: #1f1f1f;
+    --sidebar-background: #2c2c2c;
+    --card-background: #2c2c2c;
+    --text-color: #ffffff;
+    --accent-color: #9c27b0;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
-    background: #121212;
-    color: #ffffff;
+    background: var(--background-color);
+    color: var(--text-color);
     margin: 0;
     padding: 0;
     display: flex;
@@ -13,7 +24,7 @@ body {
 }
 
 header {
-    background: #1f1f1f;
+    background: var(--header-background);
     text-align: center;
     padding: 1em 0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -21,7 +32,7 @@ header {
 
 .header-container {
     display: inline-block;
-    border: 2px solid #9c27b0;
+    border: 2px solid var(--accent-color);
     padding: 0.5em;
     border-radius: 10px;
 }
@@ -29,7 +40,7 @@ header {
 header h1 {
     margin: 0;
     font-size: 2rem;
-    color: #ffffff;
+    color: var(--text-color);
 }
 
 .container {
@@ -40,7 +51,7 @@ header h1 {
 
 .sidebar {
     width: 20%;
-    background-color: transparent;
+    background-color: var(--sidebar-background);
     padding: 1rem;
     box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
@@ -57,18 +68,18 @@ nav ul li {
 }
 
 nav a {
-    color: #ffffff;
+    color: var(--text-color);
     text-decoration: none;
     font-size: 1.2rem;
     display: block;
     padding: 0.5rem;
     border-radius: 4px;
-    border: 2px solid #9c27b0;
+    border: 2px solid var(--accent-color);
     transition: background 0.3s ease, transform 0.3s ease;
 }
 
 nav a:hover {
-    background: #6200ea;
+    background: var(--primary-color);
     transform: scale(1.05);
 }
 
@@ -76,25 +87,25 @@ nav a:hover {
     width: 80%;
     padding: 2rem;
     overflow-y: auto;
-    background: transparent;
-    color: #ffffff;
-    border: 2px solid #9c27b0;
+    background: var(--background-color);
+    color: var(--text-color);
+    border: 2px solid var(--accent-color);
     border-radius: 10px;
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .card {
-    background-color: transparent;
+    background-color: var(--card-background);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 1rem;
     margin-bottom: 1rem;
-    border: 2px solid #9c27b0;
+    border: 2px solid var(--accent-color);
 }
 
 .button-link {
-    background-color: #6200ea;
-    color: #fff;
+    background-color: var(--primary-color);
+    color: var(--text-color);
     padding: 0.75em 1.5em;
     border-radius: 5px;
     text-align: center;
@@ -109,13 +120,13 @@ nav a:hover {
 }
 
 .button-link:hover {
-    background-color: #3700b3;
+    background-color: var(--secondary-color);
     transform: scale(1.05);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .button-link:active {
-    background-color: #3700b3;
+    background-color: var(--secondary-color);
     transform: scale(1.05);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -136,7 +147,7 @@ nav a:hover {
     color: transparent;
     animation: rainbow 2s linear infinite;
     background-size: 400% 100%;
-    border: 2px solid #9c27b0;
+    border: 2px solid var(--accent-color);
     padding: 0.5em;
     border-radius: 10px;
 }
@@ -149,9 +160,9 @@ nav a:hover {
 #roblox-script {
     width: 70%;
     height: 100px;
-    background: transparent;
+    background: var(--card-background);
     color: #00ff00;
-    border: 2px solid #9c27b0;
+    border: 2px solid var(--accent-color);
     border-radius: 8px;
     padding: 1rem;
     font-family: 'Courier New', Courier, monospace;
@@ -161,8 +172,8 @@ nav a:hover {
 
 #roblox-script:focus {
     outline: none;
-    border-color: #6200ea;
-    box-shadow: 0 0 10px #6200ea;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px var(--primary-color);
 }
 
 .notification {
@@ -170,8 +181,8 @@ nav a:hover {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #2c2c2c;
-    color: #ffffff;
+    background-color: var(--card-background);
+    color: var(--text-color);
     padding: 1rem;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
