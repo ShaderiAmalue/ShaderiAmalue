@@ -55,7 +55,7 @@ nav a:hover {
     transform: scale(1.05);
 }
 
-.content {
+.content-area {
     width: 80%;
     padding: 2rem;
 }
