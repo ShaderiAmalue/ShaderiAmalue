@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const links = document.querySelectorAll('nav a');
     const contents = document.querySelectorAll('.content');
+    const buttons = document.querySelectorAll('.button-link');
 
     links.forEach(link => {
         link.addEventListener('click', function(event) {
@@ -28,6 +29,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.addEventListener('selectstart', function(event) {
         event.preventDefault();
+    });
+
+    buttons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            this.classList.add('hover');
+        });
+        button.addEventListener('mouseleave', function() {
+            this.classList.remove('hover');
+        });
     });
 
     showNotification('Welcome to RegionG!');
