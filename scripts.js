@@ -1,42 +1,49 @@
-document.addEventListener('DOMContentLoaded', function() {
-  const links = document.querySelectorAll('.nav-link');
-  const contents = document.querySelectorAll('.content');
-  
-  links.forEach(link => {
-    link.addEventListener('click', function(e) {
+document.addEventListener('DOMContentLoaded', function () {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('.content');
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', function (e) {
       e.preventDefault();
-      const target = this.getAttribute('data-target');
-      links.forEach(item => item.classList.remove('active'));
+      const targetId = this.getAttribute('data-target');
+      navLinks.forEach(l => l.classList.remove('active'));
       this.classList.add('active');
-      contents.forEach(content => {
-        content.classList.remove('active');
-        if (content.id === target) {
-          content.classList.add('active');
+      sections.forEach(section => {
+        if (section.id === targetId) {
+          section.classList.add('active');
+          // Animate section appearance using Web Animations API
+          section.animate([{ opacity: 0 }, { opacity: 1 }], {
+            duration: 600,
+            easing: 'ease-out'
+          });
+        } else {
+          section.classList.remove('active');
         }
       });
     });
   });
-
-  showNotification('Welcome to ShadieVerse!');
+  showNotification('Welcome to ShadieVerse! Enjoy the ultimate experience.');
 });
 
 function showNotification(message) {
   const container = document.getElementById('notification-container');
-  const notification = document.createElement('div');
-  notification.className = 'notification';
-  notification.textContent = message;
-  container.appendChild(notification);
-
+  const note = document.createElement('div');
+  note.classList.add('notification');
+  note.textContent = message;
+  container.appendChild(note);
   setTimeout(() => {
-    notification.remove();
+    note.style.opacity = 0;
+    setTimeout(() => note.remove(), 500);
   }, 3000);
 }
 
 function copyRobloxScript() {
-  const scriptText = document.getElementById('roblox-script').textContent;
-  navigator.clipboard.writeText(scriptText).then(() => {
-    showNotification('Script copied to clipboard');
-  }).catch(() => {
-    showNotification('Failed to copy script');
-  });
+  const scriptContent = document.getElementById('roblox-script').textContent;
+  navigator.clipboard.writeText(scriptContent)
+    .then(() => {
+      showNotification('Script copied to clipboard.');
+    })
+    .catch(() => {
+      showNotification('Failed to copy script.');
+    });
 }
