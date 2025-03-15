@@ -1,7 +1,8 @@
-async function fetchDiscordProfile() {
+async function fetchDiscordProfile(userId) {
   try {
-    const response = await fetch("http://localhost:3000/api/discord-profile");
+    const response = await fetch(`http://localhost:3000/api/discord-profile?userId=${userId}`);
     const result = await response.json();
+
     if (result.status === "success") {
       const user = result.data;
       document.getElementById("discord-profile").innerHTML = `
@@ -13,7 +14,7 @@ async function fetchDiscordProfile() {
       document.getElementById("discord-profile").innerHTML = `<p>Error: ${result.message}</p>`;
     }
   } catch (error) {
-    document.getElementById("discord-profile").innerHTML = `<p>Failed to load Discord profile. Please try again later.</p>`;
+    document.getElementById("discord-profile").innerHTML = `<p>Failed to load Discord profile. Please make sure the server is running.</p>`;
   }
 }
 
@@ -30,6 +31,7 @@ function showNotification(message) {
   notification.className = "notification";
   notification.textContent = message;
   notificationContainer.appendChild(notification);
+
   setTimeout(() => notification.classList.add("show"), 10);
   setTimeout(() => {
     notification.classList.remove("show");
@@ -52,6 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   });
-  fetchDiscordProfile();
+  fetchDiscordProfile("1238870905799835718"); // Replace with actual user ID if needed
   showNotification("Welcome to ShadieVerse!");
 });
