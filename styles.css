@@ -86,15 +86,7 @@ body {
   color: var(--text);
 }
 
-.parallax {
-  background-image: url('https://picsum.photos/seed/parallax/1920/1080');
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center;
-  height: 300px;
-  filter: brightness(0.7);
-  image-rendering: auto;
-}
+
 
 .container {
   display: flex;
