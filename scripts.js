@@ -1,39 +1,19 @@
 document.addEventListener('DOMContentLoaded', function() {
-  const links = document.querySelectorAll('nav a');
+  const links = document.querySelectorAll('.nav-link');
   const contents = document.querySelectorAll('.content');
-  const buttons = document.querySelectorAll('.button-link');
-
+  
   links.forEach(link => {
-    link.addEventListener('click', function(event) {
-      event.preventDefault();
-      const targetId = this.getAttribute('data-target');
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = this.getAttribute('data-target');
+      links.forEach(item => item.classList.remove('active'));
+      this.classList.add('active');
       contents.forEach(content => {
-        content.classList.toggle('hidden', content.id !== targetId);
-        content.classList.toggle('active', content.id === targetId);
+        content.classList.remove('active');
+        if (content.id === target) {
+          content.classList.add('active');
+        }
       });
-    });
-  });
-
-  document.body.classList.add('fade-in');
-
-  const rainbowText = document.getElementById('rainbow-text');
-  if (rainbowText) {
-    setInterval(() => {
-      const x = Math.random() * 100;
-      const y = Math.random() * 100;
-      rainbowText.style.backgroundPosition = `${x}% ${y}%`;
-    }, 300);
-  }
-
-  document.addEventListener('contextmenu', e => e.preventDefault());
-  document.addEventListener('selectstart', e => e.preventDefault());
-
-  buttons.forEach(button => {
-    button.addEventListener('mouseenter', function() {
-      this.classList.add('hover');
-    });
-    button.addEventListener('mouseleave', function() {
-      this.classList.remove('hover');
     });
   });
 
@@ -41,17 +21,14 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function showNotification(message) {
-  const notificationContainer = document.getElementById('notification-container');
+  const container = document.getElementById('notification-container');
   const notification = document.createElement('div');
   notification.className = 'notification';
   notification.textContent = message;
-  notificationContainer.appendChild(notification);
-  setTimeout(() => notification.classList.add('show'), 10);
+  container.appendChild(notification);
+
   setTimeout(() => {
-    notification.classList.remove('show');
-    setTimeout(() => {
-      if (notification.parentNode) notification.parentNode.removeChild(notification);
-    }, 300);
+    notification.remove();
   }, 3000);
 }
 
