@@ -58,12 +58,13 @@ body {
 #mode-toggle:hover { transform: scale(1.1); }
 .neon-text { color: var(--text); }
 .parallax {
-  background-image: url('https://picsum.photos/1920/1080?blur=2');
+  background-image: url('https://picsum.photos/seed/parallax/1920/1080');
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
   height: 300px;
   filter: brightness(0.7);
+  image-rendering: auto;
 }
 .container {
   display: flex;
@@ -150,6 +151,7 @@ body {
 .carousel-wrapper img {
   width: 100%;
   object-fit: cover;
+  image-rendering: optimizeQuality;
 }
 .animated-text {
   background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #8b00ff);
@@ -171,6 +173,7 @@ pre {
   overflow-x: auto;
   max-width: 100%;
   box-shadow: var(--shadow);
+  image-rendering: auto;
 }
 code {
   font-family: 'Courier New', Courier, monospace;
