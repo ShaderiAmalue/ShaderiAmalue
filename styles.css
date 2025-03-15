@@ -4,7 +4,7 @@
   --primary-color: #444444;
   --secondary-color: #333333;
   --background-color: #1a1a1a;
-  --header-background: linear-gradient(135deg, #2b2b2b, #1f1f1f);
+  --header-background: #2b2b2b;
   --sidebar-background: #2c2c2c;
   --card-background: #252525;
   --text-color: #d4d4d4;
@@ -17,15 +17,11 @@
 * {
   box-sizing: border-box;
 }
-
-html,
-body {
+html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  scroll-behavior: smooth;
 }
-
 body {
   font-family: 'Poppins', sans-serif;
   background: var(--background-color);
@@ -36,93 +32,81 @@ body {
   overflow-x: hidden;
   transition: opacity 1s ease-in-out;
 }
-
 header {
   background: var(--header-background);
   text-align: center;
   padding: 1em 0;
   box-shadow: var(--box-shadow);
 }
-
 .header-container {
   display: inline-block;
   border: 2px solid var(--accent-color);
-  padding: 0.5em 1em;
+  padding: 0.5em;
   border-radius: 10px;
 }
-
 header h1 {
   margin: 0;
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: var(--text-color);
   animation: fadeIn 2s ease-in-out;
 }
-
 .container {
   display: flex;
   flex: 1;
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 80px);
 }
-
 .sidebar {
-  width: 240px;
+  width: 220px;
   background-color: var(--sidebar-background);
   padding: 1rem;
   box-shadow: 2px 0 12px rgba(0, 0, 0, 0.2);
   transition: transform var(--transition);
 }
-
 nav ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-
 nav ul li {
   margin: 1rem 0;
 }
-
 nav a {
   color: var(--text-color);
   text-decoration: none;
   font-size: 1.2rem;
   display: block;
-  padding: 0.5rem 0.75rem;
+  padding: 0.5rem;
   border-radius: 4px;
   border: 2px solid var(--accent-color);
   transition: background var(--transition), transform var(--transition);
 }
-
 nav a:hover {
   background: var(--primary-color);
   transform: scale(1.05);
 }
-
 .content-area {
   flex: 1;
   padding: 2rem;
   overflow-y: auto;
   background: var(--background-color);
   color: var(--text-color);
+  border: 2px solid var(--accent-color);
   border-radius: 10px;
   margin: 1rem;
   transition: opacity var(--transition), transform var(--transition);
 }
-
 .card {
   background-color: var(--card-background);
-  border-radius: 12px;
+  border-radius: 8px;
   box-shadow: var(--box-shadow);
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
   border: 2px solid var(--accent-color);
   transition: transform var(--transition);
 }
-
 .card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-10px);
 }
-
 .button-link {
   background: var(--gradient);
   color: var(--text-color);
@@ -130,69 +114,45 @@ nav a:hover {
   border-radius: 5px;
   text-align: center;
   display: inline-block;
-  margin-top: 1rem;
+  margin-top: 0.5em;
   border: none;
   cursor: pointer;
   font-weight: 700;
   width: 100%;
-  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  transition: background var(--transition), transform var(--transition);
 }
-
 .button-link:hover {
   background: linear-gradient(135deg, #333333, #444444);
-  transform: scale(1.03);
+  transform: scale(1.05);
   box-shadow: var(--box-shadow);
 }
-
+.button-link:active {
+  transform: scale(1.05);
+  box-shadow: var(--box-shadow);
+}
 .content.hidden {
   display: none;
 }
-
 .content.active {
   display: block;
   opacity: 1;
   transform: translateY(0);
 }
-
-#discord-profile {
-  margin-top: 1rem;
-}
-
-.profile-card {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  background: var(--card-background);
+#rainbow-text {
+  background: linear-gradient(270deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3, #ff0000);
+  background-size: 1600% 1600%;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: rainbow 20s ease infinite;
   border: 2px solid var(--accent-color);
+  padding: 0.5em;
   border-radius: 10px;
-  padding: 1rem;
-  box-shadow: var(--box-shadow);
-  text-align: center;
-  color: var(--text-color);
-  transition: transform var(--transition);
 }
-
-.profile-card:hover {
-  transform: scale(1.02);
+@keyframes rainbow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
-
-.profile-card img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  border: 2px solid var(--accent-color);
-  margin-bottom: 1rem;
-}
-
-.profile-card h4 {
-  margin: 0.5rem 0;
-  font-size: 1.6rem;
-}
-
-.profile-card p {
-  font-size: 1rem;
-}
-
 #roblox-script {
   display: block;
   width: 100%;
@@ -208,13 +168,11 @@ nav a:hover {
   overflow: auto;
   box-shadow: var(--box-shadow);
 }
-
 #roblox-script:focus {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 10px var(--primary-color);
 }
-
 .notification {
   position: fixed;
   bottom: 20px;
@@ -229,12 +187,10 @@ nav a:hover {
   transition: opacity var(--transition), transform var(--transition);
   z-index: 1000;
 }
-
 .notification.show {
   opacity: 1;
   transform: translateX(-50%) translateY(-10px);
 }
-
 pre[class*="language-"] {
   background: #2d2d2d;
   border-radius: 8px;
@@ -243,17 +199,14 @@ pre[class*="language-"] {
   max-width: 100%;
   color: #d4d4d4;
 }
-
 code[class*="language-"] {
   background: none;
   color: inherit;
 }
-
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-
 .fade-in {
   animation: fadeIn 1s ease-in-out;
 }
