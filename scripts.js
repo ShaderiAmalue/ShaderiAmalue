@@ -26,13 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 300);
   }
 
-  document.addEventListener('contextmenu', function(event) {
-    event.preventDefault();
-  });
-
-  document.addEventListener('selectstart', function(event) {
-    event.preventDefault();
-  });
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('selectstart', e => e.preventDefault());
 
   buttons.forEach(button => {
     button.addEventListener('mouseenter', function() {
@@ -44,6 +39,12 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   showNotification('Welcome to ShadieVerse!');
+  
+  if (!navigator.onLine) {
+    showOfflineOverlay();
+  }
+  window.addEventListener('offline', showOfflineOverlay);
+  window.addEventListener('online', hideOfflineOverlay);
 });
 
 function showNotification(message) {
@@ -52,12 +53,11 @@ function showNotification(message) {
   notification.className = 'notification';
   notification.textContent = message;
   notificationContainer.appendChild(notification);
-
   setTimeout(() => notification.classList.add('show'), 10);
   setTimeout(() => {
     notification.classList.remove('show');
     setTimeout(() => {
-      notificationContainer.removeChild(notification);
+      if (notification.parentNode) notification.parentNode.removeChild(notification);
     }, 300);
   }, 3000);
 }
@@ -69,4 +69,26 @@ function copyRobloxScript() {
   }).catch(() => {
     showNotification('Failed to copy script');
   });
+}
+
+function showOfflineOverlay() {
+  if (document.getElementById('offline-overlay')) return;
+  const overlay = document.createElement('div');
+  overlay.id = 'offline-overlay';
+  overlay.innerHTML = `
+    <div class="offline-container">
+      <h2>: ( Unable to Connect</h2>
+      <p>Please check your connection.</p>
+      <button id="reload-btn">Reload</button>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  document.getElementById('reload-btn').addEventListener('click', () => location.reload());
+}
+
+function hideOfflineOverlay() {
+  const overlay = document.getElementById('offline-overlay');
+  if (overlay) {
+    overlay.remove();
+  }
 }
