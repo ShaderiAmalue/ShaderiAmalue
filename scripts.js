@@ -39,24 +39,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
   document.body.classList.add('fade-in');
 
-  function fetchDiscordProfile(username) {
+ 
+  function loadDiscordProfile(userId) {
     const profileCard = document.getElementById('discord-profile');
-    fetch(`https://discordlookup.mesalytic.moe/v1/user/${username}`)
-      .then(response => response.json())
-      .then(data => {
-        profileCard.innerHTML = `
-          <img src="${data.avatar.link}" alt="${data.tag}'s Avatar">
-          <h4>${data.tag}</h4>
-          <p>ID: ${data.id}</p>
-        `;
-      })
-      .catch(error => {
-        profileCard.innerHTML = `<p>Failed to load profile. Please try again later.</p>`;
-        console.error('Error fetching Discord profile:', error);
-      });
+    const discordAvatarUrl = `https://cdn.discordapp.com/avatars/${userId}/${userId}.png?size=256`;
+
+    // Render the owner's static profile (ID-based)
+    profileCard.innerHTML = `
+      <img src="${discordAvatarUrl}" alt="Shadie's Avatar">
+      <h4>Shadie</h4>
+      <p>ID: ${userId}</p>
+    `;
   }
 
-  // Fetch your Discord profile (shadie_69 is the owner)
-  fetchDiscordProfile('shadie_69');
+  loadDiscordProfile('1238870905799835718');
   showNotification('Welcome to ShadieVerse!');
 });
