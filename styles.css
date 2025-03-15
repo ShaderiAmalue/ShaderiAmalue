@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
 :root {
-  --bg: #101010;
-  --glass: rgba(255, 255, 255, 0.1);
-  --header-bg: rgba(255, 255, 255, 0.15);
+  --bg: #141414;
+  --glass: rgba(255, 255, 255, 0.08);
+  --header-bg: rgba(255, 255, 255, 0.12);
   --accent: #00c9ff;
   --secondary: #92fe9d;
   --text: #e0e0e0;
-  --shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+  --shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
   --transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
@@ -23,18 +23,31 @@ html {
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: var(--bg);
+  background: linear-gradient(135deg, #1b1b1b, #141414);
   color: var(--text);
   line-height: 1.6;
   overflow-x: hidden;
+  animation: fadeInPage 1s ease-out forwards;
+}
+
+@keyframes fadeInPage {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .glass-header {
   background: var(--header-bg);
-  backdrop-filter: blur(10px);
-  padding: 1.5rem;
+  backdrop-filter: blur(12px);
+  padding: 2rem;
   text-align: center;
   box-shadow: var(--shadow);
+  position: relative;
 }
 
 .header-container {
@@ -47,14 +60,13 @@ body {
 }
 
 .header-container h1 {
-  font-size: 2.5rem;
-  color: var(--text);
-  text-shadow: 0 0 5px var(--accent);
+  font-size: 3rem;
+  text-shadow: 0 0 10px var(--accent);
   transition: text-shadow var(--transition);
 }
 
 .header-container h1:hover {
-  text-shadow: 0 0 15px var(--accent);
+  text-shadow: 0 0 20px var(--accent);
 }
 
 #mode-toggle {
@@ -70,6 +82,10 @@ body {
   transform: scale(1.1);
 }
 
+.neon-text {
+  color: var(--text);
+}
+
 .parallax {
   background-image: url('https://picsum.photos/seed/parallax/1920/1080');
   background-attachment: fixed;
@@ -77,6 +93,7 @@ body {
   background-position: center;
   height: 300px;
   filter: brightness(0.7);
+  image-rendering: auto;
 }
 
 .container {
@@ -90,89 +107,174 @@ body {
 .glass-sidebar {
   flex: 0 0 250px;
   background: var(--glass);
-  backdrop-filter: blur(10px);
-  padding: 1rem;
+  backdrop-filter: blur(8px);
+  padding: 1.5rem;
   border-radius: 12px;
   box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
 }
 
 .glass-sidebar ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .glass-sidebar li {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .nav-link {
   display: block;
   text-decoration: none;
   color: var(--text);
-  font-size: 1.1rem;
-  padding: 0.5rem;
-  border-radius: 8px;
-  transition: background var(--transition), transform var(--transition);
+  font-size: 1.2rem;
+  transition: transform var(--transition), color var(--transition);
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 .nav-link:hover,
 .nav-link.active {
-  background: var(--accent);
-  color: #000;
-  transform: scale(1.05);
+  color: var(--accent);
+  transform: scale(1.1);
 }
 
 .glass-content {
   flex: 1;
   background: var(--glass);
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(12px);
   padding: 2rem;
   border-radius: 12px;
   box-shadow: var(--shadow);
-  animation: fadeIn 0.5s ease-in forwards;
+  overflow: auto;
+  animation: slideIn 0.8s ease-out forwards;
 }
 
-@keyframes fadeIn {
+@keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateX(30px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
   }
 }
 
 .content {
-  display: none;
   opacity: 0;
+  visibility: hidden;
   transform: translateX(30px);
-  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 
 .content.active {
-  display: block;
   opacity: 1;
+  visibility: visible;
   transform: translateX(0);
 }
 
 .glass-card {
   background: var(--glass);
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: 16px;
   margin-bottom: 1.5rem;
+  box-shadow: var(--shadow);
   transition: transform var(--transition);
 }
 
 .glass-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-8px);
 }
 
-.notification {
+.button {
+  display: inline-block;
+  background: linear-gradient(45deg, var(--accent), var(--secondary));
+  color: #fff;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+.button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  margin: 2rem 0;
+  box-shadow: var(--shadow);
+}
+
+.carousel-wrapper {
+  display: flex;
+  transition: transform 0.8s ease-in-out;
+}
+
+.carousel-wrapper img {
+  width: 100%;
+  object-fit: cover;
+  image-rendering: optimizeQuality;
+}
+
+.animated-text {
+  background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #8b00ff);
+  background-size: 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbowEffect 10s ease infinite;
+  font-size: 1.5rem;
+}
+
+@keyframes rainbowEffect {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+pre {
+  background: var(--glass);
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  max-width: 100%;
+  box-shadow: var(--shadow);
+  image-rendering: auto;
+}
+
+code {
+  font-family: 'Courier New', Courier, monospace;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+#notification-container {
   position: fixed;
   top: 1.5rem;
   right: 1.5rem;
+  z-index: 1000;
+}
+
+.notification {
   background: var(--glass);
   backdrop-filter: blur(8px);
   padding: 1rem 1.5rem;
@@ -180,7 +282,6 @@ body {
   box-shadow: var(--shadow);
   color: var(--text);
   font-size: 0.9rem;
-  z-index: 1000;
   opacity: 0;
   animation: slideDown 0.5s ease-out forwards;
 }
@@ -200,9 +301,20 @@ body {
   .container {
     flex-direction: column;
   }
-
   .glass-sidebar {
     max-width: 100%;
     margin-bottom: 1rem;
   }
+}
+
+.light-mode {
+  --bg: #f0f0f0;
+  --glass: rgba(255, 255, 255, 0.5);
+  --header-bg: rgba(255, 255, 255, 0.7);
+  --accent: #0077cc;
+  --secondary: #66c2ff;
+  --text: #141414;
+  --shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #e0e0e0, #f0f0f0);
+  color: var(--text);
 }
