@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const links = document.querySelectorAll('nav a');
     const contents = document.querySelectorAll('.content');
     const buttons = document.querySelectorAll('.button-link');
+    const notificationContainer = document.getElementById('notification-container');
 
     links.forEach(link => {
         link.addEventListener('click', function(event) {
@@ -19,7 +20,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const rainbowText = document.getElementById('rainbow-text');
     if (rainbowText) {
         setInterval(() => {
-            rainbowText.style.backgroundPosition = `${Math.random() * 100}% ${Math.random() * 100}%`;
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            rainbowText.style.backgroundPosition = `${x}% ${y}%`;
         }, 300);
     }
 
@@ -40,23 +43,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    showNotification('Welcome to RegionG!');
-});
+    function showNotification(message) {
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.textContent = message;
+        notificationContainer.appendChild(notification);
 
-function showNotification(message) {
-    const notification = document.createElement('div');
-    notification.className = 'notification';
-    notification.textContent = message;
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        notification.classList.add('show');
-    }, 10);
-    
-    setTimeout(() => {
-        notification.classList.remove('show');
+        setTimeout(() => notification.classList.add('show'), 10);
+
         setTimeout(() => {
-            document.body.removeChild(notification);
-        }, 300);
-    }, 3000);
-}
+            notification.classList.remove('show');
+            setTimeout(() => notificationContainer.removeChild(notification), 300);
+        }, 3000);
+    }
+
+    showNotification('Welcome to Shadie!');
+});
