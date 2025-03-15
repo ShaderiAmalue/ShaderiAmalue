@@ -5,35 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ShadieVerse</title>
   <link rel="stylesheet" href="styles.css">
+  <!-- Google Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
   <link rel="icon" href="regionG.png" type="image/png">
 </head>
 <body>
   <header class="glass-header">
     <div class="header-container">
-      <h1>ShadieVerse</h1>
+      <h1 class="neon-text">ShadieVerse</h1>
     </div>
   </header>
 
-  <div class="main-container">
-    <nav class="glass-sidebar">
+  <div class="container">
+    <nav class="glass-sidebar" aria-label="Main Navigation">
       <ul>
         <li><a href="#" data-target="home" class="nav-link active">Home</a></li>
         <li><a href="#" data-target="blockman" class="nav-link">Blockman</a></li>
         <li><a href="#" data-target="roblox" class="nav-link">Roblox</a></li>
       </ul>
     </nav>
-
     <main class="glass-content">
-      <section id="home" class="content active">
+      <section id="home" class="content active" role="main">
         <div class="glass-card">
-          <h3>About Us</h3>
-          <p>ShadieVerse provides innovative tools and scripts to enhance your experience.</p>
-          <h3 id="rainbow-text">Credits: Shadie</h3>
+          <h2>About ShadieVerse</h2>
+          <p>Innovative tools and scripts designed to enhance your digital experience.</p>
+          <h3 id="rainbow-text" class="animated-text">Credits: Shadie</h3>
         </div>
       </section>
-
-      <section id="blockman" class="content">
+      <section id="blockman" class="content" role="main">
         <h2>Blockman</h2>
         <div class="glass-card">
           <h3>Blockman Mod</h3>
@@ -48,8 +47,7 @@
           <a href="https://www.mediafire.com/file/phdn555ku2r137q/GGScripts.zip/file" target="_blank" class="button">Download</a>
         </div>
       </section>
-
-      <section id="roblox" class="content">
+      <section id="roblox" class="content" role="main">
         <h2>Roblox</h2>
         <div class="glass-card">
           <pre><code id="roblox-script">loadstring(game:HttpGet("https://raw.githubusercontent.com/ShadieGit/Shadie-Ui/refs/heads/main/Main.lua", true))()</code></pre>
@@ -59,7 +57,7 @@
     </main>
   </div>
 
-  <div id="notification-container"></div>
+  <div id="notification-container" aria-live="polite"></div>
   <script src="scripts.js"></script>
 </body>
 </html>
