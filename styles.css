@@ -53,7 +53,7 @@ body {
 .header-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1rem;
   max-width: 1200px;
   margin: 0 auto;
@@ -98,21 +98,21 @@ body {
 
 .container {
   display: flex;
-  flex-wrap: nowrap;
-  gap: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
   max-width: 1200px;
-  margin: 2rem auto;
+  margin: 1rem auto;
 }
 
 .glass-sidebar {
-  flex: 0 0 250px;
+  min-width: 250px;
+  max-width: 300px;
   background: var(--glass);
   backdrop-filter: blur(8px);
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: var(--shadow);
-  position: sticky;
-  top: 0;
 }
 
 .glass-sidebar ul {
@@ -126,7 +126,6 @@ body {
 }
 
 .nav-link {
-  display: block;
   text-decoration: none;
   color: var(--text);
   font-size: 1.2rem;
@@ -148,7 +147,6 @@ body {
   padding: 2rem;
   border-radius: 12px;
   box-shadow: var(--shadow);
-  overflow: auto;
   animation: slideIn 0.8s ease-out forwards;
 }
 
@@ -164,18 +162,13 @@ body {
 }
 
 .content {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateX(30px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  display: none;
   overflow-wrap: break-word;
   max-width: 100%;
 }
 
 .content.active {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(0);
+  display: block;
 }
 
 .glass-card {
@@ -269,31 +262,30 @@ code {
 
 #notification-container {
   position: fixed;
-  top: 1.5rem;
-  right: 1.5rem;
+  bottom: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 1000;
 }
 
 .notification {
   background: var(--glass);
-  backdrop-filter: blur(8px);
-  padding: 1rem 1.5rem;
+  backdrop-filter: blur(6px);
+  padding: 1rem 2rem;
   border-radius: 8px;
   box-shadow: var(--shadow);
-  color: var(--text);
-  font-size: 0.9rem;
   opacity: 0;
-  animation: slideDown 0.5s ease-out forwards;
+  animation: fadeIn 0.5s forwards;
 }
 
-@keyframes slideDown {
+@keyframes fadeIn {
   from {
-    transform: translateY(-20px);
     opacity: 0;
+    transform: translateY(20px);
   }
   to {
-    transform: translateY(0);
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -305,16 +297,4 @@ code {
     max-width: 100%;
     margin-bottom: 1rem;
   }
-}
-
-.light-mode {
-  --bg: #f0f0f0;
-  --glass: rgba(255, 255, 255, 0.5);
-  --header-bg: rgba(255, 255, 255, 0.7);
-  --accent: #0077cc;
-  --secondary: #66c2ff;
-  --text: #141414;
-  --shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(135deg, #e0e0e0, #f0f0f0);
-  color: var(--text);
 }
