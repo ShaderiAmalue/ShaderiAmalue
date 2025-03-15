@@ -22,12 +22,12 @@ function copyRobloxScript() {
     .catch(() => showNotification('Failed to copy script'));
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const links = document.querySelectorAll('nav a');
   const contents = document.querySelectorAll('.content');
 
   links.forEach(link => {
-    link.addEventListener('click', function(event) {
+    link.addEventListener('click', function (event) {
       event.preventDefault();
       const targetId = this.getAttribute('data-target');
       contents.forEach(content => {
@@ -39,19 +39,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
   document.body.classList.add('fade-in');
 
- 
+  // Static Discord ID for Shadie (Owner)
   function loadDiscordProfile(userId) {
     const profileCard = document.getElementById('discord-profile');
     const discordAvatarUrl = `https://cdn.discordapp.com/avatars/${userId}/${userId}.png?size=256`;
+    const defaultAvatarUrl = `https://cdn.discordapp.com/embed/avatars/0.png`;
 
-    // Render the owner's static profile (ID-based)
+    // Render the owner's static profile with fallback for missing avatar
     profileCard.innerHTML = `
-      <img src="${discordAvatarUrl}" alt="Shadie's Avatar">
+      <img src="${discordAvatarUrl}" onerror="this.onerror=null; this.src='${defaultAvatarUrl}';" alt="Shadie's Avatar">
       <h4>Shadie</h4>
       <p>ID: ${userId}</p>
     `;
   }
 
+  // Load the static Discord profile using the provided ID
   loadDiscordProfile('1238870905799835718');
   showNotification('Welcome to ShadieVerse!');
 });
