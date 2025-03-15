@@ -29,6 +29,15 @@ body {
   padding: 2rem;
   text-align: center;
   box-shadow: var(--shadow);
+  position: relative;
+}
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 .header-container h1 {
   font-size: 3rem;
@@ -38,12 +47,31 @@ body {
 .header-container h1:hover {
   text-shadow: 0 0 20px var(--accent);
 }
+#mode-toggle {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform var(--transition);
+}
+#mode-toggle:hover { transform: scale(1.1); }
 .neon-text { color: var(--text); }
+.parallax {
+  background-image: url('https://picsum.photos/1920/1080?blur=2');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  filter: brightness(0.7);
+}
 .container {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   padding: 1rem;
+  max-width: 1200px;
+  margin: 1rem auto;
 }
 .glass-sidebar {
   min-width: 250px;
@@ -54,7 +82,7 @@ body {
   border-radius: 12px;
   box-shadow: var(--shadow);
 }
-.glass-sidebar ul { list-style: none; }
+.glass-sidebar ul { list-style: none; padding: 0; margin: 0; }
 .glass-sidebar li { margin-bottom: 1.5rem; }
 .nav-link {
   text-decoration: none;
@@ -107,6 +135,21 @@ body {
   transform: scale(1.05);
   opacity: 0.9;
 }
+.carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  margin: 2rem 0;
+  box-shadow: var(--shadow);
+}
+.carousel-wrapper {
+  display: flex;
+  transition: transform 0.8s ease-in-out;
+}
+.carousel-wrapper img {
+  width: 100%;
+  object-fit: cover;
+}
 .animated-text {
   background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #8b00ff);
   background-size: 400%;
@@ -143,4 +186,15 @@ body {
 @media (max-width: 768px) {
   .container { flex-direction: column; }
   .glass-sidebar { max-width: 100%; margin-bottom: 1rem; }
+}
+.light-mode {
+  --bg: #f0f0f0;
+  --glass: rgba(255, 255, 255, 0.5);
+  --header-bg: rgba(255, 255, 255, 0.7);
+  --accent: #0077cc;
+  --secondary: #66c2ff;
+  --text: #141414;
+  --shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #e0e0e0, #f0f0f0);
+  color: var(--text);
 }
