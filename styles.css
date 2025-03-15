@@ -91,28 +91,29 @@ body {
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
-  height: 300px;
+  height: 400px; /* Increased for better desktop display */
   filter: brightness(0.7);
   image-rendering: auto;
 }
 
 .container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  padding: 1rem;
+  flex-wrap: nowrap; /* Prevent wrapping on desktop */
+  gap: 2rem;
   max-width: 1200px;
-  margin: 1rem auto;
+  margin: 2rem auto;
 }
 
 .glass-sidebar {
-  min-width: 250px;
+  flex: 0 0 250px; /* Consistent sidebar width */
   max-width: 300px;
   background: var(--glass);
   backdrop-filter: blur(8px);
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: var(--shadow);
+  position: sticky;
+  top: 0; /* Keeps sidebar in view */
 }
 
 .glass-sidebar ul {
@@ -141,12 +142,13 @@ body {
 }
 
 .glass-content {
-  flex: 1;
+  flex: 1; /* Takes remaining space */
   background: var(--glass);
   backdrop-filter: blur(12px);
   padding: 2rem;
   border-radius: 12px;
   box-shadow: var(--shadow);
+  overflow: auto; /* Prevent overflow */
   animation: slideIn 0.8s ease-out forwards;
 }
 
@@ -255,7 +257,6 @@ pre {
   overflow-x: auto;
   max-width: 100%;
   box-shadow: var(--shadow);
-  image-rendering: auto;
 }
 
 code {
@@ -298,6 +299,7 @@ code {
   .container {
     flex-direction: column;
   }
+
   .glass-sidebar {
     max-width: 100%;
     margin-bottom: 1rem;
