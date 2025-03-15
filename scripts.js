@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const navLinks = document.querySelectorAll('.nav-link');
   const sections = document.querySelectorAll('.content');
   const modeToggle = document.getElementById('mode-toggle');
+  
   navLinks.forEach(link => {
     link.addEventListener('click', function(e) {
       e.preventDefault();
@@ -9,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
       navLinks.forEach(l => l.classList.remove('active'));
       this.classList.add('active');
       sections.forEach(section => {
-        if(section.id === targetId) {
+        if (section.id === targetId) {
           section.classList.add('active');
           section.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 600, easing: 'ease-out' });
         } else {
@@ -18,12 +19,15 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   });
+  
   modeToggle.addEventListener('click', function() {
     document.body.classList.toggle('light-mode');
   });
+  
   initCarousel();
-  showNotification('Welcome to ShadieVerse!');
+  showNotification('Welcome to ShadieVerse');
 });
+
 function showNotification(message) {
   const container = document.getElementById('notification-container');
   const note = document.createElement('div');
@@ -35,12 +39,14 @@ function showNotification(message) {
     setTimeout(() => note.remove(), 500);
   }, 3000);
 }
+
 function copyRobloxScript() {
   const scriptContent = document.getElementById('roblox-script').textContent;
   navigator.clipboard.writeText(scriptContent)
     .then(() => { showNotification('Script copied to clipboard.'); })
     .catch(() => { showNotification('Failed to copy script.'); });
 }
+
 function initCarousel() {
   const carouselWrapper = document.querySelector('.carousel-wrapper');
   if (!carouselWrapper) return;
