@@ -1,6 +1,6 @@
 async function fetchDiscordProfile() {
   try {
-    const response = await fetch("http://your-termux-bot-url/api/discord-profile");
+    const response = await fetch("http://localhost:3000/api/discord-profile");
     const result = await response.json();
     if (result.status === "success") {
       const user = result.data;
