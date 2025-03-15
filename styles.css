@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
-
 :root {
   --primary-color: #444444;
   --secondary-color: #333333;
@@ -13,7 +12,6 @@
   --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   --transition: 0.3s ease;
 }
-
 * {
   box-sizing: border-box;
 }
@@ -209,4 +207,50 @@ code[class*="language-"] {
 }
 .fade-in {
   animation: fadeIn 1s ease-in-out;
+}
+#offline-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+.offline-container {
+  text-align: center;
+  background: var(--card-background);
+  padding: 2rem;
+  border-radius: 10px;
+  border: 2px solid var(--accent-color);
+  box-shadow: var(--box-shadow);
+}
+.offline-container h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+  color: var(--text-color);
+}
+.offline-container p {
+  margin: 0 0 1.5rem 0;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+.offline-container button {
+  padding: 0.75em 1.5em;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  border: none;
+  border-radius: 5px;
+  background: var(--gradient);
+  color: var(--text-color);
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
+  transition: background var(--transition), transform var(--transition);
+}
+.offline-container button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #333333, #444444);
 }
