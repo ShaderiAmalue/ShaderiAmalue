@@ -130,6 +130,8 @@ body {
   color: var(--text);
   font-size: 1.2rem;
   transition: transform var(--transition), color var(--transition);
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 .nav-link:hover,
@@ -291,7 +293,6 @@ code {
   .container {
     flex-direction: column;
   }
-
   .glass-sidebar {
     max-width: 100%;
     margin-bottom: 1rem;
