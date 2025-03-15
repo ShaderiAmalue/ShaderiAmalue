@@ -1,51 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
-  const links = document.querySelectorAll('nav a');
-  const contents = document.querySelectorAll('.content');
-  const buttons = document.querySelectorAll('.button-link');
-  const notificationContainer = document.getElementById('notification-container');
-
-  links.forEach(link => {
-    link.addEventListener('click', function(event) {
-      event.preventDefault();
-      const targetId = this.getAttribute('data-target');
-      contents.forEach(content => {
-        content.classList.toggle('hidden', content.id !== targetId);
-        content.classList.toggle('active', content.id === targetId);
-      });
-    });
-  });
-
-  document.body.classList.add('fade-in');
-
-  const rainbowText = document.getElementById('rainbow-text');
-  if (rainbowText) {
-    setInterval(() => {
-      const x = Math.random() * 100;
-      const y = Math.random() * 100;
-      rainbowText.style.backgroundPosition = `${x}% ${y}%`;
-    }, 300);
-  }
-
-  document.addEventListener('contextmenu', function(event) {
-    event.preventDefault();
-  });
-
-  document.addEventListener('selectstart', function(event) {
-    event.preventDefault();
-  });
-
-  buttons.forEach(button => {
-    button.addEventListener('mouseenter', function() {
-      this.classList.add('hover');
-    });
-    button.addEventListener('mouseleave', function() {
-      this.classList.remove('hover');
-    });
-  });
-
-  showNotification('Welcome to ShadieVerse!');
-});
-
+// Global notification function accessible from anywhere
 function showNotification(message) {
   const notificationContainer = document.getElementById('notification-container');
   const notification = document.createElement('div');
@@ -64,9 +17,46 @@ function showNotification(message) {
 
 function copyRobloxScript() {
   const scriptText = document.getElementById('roblox-script').textContent;
-  navigator.clipboard.writeText(scriptText).then(() => {
-    showNotification('Script copied to clipboard');
-  }).catch(() => {
-    showNotification('Failed to copy script');
-  });
+  navigator.clipboard.writeText(scriptText)
+    .then(() => showNotification('Script copied to clipboard'))
+    .catch(() => showNotification('Failed to copy script'));
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  const links = document.querySelectorAll('nav a');
+  const contents = document.querySelectorAll('.content');
+
+  links.forEach(link => {
+    link.addEventListener('click', function(event) {
+      event.preventDefault();
+      const targetId = this.getAttribute('data-target');
+      contents.forEach(content => {
+        content.classList.toggle('hidden', content.id !== targetId);
+        content.classList.toggle('active', content.id === targetId);
+      });
+    });
+  });
+
+  document.body.classList.add('fade-in');
+
+  function fetchDiscordProfile(username) {
+    const profileCard = document.getElementById('discord-profile');
+    fetch(`https://discordlookup.mesalytic.moe/v1/user/${username}`)
+      .then(response => response.json())
+      .then(data => {
+        profileCard.innerHTML = `
+          <img src="${data.avatar.link}" alt="${data.tag}'s Avatar">
+          <h4>${data.tag}</h4>
+          <p>ID: ${data.id}</p>
+        `;
+      })
+      .catch(error => {
+        profileCard.innerHTML = `<p>Failed to load profile. Please try again later.</p>`;
+        console.error('Error fetching Discord profile:', error);
+      });
+  }
+
+  // Fetch your Discord profile (shadie_69 is the owner)
+  fetchDiscordProfile('shadie_69');
+  showNotification('Welcome to ShadieVerse!');
+});
