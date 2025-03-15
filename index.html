@@ -1,56 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ShadieVerse</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" />
-  <link rel="icon" href="regionG.png" type="image/png" />
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
+  <link rel="icon" href="regionG.png" type="image/png">
 </head>
 <body>
-  <header class="enhanced-header">
+  <header class="glass-header">
     <div class="header-container">
       <h1>ShadieVerse</h1>
     </div>
   </header>
 
   <div class="main-container">
-    <nav class="enhanced-sidebar">
+    <nav class="glass-sidebar">
       <ul>
-        <li><a href="#" data-target="home" class="enhanced-link active">Home</a></li>
-        <li><a href="#" data-target="blockman" class="enhanced-link">Blockman</a></li>
-        <li><a href="#" data-target="roblox" class="enhanced-link">Roblox</a></li>
+        <li><a href="#" data-target="home" class="nav-link active">Home</a></li>
+        <li><a href="#" data-target="blockman" class="nav-link">Blockman</a></li>
+        <li><a href="#" data-target="roblox" class="nav-link">Roblox</a></li>
       </ul>
     </nav>
-    <main class="enhanced-content-area">
-      <section id="home" class="enhanced-content active">
-        <div class="enhanced-card">
+
+    <main class="glass-content">
+      <section id="home" class="content active">
+        <div class="glass-card">
           <h3>About Us</h3>
-          <p>Shadie provides innovative tools and scripts to elevate your experience.</p>
-          <h3 id="rainbow-text" class="rainbow-text">Credits: Shadie</h3>
+          <p>ShadieVerse provides innovative tools and scripts to enhance your experience.</p>
+          <h3 id="rainbow-text">Credits: Shadie</h3>
         </div>
       </section>
-      <section id="blockman" class="enhanced-content">
+
+      <section id="blockman" class="content">
         <h2>Blockman</h2>
-        <div class="enhanced-card">
+        <div class="glass-card">
           <h3>Blockman Mod</h3>
-          <a href="https://www.mediafire.com/file/5xdnhx8kn5zwq2a/Blockman_GO_2.104.1.apk/file" target="_blank" class="enhanced-button-link">Download</a>
+          <a href="https://www.mediafire.com/file/5xdnhx8kn5zwq2a/Blockman_GO_2.104.1.apk/file" target="_blank" class="button">Download</a>
         </div>
-        <div class="enhanced-card">
+        <div class="glass-card">
           <h3>HTTP Capture, Sniffer (Free Premium)</h3>
-          <a href="https://www.mediafire.com/file/sf1m8u6rronb57w/T_I__3.3.6.apk/file" target="_blank" class="enhanced-button-link">Download</a>
+          <a href="https://www.mediafire.com/file/sf1m8u6rronb57w/T_I__3.3.6.apk/file" target="_blank" class="button">Download</a>
         </div>
-        <div class="enhanced-card">
+        <div class="glass-card">
           <h3>Game Guardian Scripts</h3>
-          <a href="https://www.mediafire.com/file/phdn555ku2r137q/GGScripts.zip/file" target="_blank" class="enhanced-button-link">Download</a>
+          <a href="https://www.mediafire.com/file/phdn555ku2r137q/GGScripts.zip/file" target="_blank" class="button">Download</a>
         </div>
       </section>
-      <section id="roblox" class="enhanced-content">
+
+      <section id="roblox" class="content">
         <h2>Roblox</h2>
-        <div class="enhanced-card">
-          <pre><code id="roblox-script" class="language-lua">loadstring(game:HttpGet("https://raw.githubusercontent.com/ShadieGit/Shadie-Ui/refs/heads/main/Main.lua", true))()</code></pre>
-          <button onclick="copyRobloxScript()" class="enhanced-button-link">Copy Script</button>
+        <div class="glass-card">
+          <pre><code id="roblox-script">loadstring(game:HttpGet("https://raw.githubusercontent.com/ShadieGit/Shadie-Ui/refs/heads/main/Main.lua", true))()</code></pre>
+          <button onclick="copyRobloxScript()" class="button">Copy Script</button>
         </div>
       </section>
     </main>
