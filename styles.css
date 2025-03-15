@@ -262,7 +262,7 @@ code {
 
 #notification-container {
   position: fixed;
-  bottom: 4rem;
+  bottom: 0.5rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
