@@ -1,60 +1,31 @@
-/* Import Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
-
-/* Global Reset */
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Root Variables & Base Settings */
 :root {
   --bg: #141414;
-  --glass: rgba(255, 255, 255, 0.05);
-  --header-bg: rgba(255, 255, 255, 0.1);
+  --glass: rgba(255, 255, 255, 0.08);
+  --header-bg: rgba(255, 255, 255, 0.12);
   --accent: #00c9ff;
   --secondary: #92fe9d;
   --text: #e0e0e0;
   --shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
+  --transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
-
-html {
-  font-size: 16px;
-}
-
+html { font-size: 16px; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #1f1f1f, #141414);
+  background: linear-gradient(135deg, #1b1b1b, #141414);
   color: var(--text);
   line-height: 1.6;
   overflow-x: hidden;
   animation: fadeInPage 1s ease-out forwards;
 }
-
-/* Keyframe Animations */
 @keyframes fadeInPage {
   from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
-@keyframes slideIn {
-  from { opacity: 0; transform: translateX(30px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes rainbowEffect {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Header */
 .glass-header {
   background: var(--header-bg);
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(12px);
   padding: 2rem;
   text-align: center;
   box-shadow: var(--shadow);
@@ -62,85 +33,64 @@ body {
 .header-container h1 {
   font-size: 3rem;
   text-shadow: 0 0 10px var(--accent);
-  transition: text-shadow 0.3s ease;
+  transition: text-shadow var(--transition);
 }
 .header-container h1:hover {
   text-shadow: 0 0 20px var(--accent);
 }
-.neon-text {
-  color: var(--text);
-}
-
-/* Layout Container */
+.neon-text { color: var(--text); }
 .container {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   padding: 1rem;
 }
-
-/* Sidebar */
 .glass-sidebar {
   min-width: 250px;
   max-width: 300px;
   background: var(--glass);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: var(--shadow);
 }
-.glass-sidebar ul {
-  list-style: none;
-}
-.glass-sidebar li {
-  margin-bottom: 1.5rem;
-}
+.glass-sidebar ul { list-style: none; }
+.glass-sidebar li { margin-bottom: 1.5rem; }
 .nav-link {
   text-decoration: none;
   color: var(--text);
   font-size: 1.2rem;
-  transition: transform 0.3s ease, color 0.3s ease;
+  transition: transform var(--transition), color var(--transition);
 }
-.nav-link:hover,
-.nav-link.active {
+.nav-link:hover, .nav-link.active {
   color: var(--accent);
   transform: scale(1.1);
 }
-
-/* Main Content */
 .glass-content {
   flex: 1;
   background: var(--glass);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(12px);
   padding: 2rem;
   border-radius: 12px;
   box-shadow: var(--shadow);
   animation: slideIn 0.8s ease-out forwards;
 }
-
-/* Content Sections */
-.content {
-  display: none;
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
 }
-.content.active {
-  display: block;
-}
-
-/* Glass Cards */
+.content { display: none; }
+.content.active { display: block; }
 .glass-card {
   background: var(--glass);
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(10px);
   padding: 2rem;
   border-radius: 16px;
   margin-bottom: 1.5rem;
   box-shadow: var(--shadow);
-  transition: transform 0.3s ease;
+  transition: transform var(--transition);
 }
-.glass-card:hover {
-  transform: translateY(-8px);
-}
-
-/* Buttons */
+.glass-card:hover { transform: translateY(-8px); }
 .button {
   display: inline-block;
   background: linear-gradient(45deg, var(--accent), var(--secondary));
@@ -151,14 +101,12 @@ body {
   text-decoration: none;
   cursor: pointer;
   font-weight: bold;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: transform var(--transition), opacity var(--transition);
 }
 .button:hover {
   transform: scale(1.05);
   opacity: 0.9;
 }
-
-/* Animated Rainbow Text */
 .animated-text {
   background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #8b00ff);
   background-size: 400%;
@@ -167,8 +115,11 @@ body {
   animation: rainbowEffect 10s ease infinite;
   font-size: 1.5rem;
 }
-
-/* Notifications */
+@keyframes rainbowEffect {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 #notification-container {
   position: fixed;
   bottom: 2rem;
@@ -178,7 +129,7 @@ body {
 }
 .notification {
   background: var(--glass);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(6px);
   padding: 1rem 2rem;
   border-radius: 8px;
   box-shadow: var(--shadow);
@@ -189,14 +140,7 @@ body {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
-/* Responsive */
 @media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-  }
-  .glass-sidebar {
-    max-width: 100%;
-    margin-bottom: 1rem;
-  }
+  .container { flex-direction: column; }
+  .glass-sidebar { max-width: 100%; margin-bottom: 1rem; }
 }
