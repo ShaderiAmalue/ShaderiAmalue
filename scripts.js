@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const links = document.querySelectorAll('nav a');
   const contents = document.querySelectorAll('.content');
   const buttons = document.querySelectorAll('.button-link');
-  const notificationContainer = document.getElementById('notification-container');
 
   links.forEach(link => {
     link.addEventListener('click', function(event) {
@@ -39,12 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   showNotification('Welcome to ShadieVerse!');
-  
-  if (!navigator.onLine) {
-    showOfflineOverlay();
-  }
-  window.addEventListener('offline', showOfflineOverlay);
-  window.addEventListener('online', hideOfflineOverlay);
 });
 
 function showNotification(message) {
@@ -69,26 +62,4 @@ function copyRobloxScript() {
   }).catch(() => {
     showNotification('Failed to copy script');
   });
-}
-
-function showOfflineOverlay() {
-  if (document.getElementById('offline-overlay')) return;
-  const overlay = document.createElement('div');
-  overlay.id = 'offline-overlay';
-  overlay.innerHTML = `
-    <div class="offline-container">
-      <h2>: ( Unable to Connect</h2>
-      <p>Please check your connection.</p>
-      <button id="reload-btn">Reload</button>
-    </div>
-  `;
-  document.body.appendChild(overlay);
-  document.getElementById('reload-btn').addEventListener('click', () => location.reload());
-}
-
-function hideOfflineOverlay() {
-  const overlay = document.getElementById('offline-overlay');
-  if (overlay) {
-    overlay.remove();
-  }
 }
