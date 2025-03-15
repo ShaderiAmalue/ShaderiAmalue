@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const navLinks = document.querySelectorAll('.nav-link');
   const sections = document.querySelectorAll('.content');
   const modeToggle = document.getElementById('mode-toggle');
-  
+  const images = document.querySelectorAll('img');
+
   navLinks.forEach(link => {
     link.addEventListener('click', function(e) {
       e.preventDefault();
@@ -10,19 +11,28 @@ document.addEventListener('DOMContentLoaded', function() {
       navLinks.forEach(l => l.classList.remove('active'));
       this.classList.add('active');
       sections.forEach(section => {
+        section.classList.remove('active');
         if (section.id === targetId) {
           section.classList.add('active');
-        } else {
-          section.classList.remove('active');
         }
       });
     });
   });
-  
+
   modeToggle.addEventListener('click', function() {
     document.body.classList.toggle('light-mode');
   });
-  
+
+  images.forEach(image => {
+    image.setAttribute('draggable', 'false');
+    image.addEventListener('contextmenu', e => e.preventDefault());
+    image.addEventListener('mousedown', e => e.preventDefault());
+    image.addEventListener('touchstart', e => e.preventDefault());
+  });
+
+  document.body.addEventListener('selectstart', e => e.preventDefault());
+  document.body.addEventListener('contextmenu', e => e.preventDefault());
+
   initCarousel();
   showNotification('Welcome to ShadieVerse');
 });
