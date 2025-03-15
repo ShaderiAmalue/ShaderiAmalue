@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
-
 :root {
   --bg: #141414;
   --glass: rgba(255, 255, 255, 0.08);
@@ -10,17 +9,14 @@
   --shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
   --transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
-
 html {
   font-size: 16px;
 }
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(135deg, #1b1b1b, #141414);
@@ -29,7 +25,6 @@ body {
   overflow-x: hidden;
   animation: fadeInPage 1s ease-out forwards;
 }
-
 @keyframes fadeInPage {
   from {
     opacity: 0;
@@ -40,7 +35,6 @@ body {
     transform: translateY(0);
   }
 }
-
 .glass-header {
   background: var(--header-bg);
   backdrop-filter: blur(12px);
@@ -49,7 +43,6 @@ body {
   box-shadow: var(--shadow);
   position: relative;
 }
-
 .header-container {
   display: flex;
   align-items: center;
@@ -58,17 +51,14 @@ body {
   max-width: 1200px;
   margin: 0 auto;
 }
-
 .header-container h1 {
   font-size: 3rem;
   text-shadow: 0 0 10px var(--accent);
   transition: text-shadow var(--transition);
 }
-
 .header-container h1:hover {
   text-shadow: 0 0 20px var(--accent);
 }
-
 #mode-toggle {
   background: none;
   border: none;
@@ -77,17 +67,12 @@ body {
   cursor: pointer;
   transition: transform var(--transition);
 }
-
 #mode-toggle:hover {
   transform: scale(1.1);
 }
-
 .neon-text {
   color: var(--text);
 }
-
-
-
 .container {
   display: flex;
   flex-wrap: wrap;
@@ -96,7 +81,6 @@ body {
   max-width: 1200px;
   margin: 1rem auto;
 }
-
 .glass-sidebar {
   min-width: 250px;
   max-width: 300px;
@@ -106,17 +90,14 @@ body {
   border-radius: 12px;
   box-shadow: var(--shadow);
 }
-
 .glass-sidebar ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-
 .glass-sidebar li {
   margin-bottom: 1.5rem;
 }
-
 .nav-link {
   text-decoration: none;
   color: var(--text);
@@ -125,13 +106,11 @@ body {
   -webkit-user-drag: none;
   user-select: none;
 }
-
 .nav-link:hover,
 .nav-link.active {
   color: var(--accent);
   transform: scale(1.1);
 }
-
 .glass-content {
   flex: 1;
   background: var(--glass);
@@ -140,8 +119,9 @@ body {
   border-radius: 12px;
   box-shadow: var(--shadow);
   animation: slideIn 0.8s ease-out forwards;
+  position: relative;
+  min-height: 400px;
 }
-
 @keyframes slideIn {
   from {
     opacity: 0;
@@ -152,17 +132,22 @@ body {
     transform: translateX(0);
   }
 }
-
 .content {
-  display: none;
-  overflow-wrap: break-word;
-  max-width: 100%;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
 }
-
 .content.active {
-  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  position: relative;
+  pointer-events: auto;
 }
-
 .glass-card {
   background: var(--glass);
   backdrop-filter: blur(10px);
@@ -172,11 +157,9 @@ body {
   box-shadow: var(--shadow);
   transition: transform var(--transition);
 }
-
 .glass-card:hover {
   transform: translateY(-8px);
 }
-
 .button {
   display: inline-block;
   background: linear-gradient(45deg, var(--accent), var(--secondary));
@@ -189,12 +172,10 @@ body {
   font-weight: bold;
   transition: transform var(--transition), opacity var(--transition);
 }
-
 .button:hover {
   transform: scale(1.05);
   opacity: 0.9;
 }
-
 .carousel {
   position: relative;
   overflow: hidden;
@@ -202,18 +183,15 @@ body {
   margin: 2rem 0;
   box-shadow: var(--shadow);
 }
-
 .carousel-wrapper {
   display: flex;
   transition: transform 0.8s ease-in-out;
 }
-
 .carousel-wrapper img {
   width: 100%;
   object-fit: cover;
   image-rendering: optimizeQuality;
 }
-
 .animated-text {
   background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #8b00ff);
   background-size: 400%;
@@ -222,7 +200,6 @@ body {
   animation: rainbowEffect 10s ease infinite;
   font-size: 1.5rem;
 }
-
 @keyframes rainbowEffect {
   0% {
     background-position: 0% 50%;
@@ -234,7 +211,6 @@ body {
     background-position: 0% 50%;
   }
 }
-
 pre {
   background: var(--glass);
   padding: 1rem;
@@ -244,14 +220,12 @@ pre {
   box-shadow: var(--shadow);
   image-rendering: auto;
 }
-
 code {
   font-family: 'Courier New', Courier, monospace;
   color: var(--text);
   white-space: pre-wrap;
   word-break: break-word;
 }
-
 #notification-container {
   position: fixed;
   bottom: 0.5rem;
@@ -259,7 +233,6 @@ code {
   transform: translateX(-50%);
   z-index: 1000;
 }
-
 .notification {
   background: var(--glass);
   backdrop-filter: blur(6px);
@@ -269,7 +242,6 @@ code {
   opacity: 0;
   animation: fadeIn 0.5s forwards;
 }
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -280,7 +252,6 @@ code {
     transform: translateY(0);
   }
 }
-
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
