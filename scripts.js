@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
       sections.forEach(section => {
         if (section.id === targetId) {
           section.classList.add('active');
-          section.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 600, easing: 'ease-out' });
         } else {
           section.classList.remove('active');
         }
