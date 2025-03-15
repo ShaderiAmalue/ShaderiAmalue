@@ -107,7 +107,11 @@ body {
   from { opacity: 0; transform: translateX(30px); }
   to { opacity: 1; transform: translateX(0); }
 }
-.content { display: none; }
+.content {
+  display: none;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
 .content.active { display: block; }
 .glass-card {
   background: var(--glass);
@@ -131,10 +135,7 @@ body {
   font-weight: bold;
   transition: transform var(--transition), opacity var(--transition);
 }
-.button:hover {
-  transform: scale(1.05);
-  opacity: 0.9;
-}
+.button:hover { transform: scale(1.05); opacity: 0.9; }
 .carousel {
   position: relative;
   overflow: hidden;
@@ -162,6 +163,20 @@ body {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+pre {
+  background: var(--glass);
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  max-width: 100%;
+  box-shadow: var(--shadow);
+}
+code {
+  font-family: 'Courier New', Courier, monospace;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 #notification-container {
   position: fixed;
